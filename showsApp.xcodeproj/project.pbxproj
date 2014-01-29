@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7826D59A1897FB34002CFE5F /* YQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 7826D5991897FB34002CFE5F /* YQL.m */; };
 		783B23A01890D30F00FCD806 /* YahooClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 783B239F1890D30F00FCD806 /* YahooClient.m */; };
 		7891F1951890B55E00BF5611 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7891F1941890B55E00BF5611 /* Foundation.framework */; };
 		7891F1971890B55E00BF5611 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7891F1961890B55E00BF5611 /* CoreGraphics.framework */; };
@@ -37,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		347E5A5EA6D142D09FCAE070 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		7826D5981897FB34002CFE5F /* YQL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YQL.h; sourceTree = "<group>"; };
+		7826D5991897FB34002CFE5F /* YQL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQL.m; sourceTree = "<group>"; };
 		783B239E1890D30F00FCD806 /* YahooClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YahooClient.h; sourceTree = "<group>"; };
 		783B239F1890D30F00FCD806 /* YahooClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YahooClient.m; sourceTree = "<group>"; };
 		7891F1911890B55E00BF5611 /* showsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = showsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +89,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7826D5971897F62C002CFE5F /* YQL */ = {
+			isa = PBXGroup;
+			children = (
+				7826D5981897FB34002CFE5F /* YQL.h */,
+				7826D5991897FB34002CFE5F /* YQL.m */,
+			);
+			name = YQL;
+			sourceTree = "<group>";
+		};
 		783B239D1890D2CF00FCD806 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +110,7 @@
 		7891F1881890B55E00BF5611 = {
 			isa = PBXGroup;
 			children = (
+				7826D5971897F62C002CFE5F /* YQL */,
 				783B239D1890D2CF00FCD806 /* API */,
 				7891F19A1890B55E00BF5611 /* showsApp */,
 				7891F1B91890B55E00BF5611 /* showsAppTests */,
@@ -304,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7891F1AB1890B55E00BF5611 /* ViewController.m in Sources */,
+				7826D59A1897FB34002CFE5F /* YQL.m in Sources */,
 				7891F1A51890B55E00BF5611 /* AppDelegate.m in Sources */,
 				7891F1A11890B55E00BF5611 /* main.m in Sources */,
 				783B23A01890D30F00FCD806 /* YahooClient.m in Sources */,

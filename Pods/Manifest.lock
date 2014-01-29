@@ -2,13 +2,16 @@ PODS:
   - AFNetworking (1.3.3)
   - AFOAuth1Client (0.3.3):
     - AFNetworking (~> 1.3)
+  - NSString-UrlEncode (1.0.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 1.3.1)
   - AFOAuth1Client
+  - NSString-UrlEncode
 
 SPEC CHECKSUMS:
   AFNetworking: 61fdd49e2ffe6380378df37b3b6e70630bb9dd66
   AFOAuth1Client: 8b06e54087732068e19c4efcd7bed5d74bc9538a
+  NSString-UrlEncode: 4127390c94abfd81415f3784cb5fbcb54432f356
 
 COCOAPODS: 0.29.0
