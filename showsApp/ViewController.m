@@ -36,6 +36,7 @@
     
     [[YQL use:@{@"store://lsri0aFyNSXQsSFK0jYL9F": @"tvdb" }]
      select:@"*" from:@"tvdb" where:@{ @"date" : @"20140114" } callback:^(NSError *error, id response) {
+         
          NSLog(@"got resposne %@", response);
      }
      ];
