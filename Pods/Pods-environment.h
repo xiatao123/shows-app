@@ -18,3 +18,9 @@
 #define COCOAPODS_VERSION_MINOR_AFOAuth1Client 3
 #define COCOAPODS_VERSION_PATCH_AFOAuth1Client 3
 
+// NSString-UrlEncode
+#define COCOAPODS_POD_AVAILABLE_NSString_UrlEncode
+#define COCOAPODS_VERSION_MAJOR_NSString_UrlEncode 1
+#define COCOAPODS_VERSION_MINOR_NSString_UrlEncode 0
+#define COCOAPODS_VERSION_PATCH_NSString_UrlEncode 0
+

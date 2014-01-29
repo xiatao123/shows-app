@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-NSString-UrlEncode.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>965005E2E9584448B18D18CF</key>
+		<key>33449A5F338140E7946C588E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A9016158E79C45E89A6E220C</key>
+		<key>476CB678C2774C2792A1C10D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EC5583B4A9BD49178F036FB0</key>
+		<key>B01C1779DB8745848562960B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FC8E82CA0FC04F408D278309</key>
 		<dict>
 			<key>primary</key>
 			<true/>

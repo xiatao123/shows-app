@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "AFOAuth1Client.h"
+#import "YQL.h"
 
 @interface ViewController ()
 - (IBAction)onLoginTapped:(UIButton *)sender;
@@ -27,6 +28,15 @@
 	// Do any additional setup after loading the view, typically from a nib.
     NSLog(@"view did load");
     self.yahoo = [[AFOAuth1Client alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.login.yahoo.com/oauth/v2/"] key:key secret:secret];
+    [YQL showTables:^(NSError *error, id response) {
+        // NSLog(@"got response %@", response);
+    }];
+    
+    [[YQL use:@{@"store://y3cUllqhFuGxAG9PkXBJW9": @"tvdb" }]
+     select:@"*" from:@"tvdb" where:@{ @"id" : @"95451" } callback:^(NSError *error, id response) {
+         NSLog(@"got resposne %@", response);
+     }
+     ];
     
 }
 
