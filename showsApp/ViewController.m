@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "AFOAuth1Client.h"
 #import "YQL.h"
+#import "Show.h"
+#import "ShowResult.h"
 
 @interface ViewController ()
 - (IBAction)onLoginTapped:(UIButton *)sender;
@@ -37,7 +39,15 @@
     [[YQL use:@{@"store://lsri0aFyNSXQsSFK0jYL9F": @"tvdb" }]
      select:@"*" from:@"tvdb" where:@{ @"date" : @"20140114" } callback:^(NSError *error, id response) {
          
-         NSLog(@"got resposne %@", response);
+         //NSLog(@"got resposne %@", response);
+         NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.results"] );
+         NSDictionary *showJSON = [response valueForKeyPath:@"query.results.results"] ;
+         NSError *err = nil;
+         //NSLog(@"%@",showJSON);
+         //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
+         ShowResult* showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
+         Show *show = [showResult.shows objectAtIndex:0];
+         NSLog(@"0 show name %@", show.title);
      }
      ];
     
