@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		356913BE1899B8E70047A580 /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913BD1899B8E70047A580 /* Episode.m */; };
+		356913C11899CC470047A580 /* ShowResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913C01899CC470047A580 /* ShowResult.m */; };
+		35887AC51899A9E100D4D903 /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 35887AC41899A9E100D4D903 /* Show.m */; };
 		7826D59A1897FB34002CFE5F /* YQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 7826D5991897FB34002CFE5F /* YQL.m */; };
 		783B23A01890D30F00FCD806 /* YahooClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 783B239F1890D30F00FCD806 /* YahooClient.m */; };
 		7891F1951890B55E00BF5611 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7891F1941890B55E00BF5611 /* Foundation.framework */; };
@@ -38,6 +41,12 @@
 
 /* Begin PBXFileReference section */
 		347E5A5EA6D142D09FCAE070 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		356913BC1899B8E70047A580 /* Episode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Episode.h; sourceTree = "<group>"; };
+		356913BD1899B8E70047A580 /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Episode.m; sourceTree = "<group>"; };
+		356913BF1899CC470047A580 /* ShowResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowResult.h; sourceTree = "<group>"; };
+		356913C01899CC470047A580 /* ShowResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowResult.m; sourceTree = "<group>"; };
+		35887AC31899A9E100D4D903 /* Show.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Show.h; path = showsApp/Show.h; sourceTree = "<group>"; };
+		35887AC41899A9E100D4D903 /* Show.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = showsApp/Show.m; sourceTree = "<group>"; };
 		7826D5981897FB34002CFE5F /* YQL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YQL.h; sourceTree = "<group>"; };
 		7826D5991897FB34002CFE5F /* YQL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQL.m; sourceTree = "<group>"; };
 		783B239E1890D30F00FCD806 /* YahooClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YahooClient.h; sourceTree = "<group>"; };
@@ -89,6 +98,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35887AC61899AA1500D4D903 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				35887AC31899A9E100D4D903 /* Show.h */,
+				35887AC41899A9E100D4D903 /* Show.m */,
+				356913BC1899B8E70047A580 /* Episode.h */,
+				356913BD1899B8E70047A580 /* Episode.m */,
+				356913BF1899CC470047A580 /* ShowResult.h */,
+				356913C01899CC470047A580 /* ShowResult.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		7826D5971897F62C002CFE5F /* YQL */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +132,7 @@
 		7891F1881890B55E00BF5611 = {
 			isa = PBXGroup;
 			children = (
+				35887AC61899AA1500D4D903 /* Model */,
 				7826D5971897F62C002CFE5F /* YQL */,
 				783B239D1890D2CF00FCD806 /* API */,
 				7891F19A1890B55E00BF5611 /* showsApp */,
@@ -320,7 +343,10 @@
 				7826D59A1897FB34002CFE5F /* YQL.m in Sources */,
 				7891F1A51890B55E00BF5611 /* AppDelegate.m in Sources */,
 				7891F1A11890B55E00BF5611 /* main.m in Sources */,
+				35887AC51899A9E100D4D903 /* Show.m in Sources */,
+				356913BE1899B8E70047A580 /* Episode.m in Sources */,
 				783B23A01890D30F00FCD806 /* YahooClient.m in Sources */,
+				356913C11899CC470047A580 /* ShowResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
