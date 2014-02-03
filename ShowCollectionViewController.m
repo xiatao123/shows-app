@@ -18,6 +18,7 @@
 -(void)reload;
 
 @property (nonatomic, strong) ShowResult* showResult;
+- (IBAction)onLogoutTap:(id)sender;
 
 @end
 
@@ -101,5 +102,11 @@
          [self.collectionView reloadData];
      }
      ];
+}
+- (IBAction)onLogoutTap:(id)sender {
+    NSLog(@"logout tapped");
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 @end
