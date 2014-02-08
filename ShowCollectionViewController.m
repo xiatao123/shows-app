@@ -12,6 +12,7 @@
 #import "YQL.h"
 #import "ShowResult.h"
 #import "Show.h"
+#import "ShowDetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
 
 @interface ShowCollectionViewController ()
@@ -128,5 +129,13 @@
     [self.navigationController pushViewController:svc animated:YES];
 //    SearchViewController *svc = [[SearchViewController alloc]init];
 //    [self.navigationController pushViewController:svc animated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
+    ShowDetailsViewController *controller = segue.destinationViewController;
+    Show *show = [self.showResult.shows objectAtIndex:indexPath.row];
+    controller.tvdb_id = show.tvdb_id;
+    
 }
 @end
