@@ -7,6 +7,7 @@
 //
 
 #import "ShowCollectionViewController.h"
+#import "SearchViewController.h"
 #import "ShowCell.h"
 #import "YQL.h"
 #import "ShowResult.h"
@@ -18,7 +19,10 @@
 -(void)reload;
 
 @property (nonatomic, strong) ShowResult* showResult;
+@property (nonatomic, strong) UIBarButtonItem *searchButton;
+
 - (IBAction)onLogoutTap:(id)sender;
+- (void)onSearchButton;
 
 @end
 
@@ -38,6 +42,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(onSearchButton)];
+    
+    self.navigationItem.rightBarButtonItem = self.searchButton;
     
     [self reload];
     //UINib *showsNib = [UINib nibWithNibName:@"ShowCell" bundle:nil];
@@ -87,8 +95,12 @@
 }
 
 -(void)reload{
-    [[YQL use:@{@"store://lsri0aFyNSXQsSFK0jYL9F": @"tvdb" }]
-     select:@"*" from:@"tvdb" where:@{ @"date" : @"20140114" } callback:^(NSError *error, id response) {
+    [[YQL
+      use:@{@"store://lsri0aFyNSXQsSFK0jYL9F": @"tvdb" }]
+      select:@"*"
+      from:@"tvdb"
+      where:@{ @"date" : @"20140114" }
+      callback:^(NSError *error, id response) {
          
          //NSLog(@"got resposne %@", response);
          // NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.results"] );
@@ -108,5 +120,13 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
     [[NSUserDefaults standardUserDefaults]synchronize];
     [[self navigationController] popViewControllerAnimated:YES];
+}
+
+- (void)onSearchButton{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchViewController"];
+    [self.navigationController pushViewController:svc animated:YES];
+//    SearchViewController *svc = [[SearchViewController alloc]init];
+//    [self.navigationController pushViewController:svc animated:YES];
 }
 @end

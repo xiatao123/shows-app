@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSString* air_time;
 @property (nonatomic, strong) NSString* overview;
 @property (nonatomic, strong) NSString<Optional>* imdb_id;
+@property (nonatomic, strong) NSString<Optional>* tvdb_id;
 @property (nonatomic, strong) NSURL* poster;
 
 +(BOOL)propertyIsOptional:(NSString *)propertyName;

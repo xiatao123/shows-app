@@ -44,14 +44,14 @@
      callback:^(NSError *error, id response) {
          
          //NSLog(@"got resposne %@", response);
-         //NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.results"] );
+         NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.results"] );
          NSDictionary *showJSON = [response valueForKeyPath:@"query.results.results"] ;
          NSError *err = nil;
          //NSLog(@"%@",showJSON);
          //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
          ShowResult* showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
          Show *show = [showResult.shows objectAtIndex:0];
-         //NSLog(@"0 show name %@", show.title);
+         NSLog(@"0 show tvdb_id is %@", show.tvdb_id);
      }
     ];
     
