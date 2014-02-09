@@ -8,9 +8,11 @@
 
 #import "ShowDetailsViewController.h"
 #import "YQL.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ShowDetailsViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *showTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *showOverview;
+@property (weak, nonatomic) IBOutlet UIImageView *showImage;
 
 @end
 
@@ -31,12 +33,11 @@
     NSLog(@"view did load");
     [[YQL use:@{@"https://raw.github.com/ios-class/yshows-tables/master/tmdb.tv.id.xml": @"identity" }] select:@"*" from:@"identity" where:@{ @"id" : @1399 } callback:^(NSError *error, id response) {
         
-        NSLog(@"data is %@", response);
-        /*
-        NSArray * array = [response valueForKeyPath:@"query.results.json.tv_results"];
-        NSObject *show = array[0];
-        self.showTitleLabel.text = [show valueForKey:@"name"];
-         */
+        NSObject *results = [response valueForKeyPath:@"query.results.json"];
+        self.title = [results valueForKeyPath:@"original_name"];
+        self.showOverview.text = [results valueForKey:@"overview"];
+        NSString *backdrop_url = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w500/%@", [results valueForKey:@"backdrop_path"]];
+        [self.showImage setImageWithURL:[NSURL URLWithString:backdrop_url]];
     }];
     
 	// Do any additional setup after loading the view.
