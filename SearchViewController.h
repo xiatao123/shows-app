@@ -10,4 +10,6 @@
 
 @interface SearchViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UISearchDisplayDelegate>
 
+@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+
 @end

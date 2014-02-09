@@ -175,11 +175,13 @@
       callback:^(NSError *error, id response) {
          NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
          NSError *err = nil;
+
          NSLog(@"%@",showJSON);
              //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
          self.showResult = [[SearchMoviedbResult alloc] initWithDictionary:showJSON error:&err];
          Show *show = [self.showResult.results objectAtIndex:0];
          NSLog(@"0 show name %@", show.name);
+
          [self.collectionView reloadData];
      }];
 }
