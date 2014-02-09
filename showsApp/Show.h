@@ -23,7 +23,8 @@
 @property (nonatomic, strong) NSString<Optional>* overview;
 @property (nonatomic, strong) NSString<Optional>* imdb_id;
 @property (nonatomic, strong) NSString<Optional>* tvdb_id;
-@property (nonatomic, strong) NSURL* poster_path;
+@property (nonatomic, strong) NSString* id;
+@property (nonatomic, strong) NSString* poster_path;
 
 +(BOOL)propertyIsOptional:(NSString *)propertyName;
 

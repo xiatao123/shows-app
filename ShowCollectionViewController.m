@@ -14,12 +14,14 @@
 #import "Show.h"
 #import "ShowDetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "SearchMoviedbResult.h"
+#import "SearchMoviedbModel.h"
 
 @interface ShowCollectionViewController ()
 
 -(void)reload;
 
-@property (nonatomic, strong) ShowResult* showResult;
+@property (nonatomic, strong) SearchMoviedbResult* showResult;
 @property (nonatomic, strong) UIBarButtonItem *searchButton;
 @property (nonatomic, readwrite, strong) REMenu *menu;
 
@@ -75,13 +77,22 @@
                                             highlightedImage:nil
                                                      action:^(REMenuItem *item) {
                                                          NSLog(@"Item: %@", item);
-                                                         [weakSelf reload];
+                                                         [weakSelf loadTopRated];
+                                                     }];
+    REMenuItem *popularItem = [[REMenuItem alloc] initWithTitle:@"Popular Shows"
+                                                   subtitle:@"Popular TV Shows"
+                                                      image:[UIImage imageNamed:@"Icon_Home"]
+                                           highlightedImage:nil
+                                                     action:^(REMenuItem *item) {
+                                                         NSLog(@"Item: %@", item);
+                                                         [weakSelf loadPopular];
                                                      }];
 
     
     homeItem.tag = 0;
     topItem.tag = 1;
-    self.menu = [[REMenu alloc] initWithItems:@[homeItem, topItem]];
+    popularItem.tag = 2;
+    self.menu = [[REMenu alloc] initWithItems:@[homeItem, topItem, popularItem]];
     if (!REUIKitIsFlatMode()) {
         self.menu.cornerRadius = 4;
         self.menu.shadowRadius = 4;
@@ -116,11 +127,12 @@
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     //TODO
-    return [self.showResult.shows count];
+    return [self.showResult.results count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"cellforItemAtIndexPath log");
     static NSString *CellIdentifier = @"ShowCell";
     ShowCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     //if(cell==nil){
@@ -131,52 +143,59 @@
         NSLog(@"cell is null");
     }
     
-    Show *show = self.showResult.shows[indexPath.row];
+    Show *show = self.showResult.results[indexPath.row];
     NSLog(@"title is %@", show.name);
     cell.backgroundColor = [UIColor whiteColor];
     [cell.showsNameLabel setText:show.name];
-    [cell.showsPosterImage setImageWithURL:show.poster_path];
+    NSString* baseUrl = @"http://image.tmdb.org/t/p/w500";
+    [cell.showsPosterImage setImageWithURL:[[NSURL alloc]initWithString: [baseUrl stringByAppendingString:show.poster_path]]];
 
     return cell;
 }
 
 -(void)reload{
-    [[YQL use:@{@"store://CUxLN5g0Ad8rP9z9woUKyA": @"tvdb" }]
-      select:@"*"
-      from:@"tvdb"
+    [YQL query:@"use 'store://CUxLN5g0Ad8rP9z9woUKyA' as popular; select * from popular;"
       callback:^(NSError *error, id response) {
-         
-         //NSLog(@"got resposne %@", response);
-         // NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.results"] );
-         NSDictionary *showJSON = [response valueForKeyPath:@"query.results.results"] ;
-         NSError *err = nil;
-         //NSLog(@"%@",showJSON);
-         //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
-         self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
-         Show *show = [self.showResult.shows objectAtIndex:0];
-         NSLog(@"0 show name %@", show.name);
-         [self.collectionView reloadData];
-     }
-     ];
+          
+              //NSLog(@"got resposne %@", response);
+          NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.json"] );
+          NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
+          NSError *err = nil;
+              //NSLog(@"%@",showJSON);
+              //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
+          self.showResult = [[SearchMoviedbResult alloc] initWithDictionary:showJSON error:&err];
+          SearchMoviedbModel *show = [self.showResult.results objectAtIndex:0];
+          NSLog(@"0 show tvdb_id is %i", show.id);
+          [self.collectionView reloadData];
+      }];
 }
 
--(void)loadPopular{
-    [[YQL use:@{@"store://CUxLN5g0Ad8rP9z9woUKyA": @"popular" }]
-     select:@"*"
-     from:@"popular"
-     callback:^(NSError *error, id response) {
-        //NSLog(@"got resposne %@", response);
-        // NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.results"] );
-         NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json.results"] ;
+-(void)loadTopRated{
+    [YQL query:@"use 'store://37O7tSnvbk37Zpl3Zeo2W0' as top; select * from top;"
+      callback:^(NSError *error, id response) {
+         NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
          NSError *err = nil;
          NSLog(@"%@",showJSON);
              //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
-         self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
-         Show *show = [self.showResult.shows objectAtIndex:0];
+         self.showResult = [[SearchMoviedbResult alloc] initWithDictionary:showJSON error:&err];
+         Show *show = [self.showResult.results objectAtIndex:0];
          NSLog(@"0 show name %@", show.name);
          [self.collectionView reloadData];
-     }
-     ];
+     }];
+}
+
+-(void)loadPopular{
+    [YQL query:@"use 'store://CUxLN5g0Ad8rP9z9woUKyA' as popular; select * from popular;"
+      callback:^(NSError *error, id response) {
+          NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
+          NSError *err = nil;
+          NSLog(@"%@",showJSON);
+              //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
+          self.showResult = [[SearchMoviedbResult alloc] initWithDictionary:showJSON error:&err];
+          Show *show = [self.showResult.results objectAtIndex:0];
+          NSLog(@"0 show name %@", show.name);
+          [self.collectionView reloadData];
+      }];
 }
 
 - (IBAction)onLogoutTap:(id)sender {
@@ -205,8 +224,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
     ShowDetailsViewController *controller = segue.destinationViewController;
-    Show *show = [self.showResult.shows objectAtIndex:indexPath.row];
-    controller.tvdb_id = show.tvdb_id;
+    SearchMoviedbModel *show = [self.showResult.results objectAtIndex:indexPath.row];
+        //controller.tvdb_id = show.id;
     
 }
 @end
