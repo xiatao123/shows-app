@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "REMenu.h"
 
 @interface ShowCollectionViewController : UICollectionViewController
+
+@property (nonatomic, readonly, strong) REMenu *menu;
+
+- (void)toggleMenu;
 
 @end

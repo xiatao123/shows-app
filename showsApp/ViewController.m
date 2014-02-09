@@ -73,7 +73,7 @@
     [self.yahoo
      authorizeUsingOAuthWithRequestTokenPath:@"get_request_token"
      userAuthorizationPath:@"request_auth"
-     callbackURL:[NSURL URLWithString:@"yahoo://success"]
+     callbackURL:[NSURL URLWithString:@"yshows://success"]
      accessTokenPath:@"get_token"
      accessMethod:@"POST"
      scope:nil success:^(AFOAuth1Token *accessToken, id request){

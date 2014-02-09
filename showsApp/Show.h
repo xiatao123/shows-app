@@ -16,14 +16,14 @@
 @interface Show : JSONModel
 
 @property (nonatomic, strong) Episode<Optional>* episode;
-@property (nonatomic, strong) NSString* title;
-@property (nonatomic, assign) float rating;
-@property (nonatomic, strong) NSString* air_day;
-@property (nonatomic, strong) NSString* air_time;
-@property (nonatomic, strong) NSString* overview;
+@property (nonatomic, strong) NSString* name;
+@property (nonatomic, assign) float vote_average;
+@property (nonatomic, strong) NSString<Optional>* air_day;
+@property (nonatomic, strong) NSString<Optional>* air_time;
+@property (nonatomic, strong) NSString<Optional>* overview;
 @property (nonatomic, strong) NSString<Optional>* imdb_id;
 @property (nonatomic, strong) NSString<Optional>* tvdb_id;
-@property (nonatomic, strong) NSURL* poster;
+@property (nonatomic, strong) NSURL* poster_path;
 
 +(BOOL)propertyIsOptional:(NSString *)propertyName;
 
