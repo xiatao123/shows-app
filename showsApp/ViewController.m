@@ -11,6 +11,9 @@
 #import "YQL.h"
 #import "Show.h"
 #import "ShowResult.h"
+#import "SearchMoviedbResult.h"
+#import "SearchMoviedbModel.h"
+
 
 @interface ViewController ()
 - (IBAction)onLoginTapped:(UIButton *)sender;
@@ -36,22 +39,18 @@
         // NSLog(@"got response %@", response);
     }];
      */
-    
-    [[YQL use:@{@"store://lsri0aFyNSXQsSFK0jYL9F": @"tvdb" }]
-     select:@"*"
-     from:@"tvdb"
-     where:@{ @"date" : @"20140114" }
-     callback:^(NSError *error, id response) {
+    [YQL query:@"use 'store://CUxLN5g0Ad8rP9z9woUKyA' as popular; select * from popular;"
+      callback:^(NSError *error, id response) {
          
          //NSLog(@"got resposne %@", response);
-         NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.results"] );
-         NSDictionary *showJSON = [response valueForKeyPath:@"query.results.results"] ;
+         NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.json"] );
+         NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
          NSError *err = nil;
          //NSLog(@"%@",showJSON);
          //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
-         ShowResult* showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
-         Show *show = [showResult.shows objectAtIndex:0];
-         NSLog(@"0 show tvdb_id is %@", show.tvdb_id);
+         SearchMoviedbResult* showResult = [[SearchMoviedbResult alloc] initWithDictionary:showJSON error:&err];
+         SearchMoviedbModel *show = [showResult.results objectAtIndex:0];
+         NSLog(@"0 show tvdb_id is %i", show.id);
      }
     ];
     
@@ -73,7 +72,7 @@
     [self.yahoo
      authorizeUsingOAuthWithRequestTokenPath:@"get_request_token"
      userAuthorizationPath:@"request_auth"
-     callbackURL:[NSURL URLWithString:@"yahoo://success"]
+     callbackURL:[NSURL URLWithString:@"yshows://success"]
      accessTokenPath:@"get_token"
      accessMethod:@"POST"
      scope:nil success:^(AFOAuth1Token *accessToken, id request){

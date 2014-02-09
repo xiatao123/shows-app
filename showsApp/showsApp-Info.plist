@@ -37,7 +37,7 @@
 			<string>com.yahoo.shows</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>yahoo</string>
+				<string>yshows</string>
 			</array>
 		</dict>
 	</array>
