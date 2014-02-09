@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JSONModel.h";
+#import "JSONModel.h"
 
 @protocol SearchMoviedbModel
 
@@ -16,11 +16,11 @@
 
 @interface SearchMoviedbModel : JSONModel
 
-@property (nonatomic, strong) NSURL* backdrop_path;
+@property (nonatomic, strong) NSString* backdrop_path;
 @property (nonatomic, assign) int id;
 @property (nonatomic, strong) NSString* original_name;
 @property (nonatomic, strong) NSString* first_air_date;
-@property (nonatomic, strong) NSURL* poster_path;
+@property (nonatomic, strong) NSString* poster_path;
 @property (nonatomic, assign) float popularity;
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, assign) float vote_average;

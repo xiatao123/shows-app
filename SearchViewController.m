@@ -8,12 +8,21 @@
 
 #import "SearchViewController.h"
 #import "YQL.h"
+#import "SearchMoviedbResult.h"
+#import "SearchMoviedbModel.h"
+#import "SearchCell.h"
 
 @interface SearchViewController ()
 
 
 //@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 //@property (strong, nonatomic) UISearchBar *mySearchBar;
+@property (nonatomic, strong) SearchMoviedbResult* searchMoviedbResult;
+
+
+-(void)reload:(NSString*)searchTxt;
+-(NSURL*)buildImageURL:(NSString*)file_path  size:(NSString*)size;
+
 
 @end
 
@@ -27,6 +36,7 @@
 //        self.mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
 //        self.mySearchBar.backgroundColor = [UIColor redColor];
 
+        self.title = @"Search!";
     }
     return self;
 }
@@ -34,10 +44,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[YQL use:@{@"store://pgdGby6VuyucfR52SFZ1wb": @"search" }] select:@"*" from:@"search" where:@{ @"query" : @"breaking" } callback:^(NSError *error, id response) {}];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
     
     NSLog(@"search view load");
 	// Do any additional setup after loading the view.
+    //[self reload];
     
 }
 
@@ -49,7 +61,8 @@
 
 #pragma mark - UISearchDisplay delegate
 - (void) searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller {
-    
+    [self.searchMoviedbResult.results removeAllObjects];
+    [self.collectionView reloadData];
 }
 
 - (BOOL) searchDisplayController: (UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
@@ -60,15 +73,71 @@
 
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:NO animated:YES];
+    NSString* searchText = [searchBar.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    [self reload:searchText];
+    
 }
 
 - (void)getSearchResults:(NSString *)searchText startingFrom:(int)start {
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [self.view endEditing:YES];
 }
 
+#pragma mark UICollectionViewDataSource
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return [self.searchMoviedbResult.results count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"SearchCell";
+    SearchCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    SearchMoviedbModel *show = self.searchMoviedbResult.results[indexPath.row];
+    cell.backgroundColor = [UIColor whiteColor];
+    [cell.showsNameLabel setText:show.original_name];
+    [cell.showsPosterImage setImageWithURL:[self buildImageURL:show.poster_path size:@"w185"]];
+    
+    return cell;
+
+}
+
+-(NSURL*)buildImageURL:(NSString *)file_path size:(NSString *)size{
+    if (file_path==NULL) {
+        return NULL;
+    }
+    static NSString *base_url = @"http://image.tmdb.org/t/p/";
+    NSString* baseAndSize = [base_url stringByAppendingString:size];
+    NSString* fullString = [baseAndSize stringByAppendingString:file_path];
+    return [[NSURL alloc]initWithString:fullString];
+}
+
+-(void)reload:(NSString*)searchTxt{
+    [[YQL
+      use:@{@"store://pgdGby6VuyucfR52SFZ1wb": @"tmdbsearch" }]
+      select:@"*" from:@"tmdbsearch" where:@{ @"query" : searchTxt }
+      callback:^(NSError *error, id response) {
+          //NSLog(@"return reposnse: %@", response);
+          NSDictionary *searchJSON = [response valueForKeyPath:@"query.results.json"];
+          //NSLog(@"%@", searchJSON);
+          self.searchMoviedbResult = [[SearchMoviedbResult alloc]initWithDictionary:searchJSON error:nil];
+         // NSLog(@"result %@", self.searchMoviedbResult);
+          SearchMoviedbModel *model = [self.searchMoviedbResult.results objectAtIndex:0];
+         NSLog(@"name is %@", model.name );
+          [self.collectionView reloadData];
+      }];
+    
+    
+}
 @end

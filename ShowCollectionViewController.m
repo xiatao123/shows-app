@@ -110,7 +110,7 @@
          //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
          self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
          Show *show = [self.showResult.shows objectAtIndex:0];
-         NSLog(@"0 show name %@", show.title);
+         //NSLog(@"0 show name %@", show.title);
          [self.collectionView reloadData];
      }
      ];
