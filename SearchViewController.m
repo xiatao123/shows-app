@@ -34,6 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [[YQL use:@{@"store://pgdGby6VuyucfR52SFZ1wb": @"search" }] select:@"*" from:@"search" where:@{ @"query" : @"breaking" } callback:^(NSError *error, id response) {}];
     
     NSLog(@"search view load");
