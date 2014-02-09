@@ -29,11 +29,14 @@
 {
     [super viewDidLoad];
     NSLog(@"view did load");
-    [[YQL use:@{@"store://kEGGpQPvV3gleWqZrYh46D": @"find" }] select:@"*" from:@"find" where:@{ @"id" : self.tvdb_id } callback:^(NSError *error, id response) {
+    [[YQL use:@{@"https://raw.github.com/ios-class/yshows-tables/master/tmdb.tv.id.xml": @"identity" }] select:@"*" from:@"identity" where:@{ @"id" : @1399 } callback:^(NSError *error, id response) {
         
+        NSLog(@"data is %@", response);
+        /*
         NSArray * array = [response valueForKeyPath:@"query.results.json.tv_results"];
         NSObject *show = array[0];
         self.showTitleLabel.text = [show valueForKey:@"name"];
+         */
     }];
     
 	// Do any additional setup after loading the view.
