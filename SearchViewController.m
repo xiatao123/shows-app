@@ -44,8 +44,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+
     
     NSLog(@"search view load");
 	// Do any additional setup after loading the view.

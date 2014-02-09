@@ -18,6 +18,7 @@
 		35887AC51899A9E100D4D903 /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 35887AC41899A9E100D4D903 /* Show.m */; };
 		7826D59A1897FB34002CFE5F /* YQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 7826D5991897FB34002CFE5F /* YQL.m */; };
 		783B23A01890D30F00FCD806 /* YahooClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 783B239F1890D30F00FCD806 /* YahooClient.m */; };
+		7871301F18A5D6EB008D31E1 /* ShowDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7871301E18A5D6EB008D31E1 /* ShowDetailsViewController.m */; };
 		7891F1951890B55E00BF5611 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7891F1941890B55E00BF5611 /* Foundation.framework */; };
 		7891F1971890B55E00BF5611 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7891F1961890B55E00BF5611 /* CoreGraphics.framework */; };
 		7891F1991890B55E00BF5611 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7891F1981890B55E00BF5611 /* UIKit.framework */; };
@@ -69,6 +70,8 @@
 		7826D5991897FB34002CFE5F /* YQL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQL.m; sourceTree = "<group>"; };
 		783B239E1890D30F00FCD806 /* YahooClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YahooClient.h; sourceTree = "<group>"; };
 		783B239F1890D30F00FCD806 /* YahooClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YahooClient.m; sourceTree = "<group>"; };
+		7871301D18A5D6EB008D31E1 /* ShowDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowDetailsViewController.h; sourceTree = "<group>"; };
+		7871301E18A5D6EB008D31E1 /* ShowDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowDetailsViewController.m; sourceTree = "<group>"; };
 		7891F1911890B55E00BF5611 /* showsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = showsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7891F1941890B55E00BF5611 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7891F1961890B55E00BF5611 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -123,6 +126,8 @@
 				356913C41899F06C0047A580 /* ShowCollectionViewController.m */,
 				35351E8A18A334AB005DAF6C /* SearchViewController.h */,
 				35351E8B18A334AB005DAF6C /* SearchViewController.m */,
+				7871301D18A5D6EB008D31E1 /* ShowDetailsViewController.h */,
+				7871301E18A5D6EB008D31E1 /* ShowDetailsViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -390,6 +395,7 @@
 				7891F1A51890B55E00BF5611 /* AppDelegate.m in Sources */,
 				35351E9518A70B8E005DAF6C /* SearchCell.m in Sources */,
 				356913C51899F06C0047A580 /* ShowCollectionViewController.m in Sources */,
+				7871301F18A5D6EB008D31E1 /* ShowDetailsViewController.m in Sources */,
 				7891F1A11890B55E00BF5611 /* main.m in Sources */,
 				35887AC51899A9E100D4D903 /* Show.m in Sources */,
 				356913BE1899B8E70047A580 /* Episode.m in Sources */,
