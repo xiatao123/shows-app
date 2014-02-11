@@ -117,7 +117,7 @@
     return cell;
 
 }
-
+ 
 -(NSURL*)buildImageURL:(NSString *)file_path size:(NSString *)size{
     if (file_path==NULL) {
         return NULL;
