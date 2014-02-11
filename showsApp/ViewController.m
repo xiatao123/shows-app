@@ -11,8 +11,8 @@
 #import "YQL.h"
 #import "Show.h"
 #import "ShowResult.h"
-#import "SearchMoviedbResult.h"
-#import "SearchMoviedbModel.h"
+//#import "SearchMoviedbResult.h"
+//#import "SearchMoviedbModel.h"
 
 
 @interface ViewController ()
@@ -48,9 +48,9 @@
          NSError *err = nil;
          //NSLog(@"%@",showJSON);
          //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
-         SearchMoviedbResult* showResult = [[SearchMoviedbResult alloc] initWithDictionary:showJSON error:&err];
-         SearchMoviedbModel *show = [showResult.results objectAtIndex:0];
-         NSLog(@"0 show tvdb_id is %i", show.id);
+//         SearchMoviedbResult* showResult = [[SearchMoviedbResult alloc] initWithDictionary:showJSON error:&err];
+//         SearchMoviedbModel *show = [showResult.results objectAtIndex:0];
+         //NSLog(@"0 show tvdb_id is %i", show.id);
      }
     ];
     

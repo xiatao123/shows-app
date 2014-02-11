@@ -15,6 +15,10 @@
 
 @interface ShowResult : JSONModel
 
-@property (nonatomic, strong) NSArray<Show>* shows;
+@property (nonatomic, strong) NSMutableArray<Show>* shows;
+
+
+
++(JSONKeyMapper*)keyMapper;
 
 @end

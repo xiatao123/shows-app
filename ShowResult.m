@@ -10,4 +10,11 @@
 
 @implementation ShowResult
 
+
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"results":@"shows"}];
+}
+
 @end
