@@ -8,8 +8,10 @@
 
 #import "SearchViewController.h"
 #import "YQL.h"
-#import "SearchMoviedbResult.h"
-#import "SearchMoviedbModel.h"
+//#import "SearchMoviedbResult.h"
+//#import "SearchMoviedbModel.h"
+#import "Show.h"
+#import "ShowResult.h"
 #import "SearchCell.h"
 
 @interface SearchViewController ()
@@ -17,7 +19,7 @@
 
 //@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 //@property (strong, nonatomic) UISearchBar *mySearchBar;
-@property (nonatomic, strong) SearchMoviedbResult* searchMoviedbResult;
+@property (nonatomic, strong) ShowResult* searchMoviedbResult;
 
 
 -(void)reload:(NSString*)searchTxt;
@@ -63,7 +65,7 @@
 
 #pragma mark - UISearchDisplay delegate
 - (void) searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller {
-    [self.searchMoviedbResult.results removeAllObjects];
+    [self.searchMoviedbResult.shows removeAllObjects];
     [self.collectionView reloadData];
 }
 
@@ -78,6 +80,7 @@
     [searchBar setShowsCancelButton:NO animated:YES];
     NSString* searchText = [searchBar.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     [self reload:searchText];
+    [self.view endEditing:YES];
     
 }
 
@@ -100,16 +103,16 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.searchMoviedbResult.results count];
+    return [self.searchMoviedbResult.shows count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"SearchCell";
     SearchCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    SearchMoviedbModel *show = self.searchMoviedbResult.results[indexPath.row];
+    Show *show = self.searchMoviedbResult.shows[indexPath.row];
     cell.backgroundColor = [UIColor whiteColor];
     [cell.showsNameLabel setText:show.original_name];
-    [cell.showsPosterImage setImageWithURL:[self buildImageURL:show.poster_path size:@"w185"]];
+    [cell.showsPosterImage setImageWithURL:[self buildImageURL:show.poster_path size:@"w185"] placeholderImage:[UIImage imageNamed:@"Placeholder"]];
     
     return cell;
 
@@ -133,9 +136,9 @@
           //NSLog(@"return reposnse: %@", response);
           NSDictionary *searchJSON = [response valueForKeyPath:@"query.results.json"];
           //NSLog(@"%@", searchJSON);
-          self.searchMoviedbResult = [[SearchMoviedbResult alloc]initWithDictionary:searchJSON error:nil];
+          self.searchMoviedbResult = [[ShowResult alloc]initWithDictionary:searchJSON error:nil];
          // NSLog(@"result %@", self.searchMoviedbResult);
-          SearchMoviedbModel *model = [self.searchMoviedbResult.results objectAtIndex:0];
+          Show *model = [self.searchMoviedbResult.shows objectAtIndex:0];
          NSLog(@"name is %@", model.name );
           [self.collectionView reloadData];
       }];

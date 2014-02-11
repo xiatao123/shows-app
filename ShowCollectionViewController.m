@@ -14,14 +14,15 @@
 #import "Show.h"
 #import "ShowDetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
-#import "SearchMoviedbResult.h"
-#import "SearchMoviedbModel.h"
+//#import "SearchMoviedbResult.h"
+//#import "SearchMoviedbModel.h"
 
 @interface ShowCollectionViewController ()
 
 -(void)reload;
 
-@property (nonatomic, strong) SearchMoviedbResult* showResult;
+//@property (nonatomic, strong) SearchMoviedbResult* showResult;
+@property (nonatomic, strong) ShowResult* showResult;
 @property (nonatomic, strong) UIBarButtonItem *searchButton;
 @property (nonatomic, readwrite, strong) REMenu *menu;
 
@@ -53,9 +54,6 @@
     self.navigationItem.rightBarButtonItem = self.searchButton;
     
     [self reload];
-    //UINib *showsNib = [UINib nibWithNibName:@"ShowCell" bundle:nil];
-    // [self.collectionView registerClass:[ShowCell class] forCellWithReuseIdentifier:@"ShowCell"];
-
     
     __typeof (self) __weak weakSelf = self;
     if (REUIKitIsFlatMode()) {
@@ -127,7 +125,7 @@
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     //TODO
-    return [self.showResult.results count];
+    return [self.showResult.shows count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -143,7 +141,7 @@
         NSLog(@"cell is null");
     }
     
-    Show *show = self.showResult.results[indexPath.row];
+    Show *show = self.showResult.shows[indexPath.row];
     NSLog(@"title is %@", show.name);
     cell.backgroundColor = [UIColor whiteColor];
     [cell.showsNameLabel setText:show.name];
@@ -163,9 +161,9 @@
           NSError *err = nil;
               //NSLog(@"%@",showJSON);
               //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
-          self.showResult = [[SearchMoviedbResult alloc] initWithDictionary:showJSON error:&err];
-          SearchMoviedbModel *show = [self.showResult.results objectAtIndex:0];
-          NSLog(@"0 show tvdb_id is %i", show.id);
+          self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
+          Show *show = [self.showResult.shows objectAtIndex:0];
+          NSLog(@"0 show tvdb_id is %@", show.id);
           [self.collectionView reloadData];
       }];
 }
@@ -178,8 +176,8 @@
 
          NSLog(@"%@",showJSON);
              //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
-         self.showResult = [[SearchMoviedbResult alloc] initWithDictionary:showJSON error:&err];
-         Show *show = [self.showResult.results objectAtIndex:0];
+         self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
+         Show *show = [self.showResult.shows objectAtIndex:0];
          NSLog(@"0 show name %@", show.name);
 
          [self.collectionView reloadData];
@@ -193,8 +191,8 @@
           NSError *err = nil;
           NSLog(@"%@",showJSON);
               //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
-          self.showResult = [[SearchMoviedbResult alloc] initWithDictionary:showJSON error:&err];
-          Show *show = [self.showResult.results objectAtIndex:0];
+          self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
+          Show *show = [self.showResult.shows objectAtIndex:0];
           NSLog(@"0 show name %@", show.name);
           [self.collectionView reloadData];
       }];
@@ -211,8 +209,6 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchViewController"];
     [self.navigationController pushViewController:svc animated:YES];
-//    SearchViewController *svc = [[SearchViewController alloc]init];
-//    [self.navigationController pushViewController:svc animated:YES];
 }
 
 - (void)toggleMenu
@@ -226,7 +222,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
     ShowDetailsViewController *controller = segue.destinationViewController;
-    SearchMoviedbModel *show = [self.showResult.results objectAtIndex:indexPath.row];
+    Show *show = [self.showResult.shows objectAtIndex:indexPath.row];
         //controller.tvdb_id = show.id;
     
 }
