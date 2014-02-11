@@ -227,7 +227,7 @@
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
     ShowDetailsViewController *controller = segue.destinationViewController;
     SearchMoviedbModel *show = [self.showResult.results objectAtIndex:indexPath.row];
-        //controller.tvdb_id = show.id;
+        controller.tmdb_id = show.id;
     
 }
 @end
