@@ -25,7 +25,7 @@
 @property (nonatomic, strong) ShowResult* showResult;
 @property (nonatomic, strong) UIBarButtonItem *searchButton;
 @property (nonatomic, readwrite, strong) REMenu *menu;
-
+@property (nonatomic, strong) NSDictionary *categories;
 
 - (IBAction)onLogoutTap:(id)sender;
 - (void)onSearchButton;
@@ -40,6 +40,7 @@
     if (self) {
         // Custom initialization
 //        [self reload];
+        self.categories = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:28], @"Action", [NSNumber numberWithInt:16], @"Animation", [NSNumber numberWithInt:35], @"Comedy", [NSNumber numberWithInt:18], @"Drama", [NSNumber numberWithInt:27], @"Horror", [NSNumber numberWithInt:53], @"Thriller", nil];
     }
     return self;
 }
@@ -48,6 +49,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    if (!self.categories){
+        self.categories = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:28], @"Action", [NSNumber numberWithInt:16], @"Animation", [NSNumber numberWithInt:35], @"Comedy", [NSNumber numberWithInt:18], @"Drama", [NSNumber numberWithInt:27], @"Horror", [NSNumber numberWithInt:53], @"Thriller", nil];
+    }
     
     self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(onSearchButton)];
     
@@ -63,11 +67,17 @@
         self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0 green:179/255.0 blue:134/255.0 alpha:1];
     }
     
-    REMenuItem *homeItem = [[REMenuItem alloc] initWithTitle:@"Home"
-                                                    subtitle:@"Return to Home Screen"
-                                                       image:[UIImage imageNamed:@"Icon_Home"]
-                                            highlightedImage:nil
-                                                      action:nil];
+    NSMutableArray *menuItems = [[NSMutableArray alloc] init];
+    
+    REMenuItem *popularItem = [[REMenuItem alloc] initWithTitle:@"Popular Shows"
+                                                       subtitle:@"Popular TV Shows"
+                                                          image:[UIImage imageNamed:@"Icon_Home"]
+                                               highlightedImage:nil
+                                                         action:^(REMenuItem *item) {
+                                                             NSLog(@"Item: %@", item);
+                                                             [weakSelf loadPopular];
+                                                         }];
+    [menuItems addObject:popularItem];
     
     REMenuItem *topItem = [[REMenuItem alloc] initWithTitle:@"Top Shows"
                                                     subtitle:@"Top Rated TV Shows"
@@ -77,20 +87,28 @@
                                                          NSLog(@"Item: %@", item);
                                                          [weakSelf loadTopRated];
                                                      }];
-    REMenuItem *popularItem = [[REMenuItem alloc] initWithTitle:@"Popular Shows"
-                                                   subtitle:@"Popular TV Shows"
+    [menuItems addObject:topItem];
+    
+    int temp = 2;
+    for(NSString *categoryName in self.categories){
+        NSNumber *categoryID = [self.categories objectForKey:categoryName];
+        REMenuItem *tempItem = [[REMenuItem alloc] initWithTitle: categoryName
+                                                   subtitle:[NSString stringWithFormat: @"%@ Shows", categoryName]
                                                       image:[UIImage imageNamed:@"Icon_Home"]
                                            highlightedImage:nil
-                                                     action:^(REMenuItem *item) {
-                                                         NSLog(@"Item: %@", item);
-                                                         [weakSelf loadPopular];
-                                                     }];
-
+                                                    action:^(REMenuItem *item) {
+                                                        NSLog(@"Item: %@", item);
+                                                        [weakSelf loadCategory:[categoryID intValue]];
+                                                    }];
+        tempItem.tag = temp++;
+        [menuItems addObject:tempItem];
+    }
     
-    homeItem.tag = 0;
+    
+    popularItem.tag = 0;
     topItem.tag = 1;
-    popularItem.tag = 2;
-    self.menu = [[REMenu alloc] initWithItems:@[homeItem, topItem, popularItem]];
+    
+    self.menu = [[REMenu alloc] initWithItems:menuItems];
     if (!REUIKitIsFlatMode()) {
         self.menu.cornerRadius = 4;
         self.menu.shadowRadius = 4;
@@ -196,6 +214,19 @@
           NSLog(@"0 show name %@", show.name);
           [self.collectionView reloadData];
       }];
+}
+
+-(void)loadCategory:(int)categoryID{
+    [YQL query:[NSString stringWithFormat:@"use 'store://qgc6p6Z7WGrJWXs9Mn4LFe' as category; select * from category where with_genres=%d;", categoryID]
+      callback:^(NSError *error, id response) {
+          NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
+          NSError *err = nil;
+          NSLog(@"%@",showJSON);
+          self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
+          Show *show = [self.showResult.shows objectAtIndex:0];
+          NSLog(@"0 show name %@", show.name);
+          [self.collectionView reloadData];
+      }];  
 }
 
 - (IBAction)onLogoutTap:(id)sender {
