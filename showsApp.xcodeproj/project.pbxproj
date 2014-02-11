@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		35351E8C18A334AB005DAF6C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E8B18A334AB005DAF6C /* SearchViewController.m */; };
-		35351E8F18A5C550005DAF6C /* SearchMoviedbResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E8E18A5C550005DAF6C /* SearchMoviedbResult.m */; };
-		35351E9218A5C61D005DAF6C /* SearchMoviedbModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E9118A5C61D005DAF6C /* SearchMoviedbModel.m */; };
 		35351E9518A70B8E005DAF6C /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E9418A70B8E005DAF6C /* SearchCell.m */; };
 		356913BE1899B8E70047A580 /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913BD1899B8E70047A580 /* Episode.m */; };
 		356913C11899CC470047A580 /* ShowResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913C01899CC470047A580 /* ShowResult.m */; };
@@ -50,10 +48,6 @@
 		347E5A5EA6D142D09FCAE070 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		35351E8A18A334AB005DAF6C /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		35351E8B18A334AB005DAF6C /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		35351E8D18A5C550005DAF6C /* SearchMoviedbResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMoviedbResult.h; sourceTree = "<group>"; };
-		35351E8E18A5C550005DAF6C /* SearchMoviedbResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMoviedbResult.m; sourceTree = "<group>"; };
-		35351E9018A5C61D005DAF6C /* SearchMoviedbModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMoviedbModel.h; sourceTree = "<group>"; };
-		35351E9118A5C61D005DAF6C /* SearchMoviedbModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMoviedbModel.m; sourceTree = "<group>"; };
 		35351E9318A70B8E005DAF6C /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
 		35351E9418A70B8E005DAF6C /* SearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCell.m; sourceTree = "<group>"; };
 		356913BC1899B8E70047A580 /* Episode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Episode.h; sourceTree = "<group>"; };
@@ -152,10 +146,6 @@
 				356913BD1899B8E70047A580 /* Episode.m */,
 				356913BF1899CC470047A580 /* ShowResult.h */,
 				356913C01899CC470047A580 /* ShowResult.m */,
-				35351E8D18A5C550005DAF6C /* SearchMoviedbResult.h */,
-				35351E8E18A5C550005DAF6C /* SearchMoviedbResult.m */,
-				35351E9018A5C61D005DAF6C /* SearchMoviedbModel.h */,
-				35351E9118A5C61D005DAF6C /* SearchMoviedbModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -402,9 +392,7 @@
 				783B23A01890D30F00FCD806 /* YahooClient.m in Sources */,
 				35351E8C18A334AB005DAF6C /* SearchViewController.m in Sources */,
 				356913C91899F0EC0047A580 /* ShowCell.m in Sources */,
-				35351E9218A5C61D005DAF6C /* SearchMoviedbModel.m in Sources */,
 				356913C11899CC470047A580 /* ShowResult.m in Sources */,
-				35351E8F18A5C550005DAF6C /* SearchMoviedbResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

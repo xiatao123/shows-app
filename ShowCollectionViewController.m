@@ -15,7 +15,7 @@
 #import "ShowDetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
 //#import "SearchMoviedbResult.h"
-#import "SearchMoviedbModel.h"
+//#import "SearchMoviedbModel.h"
 
 @interface ShowCollectionViewController ()
 
@@ -162,8 +162,8 @@
               //NSLog(@"%@",showJSON);
               //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
           self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
-          SearchMoviedbModel *show = [self.showResult.shows objectAtIndex:0];
-          NSLog(@"0 show tvdb_id is %i", show.id);
+          Show *show = [self.showResult.shows objectAtIndex:0];
+          NSLog(@"0 show tvdb_id is %@", show.id);
           [self.collectionView reloadData];
       }];
 }
@@ -222,7 +222,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
     ShowDetailsViewController *controller = segue.destinationViewController;
-    SearchMoviedbModel *show = [self.showResult.shows objectAtIndex:indexPath.row];
+    Show *show = [self.showResult.shows objectAtIndex:indexPath.row];
         //controller.tvdb_id = show.id;
     
 }
