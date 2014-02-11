@@ -78,6 +78,7 @@
     [searchBar setShowsCancelButton:NO animated:YES];
     NSString* searchText = [searchBar.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     [self reload:searchText];
+    [self.view endEditing:YES];
     
 }
 
