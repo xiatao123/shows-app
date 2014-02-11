@@ -60,7 +60,7 @@
     
     if ([filters count] > 0) {
         for (key in filters) {
-            [params addObject:[NSString stringWithFormat:@"%@=%@", key, [filters objectForKey:key]]];
+            [params addObject:[NSString stringWithFormat:@"%@='%@'", key, [filters objectForKey:key]]];
         }
         statement = [NSString stringWithFormat:@"select %@ from %@ where %@", field, table, [params componentsJoinedByString:@" and "]];
     }
@@ -82,7 +82,7 @@
     
     if ([filters count] > 0) {
         for (key in filters) {
-            [params addObject:[NSString stringWithFormat:@"%@=%@", key, [filters objectForKey:key]]];
+            [params addObject:[NSString stringWithFormat:@"%@=\'%@\'", key, [filters objectForKey:key]]];
         }
         statement = [NSString stringWithFormat:@"select %@ from %@ where %@", field, table, [params componentsJoinedByString:@" and "]];
     }

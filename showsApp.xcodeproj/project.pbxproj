@@ -10,6 +10,7 @@
 		35351E8C18A334AB005DAF6C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E8B18A334AB005DAF6C /* SearchViewController.m */; };
 		35351E8F18A5C550005DAF6C /* SearchMoviedbResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E8E18A5C550005DAF6C /* SearchMoviedbResult.m */; };
 		35351E9218A5C61D005DAF6C /* SearchMoviedbModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E9118A5C61D005DAF6C /* SearchMoviedbModel.m */; };
+		35351E9518A70B8E005DAF6C /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E9418A70B8E005DAF6C /* SearchCell.m */; };
 		356913BE1899B8E70047A580 /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913BD1899B8E70047A580 /* Episode.m */; };
 		356913C11899CC470047A580 /* ShowResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913C01899CC470047A580 /* ShowResult.m */; };
 		356913C51899F06C0047A580 /* ShowCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913C41899F06C0047A580 /* ShowCollectionViewController.m */; };
@@ -53,6 +54,8 @@
 		35351E8E18A5C550005DAF6C /* SearchMoviedbResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMoviedbResult.m; sourceTree = "<group>"; };
 		35351E9018A5C61D005DAF6C /* SearchMoviedbModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMoviedbModel.h; sourceTree = "<group>"; };
 		35351E9118A5C61D005DAF6C /* SearchMoviedbModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMoviedbModel.m; sourceTree = "<group>"; };
+		35351E9318A70B8E005DAF6C /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
+		35351E9418A70B8E005DAF6C /* SearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCell.m; sourceTree = "<group>"; };
 		356913BC1899B8E70047A580 /* Episode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Episode.h; sourceTree = "<group>"; };
 		356913BD1899B8E70047A580 /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Episode.m; sourceTree = "<group>"; };
 		356913BF1899CC470047A580 /* ShowResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowResult.h; sourceTree = "<group>"; };
@@ -134,6 +137,8 @@
 			children = (
 				356913C71899F0EC0047A580 /* ShowCell.h */,
 				356913C81899F0EC0047A580 /* ShowCell.m */,
+				35351E9318A70B8E005DAF6C /* SearchCell.h */,
+				35351E9418A70B8E005DAF6C /* SearchCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -388,6 +393,7 @@
 				7891F1AB1890B55E00BF5611 /* ViewController.m in Sources */,
 				7826D59A1897FB34002CFE5F /* YQL.m in Sources */,
 				7891F1A51890B55E00BF5611 /* AppDelegate.m in Sources */,
+				35351E9518A70B8E005DAF6C /* SearchCell.m in Sources */,
 				356913C51899F06C0047A580 /* ShowCollectionViewController.m in Sources */,
 				7871301F18A5D6EB008D31E1 /* ShowDetailsViewController.m in Sources */,
 				7891F1A11890B55E00BF5611 /* main.m in Sources */,

@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JSONModel.h";
-#import "SearchMoviedbModel.h";
+#import "JSONModel.h"
+#import "SearchMoviedbModel.h"
 
 @interface SearchMoviedbResult : JSONModel
 
-@property (nonatomic, strong) NSArray<SearchMoviedbModel>* results;
+@property (nonatomic, strong) NSMutableArray<SearchMoviedbModel>* results;
 @end
