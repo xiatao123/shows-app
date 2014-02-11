@@ -30,6 +30,11 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>Pods-REMenu.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -50,12 +55,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>37E5941CAFE74561A2A07448</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3CE2BC24FCC142888F157921</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>476CB678C2774C2792A1C10D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4D2A7D9A991A47EA8926F88F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5A9A5FC97F014AE2BB283625</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6DE481516DA347039FA3099E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -70,12 +95,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>CF0625EA653F4C9B96B3723B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E8EEDA823FE045AD9DF5C01C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>EE3459ACF10C4A3C84B055EE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FC86D9ACA69540F6BAA6E9CE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

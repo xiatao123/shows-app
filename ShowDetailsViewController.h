@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ShowDetailsViewController : UIViewController
-@property (nonatomic, strong) NSString * tvdb_id;
+@property (nonatomic, strong) NSString * tmdb_id;
 @end
