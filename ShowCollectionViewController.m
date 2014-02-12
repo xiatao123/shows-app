@@ -14,8 +14,7 @@
 #import "Show.h"
 #import "ShowDetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
-//#import "SearchMoviedbResult.h"
-//#import "SearchMoviedbModel.h"
+#import "GlobalShows.h"
 
 @interface ShowCollectionViewController ()
 
@@ -25,7 +24,7 @@
 @property (nonatomic, strong) ShowResult* showResult;
 @property (nonatomic, strong) UIBarButtonItem *searchButton;
 @property (nonatomic, readwrite, strong) REMenu *menu;
-@property (nonatomic, strong) NSDictionary *categories;
+//@property (nonatomic, strong) NSDictionary *categories;
 
 - (IBAction)onLogoutTap:(id)sender;
 - (void)onSearchButton;
@@ -39,8 +38,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-//        [self reload];
-        self.categories = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:28], @"Action", [NSNumber numberWithInt:16], @"Animation", [NSNumber numberWithInt:35], @"Comedy", [NSNumber numberWithInt:18], @"Drama", [NSNumber numberWithInt:27], @"Horror", [NSNumber numberWithInt:53], @"Thriller", nil];
+//        self.categories = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:28], @"Action", [NSNumber numberWithInt:16], @"Animation", [NSNumber numberWithInt:35], @"Comedy", [NSNumber numberWithInt:18], @"Drama", [NSNumber numberWithInt:27], @"Horror", [NSNumber numberWithInt:53], @"Thriller", nil];
     }
     return self;
 }
@@ -49,9 +47,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    if (!self.categories){
-        self.categories = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:28], @"Action", [NSNumber numberWithInt:16], @"Animation", [NSNumber numberWithInt:35], @"Comedy", [NSNumber numberWithInt:18], @"Drama", [NSNumber numberWithInt:27], @"Horror", [NSNumber numberWithInt:53], @"Thriller", nil];
-    }
+//    if (!self.categories){
+//        self.categories = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:28], @"Action", [NSNumber numberWithInt:16], @"Animation", [NSNumber numberWithInt:35], @"Comedy", [NSNumber numberWithInt:18], @"Drama", [NSNumber numberWithInt:27], @"Horror", [NSNumber numberWithInt:53], @"Thriller", nil];
+//    }
+   // [GlobalShows globalCategorySingleton];
     
     self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(onSearchButton)];
     
@@ -90,8 +89,8 @@
     [menuItems addObject:topItem];
     
     int temp = 2;
-    for(NSString *categoryName in self.categories){
-        NSNumber *categoryID = [self.categories objectForKey:categoryName];
+    for(NSString *categoryName in [GlobalShows globalCategorySingleton]){
+        NSNumber *categoryID = [[GlobalShows globalCategorySingleton] objectForKey:categoryName];
         REMenuItem *tempItem = [[REMenuItem alloc] initWithTitle: categoryName
                                                    subtitle:[NSString stringWithFormat: @"%@ Shows", categoryName]
                                                       image:[UIImage imageNamed:@"Icon_Home"]
