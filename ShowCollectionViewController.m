@@ -150,9 +150,6 @@
     NSLog(@"cellforItemAtIndexPath log");
     static NSString *CellIdentifier = @"ShowCell";
     ShowCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    //if(cell==nil){
-    //    cell = [[ShowsCell alloc] initwithStyle: UICollectionViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    //}
     
     if (cell == nil) {
         NSLog(@"cell is null");
@@ -171,16 +168,11 @@
 -(void)reload{
     [YQL query:@"use 'store://CUxLN5g0Ad8rP9z9woUKyA' as popular; select * from popular;"
       callback:^(NSError *error, id response) {
-          
-              //NSLog(@"got resposne %@", response);
-          NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.json"] );
+          //NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.json"] );
           NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
           NSError *err = nil;
-              //NSLog(@"%@",showJSON);
-              //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
+          //NSLog(@"%@",showJSON);
           self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
-          Show *show = [self.showResult.shows objectAtIndex:0];
-          NSLog(@"0 show tvdb_id is %@", show.id);
           [self.collectionView reloadData];
       }];
 }
@@ -190,13 +182,8 @@
       callback:^(NSError *error, id response) {
          NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
          NSError *err = nil;
-
-         NSLog(@"%@",showJSON);
-             //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
+         //NSLog(@"%@",showJSON);
          self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
-         Show *show = [self.showResult.shows objectAtIndex:0];
-         NSLog(@"0 show name %@", show.name);
-
          [self.collectionView reloadData];
      }];
 }
@@ -206,11 +193,8 @@
       callback:^(NSError *error, id response) {
           NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
           NSError *err = nil;
-          NSLog(@"%@",showJSON);
-              //Show *show = [[Show alloc]initWithDictionary:showJSON error:&err];
+          //NSLog(@"%@",showJSON);
           self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
-          Show *show = [self.showResult.shows objectAtIndex:0];
-          NSLog(@"0 show name %@", show.name);
           [self.collectionView reloadData];
       }];
 }
@@ -220,10 +204,8 @@
       callback:^(NSError *error, id response) {
           NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
           NSError *err = nil;
-          NSLog(@"%@",showJSON);
+          //NSLog(@"%@",showJSON);
           self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
-          Show *show = [self.showResult.shows objectAtIndex:0];
-          NSLog(@"0 show name %@", show.name);
           [self.collectionView reloadData];
       }];  
 }
