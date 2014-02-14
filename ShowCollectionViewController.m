@@ -18,14 +18,13 @@
 
 @interface ShowCollectionViewController ()
 
-//-(void)reload;
+-(void)loadTopRated;
+-(void)loadPopular;
 -(void)loadCategory:(int)categoryID categoryName:(NSString *)categoryName;
 
-//@property (nonatomic, strong) SearchMoviedbResult* showResult;
-//@property (nonatomic, strong) ShowResult* showResult;
+
 @property (nonatomic, strong) UIBarButtonItem *searchButton;
 @property (nonatomic, readwrite, strong) REMenu *menu;
-//@property (nonatomic, strong) NSDictionary *categories;
 @property (nonatomic, strong) NSString* bucketKey;
 @property (nonatomic, strong) NSMutableArray<Show>* showArrayBucket;
 
@@ -41,7 +40,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-//        self.categories = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:28], @"Action", [NSNumber numberWithInt:16], @"Animation", [NSNumber numberWithInt:35], @"Comedy", [NSNumber numberWithInt:18], @"Drama", [NSNumber numberWithInt:27], @"Horror", [NSNumber numberWithInt:53], @"Thriller", nil];
     }
     return self;
 }
@@ -50,10 +48,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-//    if (!self.categories){
-//        self.categories = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:28], @"Action", [NSNumber numberWithInt:16], @"Animation", [NSNumber numberWithInt:35], @"Comedy", [NSNumber numberWithInt:18], @"Drama", [NSNumber numberWithInt:27], @"Horror", [NSNumber numberWithInt:53], @"Thriller", nil];
-//    }
-   // [GlobalShows globalCategorySingleton];
     
     self.bucketKey = @"";
     self.showArrayBucket = [NSMutableArray array];
@@ -94,8 +88,8 @@
     [menuItems addObject:topItem];
     
     int temp = 2;
-    for(NSString *categoryName in [GlobalShows globalCategory]){
-        NSNumber *categoryID = [[GlobalShows globalCategory] objectForKey:categoryName];
+    for(NSString *categoryName in [GlobalShows category]){
+        NSNumber *categoryID = [[GlobalShows category] objectForKey:categoryName];
         REMenuItem *tempItem = [[REMenuItem alloc] initWithTitle: categoryName
                                                    subtitle:[NSString stringWithFormat: @"%@ Shows", categoryName]
                                                       image:[UIImage imageNamed:@"Icon_Home"]
@@ -161,7 +155,7 @@
         }
         return self.showArrayBucket.count;
     }
-    else return 0;//[self.showResult.shows count];
+    else return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -173,33 +167,20 @@
     if (cell == nil) {
         NSLog(@"cell is null");
     }
-    Show *show;
     if (self.bucketKey!= NULL && self.bucketKey.length !=0 ) {
-        show = self.showArrayBucket[indexPath.row];
+        Show* show = self.showArrayBucket[indexPath.row];
         //NSLog(@"title is %@", show.name);
+        //NSLog(@"title is %@", show.name);
+        cell.backgroundColor = [UIColor whiteColor];
+        [cell.showsNameLabel setText:show.name];
+        NSString* baseUrl = @"http://image.tmdb.org/t/p/w500";
+        [cell.showsPosterImage setImageWithURL:[[NSURL alloc]initWithString: [baseUrl stringByAppendingString:show.poster_path]]];
     }else{
-        show = 0;//self.showResult.shows[indexPath.row];
     }
-    //NSLog(@"title is %@", show.name);
-    cell.backgroundColor = [UIColor whiteColor];
-    [cell.showsNameLabel setText:show.name];
-    NSString* baseUrl = @"http://image.tmdb.org/t/p/w500";
-    [cell.showsPosterImage setImageWithURL:[[NSURL alloc]initWithString: [baseUrl stringByAppendingString:show.poster_path]]];
     
     return cell;
 }
 
-//-(void)reload{
-//    [YQL query:@"use 'store://CUxLN5g0Ad8rP9z9woUKyA' as popular; select * from popular;"
-//      callback:^(NSError *error, id response) {
-//          //NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.json"] );
-//          NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
-//          NSError *err = nil;
-//          //NSLog(@"%@",showJSON);
-//          self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
-//          [self.collectionView reloadData];
-//      }];
-//}
 
 -(void)loadTopRated{
     self.bucketKey = @"Top";

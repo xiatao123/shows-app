@@ -20,7 +20,7 @@
     return instance;
 }
 
-+ (NSDictionary *)globalCategory{
++ (NSDictionary *)category{
     static dispatch_once_t once;
     static NSDictionary *instance;
     dispatch_once(&once, ^{
