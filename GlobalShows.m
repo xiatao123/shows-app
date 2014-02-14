@@ -34,7 +34,7 @@
     static dispatch_once_t once;
     static NSMutableDictionary *instance;
     dispatch_once(&once, ^{
-        instance = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[[NSMutableArray alloc]init], @"Action", [[NSMutableArray alloc]init], @"Animation", [[NSMutableArray alloc]init], @"Comedy", [[NSMutableArray alloc]init], @"Drama", [[NSMutableArray alloc]init], @"Horror", [[NSMutableArray alloc]init], @"Thriller", nil];
+        instance = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[[NSMutableArray alloc]init], @"Popular", [[NSMutableArray alloc]init], @"Top", [[NSMutableArray alloc]init], @"Action", [[NSMutableArray alloc]init], @"Animation", [[NSMutableArray alloc]init], @"Comedy", [[NSMutableArray alloc]init], @"Drama", [[NSMutableArray alloc]init], @"Horror", [[NSMutableArray alloc]init], @"Thriller", nil];
     });
     
     return instance;

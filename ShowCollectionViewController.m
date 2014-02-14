@@ -18,16 +18,16 @@
 
 @interface ShowCollectionViewController ()
 
--(void)reload;
+//-(void)reload;
 -(void)loadCategory:(int)categoryID categoryName:(NSString *)categoryName;
 
 //@property (nonatomic, strong) SearchMoviedbResult* showResult;
-@property (nonatomic, strong) ShowResult* showResult;
+//@property (nonatomic, strong) ShowResult* showResult;
 @property (nonatomic, strong) UIBarButtonItem *searchButton;
 @property (nonatomic, readwrite, strong) REMenu *menu;
 //@property (nonatomic, strong) NSDictionary *categories;
 @property (nonatomic, strong) NSString* bucketKey;
-@property (nonatomic, strong) NSMutableArray<Show>* bucket;
+@property (nonatomic, strong) NSMutableArray<Show>* showArrayBucket;
 
 - (IBAction)onLogoutTap:(id)sender;
 - (void)onSearchButton;
@@ -56,12 +56,12 @@
    // [GlobalShows globalCategorySingleton];
     
     self.bucketKey = @"";
-    self.bucket = [NSMutableArray array];
+    self.showArrayBucket = [NSMutableArray array];
     self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(onSearchButton)];
     
     self.navigationItem.rightBarButtonItem = self.searchButton;
     
-    [self reload];
+    
     
     __typeof (self) __weak weakSelf = self;
     if (REUIKitIsFlatMode()) {
@@ -129,6 +129,7 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleMenu)];
 
+    [self loadPopular];
 }
 
 - (void)didReceiveMemoryWarning
@@ -148,19 +149,19 @@
 {
     //NSLog(@"numberOfInSection");
     if(self.bucketKey!= NULL && self.bucketKey.length !=0 ){
-        [self.bucket removeAllObjects];
+        [self.showArrayBucket removeAllObjects];
         NSArray *keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
         NSLog(@"%i", keyBucket.count);
         for(NSString *key in keyBucket){
             //NSLog(@"%@", key);
             Show* show = [[GlobalShows globalShowsSingleton]objectForKey:key];
             //NSLog(@"show's name is %@", show.name);
-            [self.bucket addObject:show];
+            [self.showArrayBucket addObject:show];
             //NSLog(@"bucket size %i", self.bucket.count);
         }
-        return self.bucket.count;
+        return self.showArrayBucket.count;
     }
-    else return [self.showResult.shows count];
+    else return 0;//[self.showResult.shows count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -174,10 +175,10 @@
     }
     Show *show;
     if (self.bucketKey!= NULL && self.bucketKey.length !=0 ) {
-        show = self.bucket[indexPath.row];
+        show = self.showArrayBucket[indexPath.row];
         //NSLog(@"title is %@", show.name);
     }else{
-        show = self.showResult.shows[indexPath.row];
+        show = 0;//self.showResult.shows[indexPath.row];
     }
     //NSLog(@"title is %@", show.name);
     cell.backgroundColor = [UIColor whiteColor];
@@ -188,38 +189,62 @@
     return cell;
 }
 
--(void)reload{
-    [YQL query:@"use 'store://CUxLN5g0Ad8rP9z9woUKyA' as popular; select * from popular;"
-      callback:^(NSError *error, id response) {
-          //NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.json"] );
-          NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
-          NSError *err = nil;
-          //NSLog(@"%@",showJSON);
-          self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
-          [self.collectionView reloadData];
-      }];
-}
+//-(void)reload{
+//    [YQL query:@"use 'store://CUxLN5g0Ad8rP9z9woUKyA' as popular; select * from popular;"
+//      callback:^(NSError *error, id response) {
+//          //NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.json"] );
+//          NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
+//          NSError *err = nil;
+//          //NSLog(@"%@",showJSON);
+//          self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
+//          [self.collectionView reloadData];
+//      }];
+//}
 
 -(void)loadTopRated{
-    [YQL query:@"use 'store://37O7tSnvbk37Zpl3Zeo2W0' as top; select * from top;"
-      callback:^(NSError *error, id response) {
-         NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
-         NSError *err = nil;
-         //NSLog(@"%@",showJSON);
-         self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
-         [self.collectionView reloadData];
-     }];
+    self.bucketKey = @"Top";
+    NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
+    if (keyBucket.count != 0) {
+        //NSLog(@"count!=0!");
+        [self.collectionView reloadData];
+    }else{
+        [YQL query:@"use 'store://37O7tSnvbk37Zpl3Zeo2W0' as top; select * from top;"
+          callback:^(NSError *error, id response) {
+              NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
+              NSError *err = nil;
+              //NSLog(@"%@",showJSON);
+              ShowResult* showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
+              NSMutableArray *bucket = [[GlobalShows globalTriageBucket] objectForKey:self.bucketKey];
+              for(Show* show in showResult.shows){
+                  [bucket addObject:show.id];
+                  [[GlobalShows globalShowsSingleton] setValue:show forKey:show.id];
+              }
+              [self.collectionView reloadData];
+          }];
+    }
 }
 
 -(void)loadPopular{
-    [YQL query:@"use 'store://CUxLN5g0Ad8rP9z9woUKyA' as popular; select * from popular;"
-      callback:^(NSError *error, id response) {
-          NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
-          NSError *err = nil;
-          //NSLog(@"%@",showJSON);
-          self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
-          [self.collectionView reloadData];
-      }];
+    self.bucketKey = @"Popular";
+    NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
+    if (keyBucket.count != 0) {
+        //NSLog(@"count!=0!");
+        [self.collectionView reloadData];
+    }else{
+        [YQL query:@"use 'store://CUxLN5g0Ad8rP9z9woUKyA' as popular; select * from popular;"
+          callback:^(NSError *error, id response) {
+              NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
+              NSError *err = nil;
+              //NSLog(@"%@",showJSON);
+              ShowResult* showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
+              NSMutableArray *bucket = [[GlobalShows globalTriageBucket] objectForKey:self.bucketKey];
+              for(Show* show in showResult.shows){
+                  [bucket addObject:show.id];
+                  [[GlobalShows globalShowsSingleton] setValue:show forKey:show.id];
+              }
+              [self.collectionView reloadData];
+          }];
+    }
 }
 
 -(void)loadCategory:(int)categoryID categoryName:(NSString *)categoryName{
@@ -272,7 +297,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
     ShowDetailsViewController *controller = segue.destinationViewController;
-    Show *show = [self.showResult.shows objectAtIndex:indexPath.row];
+    Show *show = [self.showArrayBucket objectAtIndex:indexPath.row];
     controller.tmdb_id = show.id;
 }
 @end
