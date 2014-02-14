@@ -11,6 +11,8 @@
 @interface GlobalShows : NSObject
 
 + (NSDictionary *)globalShowsSingleton;
-+ (NSDictionary *)globalCategorySingleton;
++ (NSDictionary *)globalCategory;
++ (NSDictionary *)globalTriageBucket;
+
 
 @end

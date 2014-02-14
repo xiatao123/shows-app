@@ -12,15 +12,15 @@
 
 + (NSDictionary *)globalShowsSingleton{
     static dispatch_once_t once;
-    static NSDictionary *instance;
+    static NSMutableDictionary *instance;
     dispatch_once(&once, ^{
-        instance = [[NSDictionary alloc]init];
+        instance = [[NSMutableDictionary alloc]init];
     });
     
     return instance;
 }
 
-+ (NSDictionary *)globalCategorySingleton{
++ (NSDictionary *)globalCategory{
     static dispatch_once_t once;
     static NSDictionary *instance;
     dispatch_once(&once, ^{
@@ -29,4 +29,16 @@
     
     return instance;
 }
+
++ (NSDictionary *)globalTriageBucket{
+    static dispatch_once_t once;
+    static NSMutableDictionary *instance;
+    dispatch_once(&once, ^{
+        instance = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[[NSMutableArray alloc]init], @"Action", [[NSMutableArray alloc]init], @"Animation", [[NSMutableArray alloc]init], @"Comedy", [[NSMutableArray alloc]init], @"Drama", [[NSMutableArray alloc]init], @"Horror", [[NSMutableArray alloc]init], @"Thriller", nil];
+    });
+    
+    return instance;
+}
+
+
 @end

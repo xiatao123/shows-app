@@ -19,12 +19,15 @@
 @interface ShowCollectionViewController ()
 
 -(void)reload;
+-(void)loadCategory:(int)categoryID categoryName:(NSString *)categoryName;
 
 //@property (nonatomic, strong) SearchMoviedbResult* showResult;
 @property (nonatomic, strong) ShowResult* showResult;
 @property (nonatomic, strong) UIBarButtonItem *searchButton;
 @property (nonatomic, readwrite, strong) REMenu *menu;
 //@property (nonatomic, strong) NSDictionary *categories;
+@property (nonatomic, strong) NSString* bucketKey;
+@property (nonatomic, strong) NSMutableArray<Show>* bucket;
 
 - (IBAction)onLogoutTap:(id)sender;
 - (void)onSearchButton;
@@ -52,6 +55,8 @@
 //    }
    // [GlobalShows globalCategorySingleton];
     
+    self.bucketKey = @"";
+    self.bucket = [NSMutableArray array];
     self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(onSearchButton)];
     
     self.navigationItem.rightBarButtonItem = self.searchButton;
@@ -73,7 +78,7 @@
                                                           image:[UIImage imageNamed:@"Icon_Home"]
                                                highlightedImage:nil
                                                          action:^(REMenuItem *item) {
-                                                             NSLog(@"Item: %@", item);
+                                                             //NSLog(@"Item: %@", item);
                                                              [weakSelf loadPopular];
                                                          }];
     [menuItems addObject:popularItem];
@@ -83,21 +88,21 @@
                                                        image:[UIImage imageNamed:@"Icon_Home"]
                                             highlightedImage:nil
                                                      action:^(REMenuItem *item) {
-                                                         NSLog(@"Item: %@", item);
+                                                         //NSLog(@"Item: %@", item);
                                                          [weakSelf loadTopRated];
                                                      }];
     [menuItems addObject:topItem];
     
     int temp = 2;
-    for(NSString *categoryName in [GlobalShows globalCategorySingleton]){
-        NSNumber *categoryID = [[GlobalShows globalCategorySingleton] objectForKey:categoryName];
+    for(NSString *categoryName in [GlobalShows globalCategory]){
+        NSNumber *categoryID = [[GlobalShows globalCategory] objectForKey:categoryName];
         REMenuItem *tempItem = [[REMenuItem alloc] initWithTitle: categoryName
                                                    subtitle:[NSString stringWithFormat: @"%@ Shows", categoryName]
                                                       image:[UIImage imageNamed:@"Icon_Home"]
                                            highlightedImage:nil
                                                     action:^(REMenuItem *item) {
-                                                        NSLog(@"Item: %@", item);
-                                                        [weakSelf loadCategory:[categoryID intValue]];
+                                                        //NSLog(@"Item: %@", item);
+                                                        [weakSelf loadCategory:[categoryID intValue] categoryName:categoryName];
                                                     }];
         tempItem.tag = temp++;
         [menuItems addObject:tempItem];
@@ -141,27 +146,45 @@
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    //TODO
-    return [self.showResult.shows count];
+    //NSLog(@"numberOfInSection");
+    if(self.bucketKey!= NULL && self.bucketKey.length !=0 ){
+        [self.bucket removeAllObjects];
+        NSArray *keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
+        NSLog(@"%i", keyBucket.count);
+        for(NSString *key in keyBucket){
+            //NSLog(@"%@", key);
+            Show* show = [[GlobalShows globalShowsSingleton]objectForKey:key];
+            //NSLog(@"show's name is %@", show.name);
+            [self.bucket addObject:show];
+            //NSLog(@"bucket size %i", self.bucket.count);
+        }
+        return self.bucket.count;
+    }
+    else return [self.showResult.shows count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"cellforItemAtIndexPath log");
+    //NSLog(@"cellforItemAtIndexPath log");
     static NSString *CellIdentifier = @"ShowCell";
     ShowCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     
     if (cell == nil) {
         NSLog(@"cell is null");
     }
-    
-    Show *show = self.showResult.shows[indexPath.row];
-    NSLog(@"title is %@", show.name);
+    Show *show;
+    if (self.bucketKey!= NULL && self.bucketKey.length !=0 ) {
+        show = self.bucket[indexPath.row];
+        //NSLog(@"title is %@", show.name);
+    }else{
+        show = self.showResult.shows[indexPath.row];
+    }
+    //NSLog(@"title is %@", show.name);
     cell.backgroundColor = [UIColor whiteColor];
     [cell.showsNameLabel setText:show.name];
     NSString* baseUrl = @"http://image.tmdb.org/t/p/w500";
     [cell.showsPosterImage setImageWithURL:[[NSURL alloc]initWithString: [baseUrl stringByAppendingString:show.poster_path]]];
-
+    
     return cell;
 }
 
@@ -199,15 +222,30 @@
       }];
 }
 
--(void)loadCategory:(int)categoryID{
-    [YQL query:[NSString stringWithFormat:@"use 'store://qgc6p6Z7WGrJWXs9Mn4LFe' as category; select * from category where with_genres=%d;", categoryID]
-      callback:^(NSError *error, id response) {
-          NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
-          NSError *err = nil;
-          //NSLog(@"%@",showJSON);
-          self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
-          [self.collectionView reloadData];
-      }];  
+-(void)loadCategory:(int)categoryID categoryName:(NSString *)categoryName{
+    self.bucketKey = categoryName;
+    NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:categoryName];
+    if (keyBucket.count != 0) {
+        //NSLog(@"count!=0!");
+        [self.collectionView reloadData];
+    }
+    else{
+        [YQL query:[NSString stringWithFormat:@"use 'store://qgc6p6Z7WGrJWXs9Mn4LFe' as category; select * from category where with_genres=%d;", categoryID]
+          callback:^(NSError *error, id response) {
+              NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
+              NSError *err = nil;
+              //NSLog(@"%@",showJSON);
+              //self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
+              ShowResult* showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
+              NSMutableArray *bucket = [[GlobalShows globalTriageBucket] objectForKey:categoryName];
+              for(Show* show in showResult.shows){
+                  [bucket addObject:show.id];
+                  [[GlobalShows globalShowsSingleton] setValue:show forKey:show.id];
+              }
+              [self.collectionView reloadData];
+          }];  
+
+    }
 }
 
 - (IBAction)onLogoutTap:(id)sender {
