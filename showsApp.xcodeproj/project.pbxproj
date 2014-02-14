@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		35351E8C18A334AB005DAF6C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E8B18A334AB005DAF6C /* SearchViewController.m */; };
 		35351E9518A70B8E005DAF6C /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E9418A70B8E005DAF6C /* SearchCell.m */; };
+		353F85FF18AAE2FD004A9346 /* GlobalShows.m in Sources */ = {isa = PBXBuildFile; fileRef = 353F85FE18AAE2FD004A9346 /* GlobalShows.m */; };
 		356913BE1899B8E70047A580 /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913BD1899B8E70047A580 /* Episode.m */; };
 		356913C11899CC470047A580 /* ShowResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913C01899CC470047A580 /* ShowResult.m */; };
 		356913C51899F06C0047A580 /* ShowCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913C41899F06C0047A580 /* ShowCollectionViewController.m */; };
@@ -50,6 +51,8 @@
 		35351E8B18A334AB005DAF6C /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		35351E9318A70B8E005DAF6C /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
 		35351E9418A70B8E005DAF6C /* SearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCell.m; sourceTree = "<group>"; };
+		353F85FD18AAE2FD004A9346 /* GlobalShows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalShows.h; sourceTree = "<group>"; };
+		353F85FE18AAE2FD004A9346 /* GlobalShows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalShows.m; sourceTree = "<group>"; };
 		356913BC1899B8E70047A580 /* Episode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Episode.h; sourceTree = "<group>"; };
 		356913BD1899B8E70047A580 /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Episode.m; sourceTree = "<group>"; };
 		356913BF1899CC470047A580 /* ShowResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowResult.h; sourceTree = "<group>"; };
@@ -113,6 +116,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		353F85FC18AAE272004A9346 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				353F85FD18AAE2FD004A9346 /* GlobalShows.h */,
+				353F85FE18AAE2FD004A9346 /* GlobalShows.m */,
+			);
+			name = Global;
+			sourceTree = "<group>";
+		};
 		356913C21899EF5C0047A580 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +183,7 @@
 		7891F1881890B55E00BF5611 = {
 			isa = PBXGroup;
 			children = (
+				353F85FC18AAE272004A9346 /* Global */,
 				356913C61899F0CD0047A580 /* View */,
 				356913C21899EF5C0047A580 /* View Controllers */,
 				35887AC61899AA1500D4D903 /* Model */,
@@ -391,6 +404,7 @@
 				356913BE1899B8E70047A580 /* Episode.m in Sources */,
 				783B23A01890D30F00FCD806 /* YahooClient.m in Sources */,
 				35351E8C18A334AB005DAF6C /* SearchViewController.m in Sources */,
+				353F85FF18AAE2FD004A9346 /* GlobalShows.m in Sources */,
 				356913C91899F0EC0047A580 /* ShowCell.m in Sources */,
 				356913C11899CC470047A580 /* ShowResult.m in Sources */,
 			);

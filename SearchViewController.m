@@ -20,7 +20,7 @@
 //@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 //@property (strong, nonatomic) UISearchBar *mySearchBar;
 @property (nonatomic, strong) ShowResult* searchMoviedbResult;
-
+@property (nonatomic, strong) UIImage* imagePlaceholder;
 
 -(void)reload:(NSString*)searchTxt;
 -(NSURL*)buildImageURL:(NSString*)file_path  size:(NSString*)size;
@@ -50,7 +50,8 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
 
-    
+    self.imagePlaceholder = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://cdn0.iconfinder.com/data/icons/elite-emoticons/512/not-excited-128.png"]]];
+
     NSLog(@"search view load");
 	// Do any additional setup after loading the view.
     //[self reload];
@@ -112,11 +113,20 @@
     Show *show = self.searchMoviedbResult.shows[indexPath.row];
     cell.backgroundColor = [UIColor whiteColor];
     [cell.showsNameLabel setText:show.original_name];
-    [cell.showsPosterImage setImageWithURL:[self buildImageURL:show.poster_path size:@"w185"] placeholderImage:[UIImage imageNamed:@"Placeholder"]];
+//    UIImage *placeholderImage = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/skull.png",[self applicationDocumentsDirectory]]];
+    [cell.showsPosterImage setImageWithURL:[self buildImageURL:show.poster_path size:@"w185"] placeholderImage:self.imagePlaceholder];
     
     return cell;
 
 }
+
+
+//- (NSString *)applicationDocumentsDirectory
+//{
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+//    return basePath;
+//}
 
 -(NSURL*)buildImageURL:(NSString *)file_path size:(NSString *)size{
     if (file_path==NULL) {
@@ -135,7 +145,7 @@
       callback:^(NSError *error, id response) {
           //NSLog(@"return reposnse: %@", response);
           NSDictionary *searchJSON = [response valueForKeyPath:@"query.results.json"];
-          //NSLog(@"%@", searchJSON);
+          NSLog(@"%@", searchJSON);
           self.searchMoviedbResult = [[ShowResult alloc]initWithDictionary:searchJSON error:nil];
          // NSLog(@"result %@", self.searchMoviedbResult);
           Show *model = [self.searchMoviedbResult.shows objectAtIndex:0];
