@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "AFOAuth1Client.h"
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
@@ -22,6 +23,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [Parse setApplicationId:@"Uj1QKxgWXFu6X59XbRxUzuT0ahYdgwycWJ6vqIBK"
+                  clientKey:@"3BJAOf5QaPWJvv7kMcJPfWbKpRFWooQG4xlFwP4X"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     return YES;
 }
 							

@@ -9,6 +9,7 @@
 #import "ShowDetailsViewController.h"
 #import "YQL.h"
 #import "UIImageView+AFNetworking.h"
+#import <Parse/Parse.h>
 
 @interface ShowDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *showOverview;
@@ -41,6 +42,11 @@
     }];
     
 	// Do any additional setup after loading the view.
+    /*
+    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    testObject[@"foo"] = @"bar";
+    [testObject saveInBackground];
+     */
 }
 
 - (void)didReceiveMemoryWarning

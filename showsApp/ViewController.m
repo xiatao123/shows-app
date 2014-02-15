@@ -11,6 +11,8 @@
 #import "YQL.h"
 #import "Show.h"
 #import "ShowResult.h"
+#import "CMDQueryStringSerialization.h"
+#import "LocalStorage.h"
 //#import "SearchMoviedbResult.h"
 //#import "SearchMoviedbModel.h"
 
@@ -54,9 +56,9 @@
      }
     ];
     
-    NSData * data = [[self defaults] objectForKey:@"accessToken"];
+    NSDictionary * data = (NSDictionary *)[LocalStorage read:@"current_user"];
     if (data) {
-        AFOAuth1Token * accessToken = [NSKeyedUnarchiver unarchiveObjectWithData:data];;
+        AFOAuth1Token * accessToken = [NSKeyedUnarchiver unarchiveObjectWithData:[data objectForKey:@"acces_token"]];;
         [self performSegueWithIdentifier:@"goToHome" sender:self];
     }
 }
@@ -75,16 +77,16 @@
      callbackURL:[NSURL URLWithString:@"yshows://success"]
      accessTokenPath:@"get_token"
      accessMethod:@"POST"
-     scope:nil success:^(AFOAuth1Token *accessToken, id request){
+     scope:nil success:^(AFOAuth1Token *accessToken, id response){
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          
-         // encode access token
+         NSString *query = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+         NSDictionary *params = [CMDQueryStringSerialization dictionaryWithQueryString:query];
          NSData *data = [NSKeyedArchiver archivedDataWithRootObject:accessToken];
+         NSDictionary *user = @{@"guid": [params objectForKey:@"xoauth_yahoo_guid"], @"access_token": data };
          
          // save to NSUserDefaults
-         [[self defaults] setObject:data forKey:@"accessToken"];
-         [[self defaults] synchronize];
-         
+         [LocalStorage create:@"current_user" value:user];
          [self performSegueWithIdentifier:@"goToHome" sender:self];
      }
      failure:^(NSError *error) {
