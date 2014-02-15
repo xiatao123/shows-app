@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_AFOAuth1Client 3
 #define COCOAPODS_VERSION_PATCH_AFOAuth1Client 3
 
+// CMDQueryStringSerialization
+#define COCOAPODS_POD_AVAILABLE_CMDQueryStringSerialization
+#define COCOAPODS_VERSION_MAJOR_CMDQueryStringSerialization 0
+#define COCOAPODS_VERSION_MINOR_CMDQueryStringSerialization 1
+#define COCOAPODS_VERSION_PATCH_CMDQueryStringSerialization 0
+
 // JSONModel
 #define COCOAPODS_POD_AVAILABLE_JSONModel
 #define COCOAPODS_VERSION_MAJOR_JSONModel 0

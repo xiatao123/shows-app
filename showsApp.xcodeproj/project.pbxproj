@@ -17,6 +17,18 @@
 		356913C91899F0EC0047A580 /* ShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913C81899F0EC0047A580 /* ShowCell.m */; };
 		35887AC51899A9E100D4D903 /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 35887AC41899A9E100D4D903 /* Show.m */; };
 		7826D59A1897FB34002CFE5F /* YQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 7826D5991897FB34002CFE5F /* YQL.m */; };
+		7835633A18A9CC5500797F4B /* LocalStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7835633918A9CC5500797F4B /* LocalStorage.m */; };
+		7835634118B01C0000797F4B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835634018B01C0000797F4B /* Parse.framework */; };
+		7835634318B01C3C00797F4B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835634218B01C3C00797F4B /* AudioToolbox.framework */; };
+		7835634518B01C4300797F4B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835634418B01C4300797F4B /* CFNetwork.framework */; };
+		7835634718B01C5400797F4B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835634618B01C5400797F4B /* CoreLocation.framework */; };
+		7835634918B01C5D00797F4B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835634818B01C5D00797F4B /* libz.dylib */; };
+		7835634B18B01C6500797F4B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835634A18B01C6500797F4B /* MobileCoreServices.framework */; };
+		7835634D18B01C6D00797F4B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835634C18B01C6D00797F4B /* QuartzCore.framework */; };
+		7835634F18B01C8F00797F4B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835634E18B01C8F00797F4B /* Security.framework */; };
+		7835635118B01C9500797F4B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835635018B01C9500797F4B /* StoreKit.framework */; };
+		7835635318B01C9D00797F4B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835635218B01C9D00797F4B /* SystemConfiguration.framework */; };
+		7835635818B01EAA00797F4B /* MissingSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 7835635718B01EAA00797F4B /* MissingSymbols.m */; };
 		783B23A01890D30F00FCD806 /* YahooClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 783B239F1890D30F00FCD806 /* YahooClient.m */; };
 		7871301F18A5D6EB008D31E1 /* ShowDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7871301E18A5D6EB008D31E1 /* ShowDetailsViewController.m */; };
 		7891F1951890B55E00BF5611 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7891F1941890B55E00BF5611 /* Foundation.framework */; };
@@ -68,6 +80,20 @@
 		35887AC41899A9E100D4D903 /* Show.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = showsApp/Show.m; sourceTree = "<group>"; };
 		7826D5981897FB34002CFE5F /* YQL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YQL.h; sourceTree = "<group>"; };
 		7826D5991897FB34002CFE5F /* YQL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQL.m; sourceTree = "<group>"; };
+		7835633818A9CC5500797F4B /* LocalStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalStorage.h; sourceTree = "<group>"; };
+		7835633918A9CC5500797F4B /* LocalStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalStorage.m; sourceTree = "<group>"; };
+		7835634018B01C0000797F4B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		7835634218B01C3C00797F4B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7835634418B01C4300797F4B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		7835634618B01C5400797F4B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7835634818B01C5D00797F4B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		7835634A18B01C6500797F4B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		7835634C18B01C6D00797F4B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7835634E18B01C8F00797F4B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		7835635018B01C9500797F4B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		7835635218B01C9D00797F4B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7835635418B01E2600797F4B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		7835635718B01EAA00797F4B /* MissingSymbols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissingSymbols.m; sourceTree = "<group>"; };
 		783B239E1890D30F00FCD806 /* YahooClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YahooClient.h; sourceTree = "<group>"; };
 		783B239F1890D30F00FCD806 /* YahooClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YahooClient.m; sourceTree = "<group>"; };
 		7871301D18A5D6EB008D31E1 /* ShowDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowDetailsViewController.h; sourceTree = "<group>"; };
@@ -99,10 +125,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7835635318B01C9D00797F4B /* SystemConfiguration.framework in Frameworks */,
+				7835635118B01C9500797F4B /* StoreKit.framework in Frameworks */,
+				7835634F18B01C8F00797F4B /* Security.framework in Frameworks */,
+				7835634D18B01C6D00797F4B /* QuartzCore.framework in Frameworks */,
+				7835634B18B01C6500797F4B /* MobileCoreServices.framework in Frameworks */,
+				7835634918B01C5D00797F4B /* libz.dylib in Frameworks */,
+				7835634718B01C5400797F4B /* CoreLocation.framework in Frameworks */,
 				7891F1971890B55E00BF5611 /* CoreGraphics.framework in Frameworks */,
+				7835634518B01C4300797F4B /* CFNetwork.framework in Frameworks */,
+				7835634318B01C3C00797F4B /* AudioToolbox.framework in Frameworks */,
 				7891F1991890B55E00BF5611 /* UIKit.framework in Frameworks */,
 				7891F1951890B55E00BF5611 /* Foundation.framework in Frameworks */,
 				E395C400627045D2A9407CA9 /* libPods.a in Frameworks */,
+				7835634118B01C0000797F4B /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +199,8 @@
 				356913BD1899B8E70047A580 /* Episode.m */,
 				356913BF1899CC470047A580 /* ShowResult.h */,
 				356913C01899CC470047A580 /* ShowResult.m */,
+				7835633818A9CC5500797F4B /* LocalStorage.h */,
+				7835633918A9CC5500797F4B /* LocalStorage.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -214,6 +252,17 @@
 		7891F1931890B55E00BF5611 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7835635418B01E2600797F4B /* Social.framework */,
+				7835635218B01C9D00797F4B /* SystemConfiguration.framework */,
+				7835635018B01C9500797F4B /* StoreKit.framework */,
+				7835634E18B01C8F00797F4B /* Security.framework */,
+				7835634C18B01C6D00797F4B /* QuartzCore.framework */,
+				7835634A18B01C6500797F4B /* MobileCoreServices.framework */,
+				7835634818B01C5D00797F4B /* libz.dylib */,
+				7835634618B01C5400797F4B /* CoreLocation.framework */,
+				7835634418B01C4300797F4B /* CFNetwork.framework */,
+				7835634218B01C3C00797F4B /* AudioToolbox.framework */,
+				7835634018B01C0000797F4B /* Parse.framework */,
 				7891F1941890B55E00BF5611 /* Foundation.framework */,
 				7891F1961890B55E00BF5611 /* CoreGraphics.framework */,
 				7891F1981890B55E00BF5611 /* UIKit.framework */,
@@ -233,6 +282,7 @@
 				7891F1AA1890B55E00BF5611 /* ViewController.m */,
 				7891F1AC1890B55E00BF5611 /* Images.xcassets */,
 				7891F19B1890B55E00BF5611 /* Supporting Files */,
+				7835635718B01EAA00797F4B /* MissingSymbols.m */,
 			);
 			path = showsApp;
 			sourceTree = "<group>";
@@ -399,12 +449,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7891F1AB1890B55E00BF5611 /* ViewController.m in Sources */,
+				7835635818B01EAA00797F4B /* MissingSymbols.m in Sources */,
 				7826D59A1897FB34002CFE5F /* YQL.m in Sources */,
 				7891F1A51890B55E00BF5611 /* AppDelegate.m in Sources */,
 				35351E9518A70B8E005DAF6C /* SearchCell.m in Sources */,
 				356913C51899F06C0047A580 /* ShowCollectionViewController.m in Sources */,
 				7871301F18A5D6EB008D31E1 /* ShowDetailsViewController.m in Sources */,
 				7891F1A11890B55E00BF5611 /* main.m in Sources */,
+				7835633A18A9CC5500797F4B /* LocalStorage.m in Sources */,
 				35887AC51899A9E100D4D903 /* Show.m in Sources */,
 				356913BE1899B8E70047A580 /* Episode.m in Sources */,
 				783B23A01890D30F00FCD806 /* YahooClient.m in Sources */,
@@ -540,9 +592,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/dspark/Code/shows-app",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "showsApp/showsApp-Prefix.pch";
 				INFOPLIST_FILE = "showsApp/showsApp-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					Security,
+					"-framework",
+					SystemConfiguration,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -554,9 +623,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/dspark/Code/shows-app",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "showsApp/showsApp-Prefix.pch";
 				INFOPLIST_FILE = "showsApp/showsApp-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					Security,
+					"-framework",
+					SystemConfiguration,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
