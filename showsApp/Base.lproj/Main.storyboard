@@ -119,9 +119,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Show" id="Ua1-nu-ISb">
-                        <barButtonItem key="rightBarButtonItem" title="Favorite" id="t85-t1-6fo"/>
+                        <barButtonItem key="rightBarButtonItem" title="Favorite" id="t85-t1-6fo">
+                            <connections>
+                                <action selector="onFavTap:" destination="pwm-Xr-QKz" id="cyB-E3-PyI"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="favButton" destination="t85-t1-6fo" id="Vrm-dY-owe"/>
                         <outlet property="showImage" destination="Eja-gr-Uc4" id="Obv-kW-Dve"/>
                         <outlet property="showOverview" destination="6Au-Xu-hYa" id="3kL-i0-TNe"/>
                     </connections>

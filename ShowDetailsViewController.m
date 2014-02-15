@@ -8,12 +8,19 @@
 
 #import "ShowDetailsViewController.h"
 #import "YQL.h"
+#import "Show.h"
 #import "UIImageView+AFNetworking.h"
+#import "LocalStorage.h"
 #import <Parse/Parse.h>
+#import "GlobalShows.h"
 
 @interface ShowDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *showOverview;
 @property (weak, nonatomic) IBOutlet UIImageView *showImage;
+@property (strong, nonatomic) PFObject *favorite;
+@property (assign, nonatomic) bool is_favorited;
+- (IBAction)onFavTap:(UIBarButtonItem *)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *favButton;
 
 @end
 
@@ -32,6 +39,8 @@
 {
     [super viewDidLoad];
     NSLog(@"view did load");
+    Show* show = [[GlobalShows globalShowsSingleton]objectForKey:self.tmdb_id];
+    /*
     [[YQL use:@{@"https://raw.github.com/ios-class/yshows-tables/master/tmdb.tv.id.xml": @"identity" }] select:@"*" from:@"identity" where:@{ @"id" : self.tmdb_id } callback:^(NSError *error, id response) {
         
         NSObject *results = [response valueForKeyPath:@"query.results.json"];
@@ -40,13 +49,26 @@
         NSString *backdrop_url = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w500/%@", [results valueForKey:@"backdrop_path"]];
         [self.showImage setImageWithURL:[NSURL URLWithString:backdrop_url]];
     }];
+     */
+    
+    NSLog(@"show is %@", show);
+    NSString *guid = [(NSDictionary *)[LocalStorage read:@"current_user"] objectForKey:@"guid"];
+    PFQuery *query = [PFQuery queryWithClassName:@"Favorite"];
+    [query whereKey:@"guid" equalTo:guid];
+    [query whereKey:@"tmdb_id" equalTo:self.tmdb_id];
+    [self.favButton setEnabled:NO];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        NSLog(@"got objects %d", [objects count]);
+        if ([objects count] == 1) {
+            self.favorite = [objects objectAtIndex:0];
+            self.favButton.title = @"Unfavorite";
+            self.is_favorited = true;
+        }
+        [self.favButton setEnabled:YES];
+    }];
+    
     
 	// Do any additional setup after loading the view.
-    /*
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"foo"] = @"bar";
-    [testObject saveInBackground];
-     */
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,4 +77,28 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)onFavTap:(UIBarButtonItem *)sender {
+    NSString *guid = [(NSDictionary *)[LocalStorage read:@"current_user"] objectForKey:@"guid"];
+    
+    [self.favButton setEnabled:NO];
+    if (self.is_favorited) {
+        [self.favorite deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            self.favorite = nil;
+            self.is_favorited = false;
+            self.favButton.title = @"Favorite";
+            [self.favButton setEnabled:YES];
+        }];
+    }
+    else {
+        PFObject *testObject = [PFObject objectWithClassName:@"Favorite"];
+        testObject[@"guid"] = guid;
+        testObject[@"tmdb_id"] = self.tmdb_id;
+        [testObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            self.favorite = testObject;
+            self.is_favorited = true;
+            self.favButton.title = @"Unfavorite";
+            [self.favButton setEnabled:YES];
+        }];
+    }
+}
 @end
