@@ -10,6 +10,7 @@
 		35351E8C18A334AB005DAF6C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E8B18A334AB005DAF6C /* SearchViewController.m */; };
 		35351E9518A70B8E005DAF6C /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E9418A70B8E005DAF6C /* SearchCell.m */; };
 		353F85FF18AAE2FD004A9346 /* GlobalShows.m in Sources */ = {isa = PBXBuildFile; fileRef = 353F85FE18AAE2FD004A9346 /* GlobalShows.m */; };
+		353F860218B0254F004A9346 /* GlobalMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 353F860118B0254F004A9346 /* GlobalMethod.m */; };
 		356913BE1899B8E70047A580 /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913BD1899B8E70047A580 /* Episode.m */; };
 		356913C11899CC470047A580 /* ShowResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913C01899CC470047A580 /* ShowResult.m */; };
 		356913C51899F06C0047A580 /* ShowCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913C41899F06C0047A580 /* ShowCollectionViewController.m */; };
@@ -53,6 +54,8 @@
 		35351E9418A70B8E005DAF6C /* SearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCell.m; sourceTree = "<group>"; };
 		353F85FD18AAE2FD004A9346 /* GlobalShows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalShows.h; sourceTree = "<group>"; };
 		353F85FE18AAE2FD004A9346 /* GlobalShows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalShows.m; sourceTree = "<group>"; };
+		353F860018B0254F004A9346 /* GlobalMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalMethod.h; sourceTree = "<group>"; };
+		353F860118B0254F004A9346 /* GlobalMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalMethod.m; sourceTree = "<group>"; };
 		356913BC1899B8E70047A580 /* Episode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Episode.h; sourceTree = "<group>"; };
 		356913BD1899B8E70047A580 /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Episode.m; sourceTree = "<group>"; };
 		356913BF1899CC470047A580 /* ShowResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowResult.h; sourceTree = "<group>"; };
@@ -121,6 +124,8 @@
 			children = (
 				353F85FD18AAE2FD004A9346 /* GlobalShows.h */,
 				353F85FE18AAE2FD004A9346 /* GlobalShows.m */,
+				353F860018B0254F004A9346 /* GlobalMethod.h */,
+				353F860118B0254F004A9346 /* GlobalMethod.m */,
 			);
 			name = Global;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 				35351E8C18A334AB005DAF6C /* SearchViewController.m in Sources */,
 				353F85FF18AAE2FD004A9346 /* GlobalShows.m in Sources */,
 				356913C91899F0EC0047A580 /* ShowCell.m in Sources */,
+				353F860218B0254F004A9346 /* GlobalMethod.m in Sources */,
 				356913C11899CC470047A580 /* ShowResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
