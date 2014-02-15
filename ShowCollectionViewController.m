@@ -59,11 +59,18 @@
     
     __typeof (self) __weak weakSelf = self;
     if (REUIKitIsFlatMode()) {
-        [self.navigationController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor colorWithRed:0/255.0 green:213/255.0 blue:161/255.0 alpha:1]];
+        [self.navigationController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor blackColor]];
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     } else {
-        self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0 green:179/255.0 blue:134/255.0 alpha:1];
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     }
+    
+    UINavigationBar* navBar = self.navigationController.navigationBar;
+    int borderSize = 1;
+    UIView *navBorder = [[UIView alloc] initWithFrame:CGRectMake(0,navBar.frame.size.height-borderSize,navBar.frame.size.width, borderSize)];
+    [navBorder setBackgroundColor:[UIColor darkGrayColor]];
+    [self.navigationController.navigationBar addSubview:navBorder];
+    
     
     NSMutableArray *menuItems = [[NSMutableArray alloc] init];
     
@@ -122,7 +129,7 @@
     };
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleMenu)];
-
+    
     [self loadPopular];
 }
 
@@ -184,6 +191,17 @@
 
 -(void)loadTopRated{
     self.bucketKey = @"Top";
+    
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.text = self.bucketKey;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.shadowColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.25f];
+    titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
+    [titleLabel sizeToFit];
+    
+    self.navigationItem.titleView = titleLabel;
+
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
     if (keyBucket.count != 0) {
         //NSLog(@"count!=0!");
@@ -207,6 +225,18 @@
 
 -(void)loadPopular{
     self.bucketKey = @"Popular";
+    
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.text = self.bucketKey;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.textAlignment = UITextAlignmentCenter;
+    titleLabel.shadowColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.25f];
+    titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
+    [titleLabel sizeToFit];
+    
+    self.navigationItem.titleView = titleLabel;
+    
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
     if (keyBucket.count != 0) {
         //NSLog(@"count!=0!");
@@ -230,6 +260,18 @@
 
 -(void)loadCategory:(int)categoryID categoryName:(NSString *)categoryName{
     self.bucketKey = categoryName;
+    
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.text = self.bucketKey;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.textAlignment = UITextAlignmentCenter;
+    titleLabel.shadowColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.25f];
+    titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
+    [titleLabel sizeToFit];
+    
+    self.navigationItem.titleView = titleLabel;
+
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:categoryName];
     if (keyBucket.count != 0) {
         //NSLog(@"count!=0!");
