@@ -15,6 +15,7 @@
 #import "ShowDetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "GlobalShows.h"
+#import "GlobalMethod.h"
 
 @interface ShowCollectionViewController ()
 
@@ -26,10 +27,13 @@
 @property (nonatomic, strong) UIBarButtonItem *searchButton;
 @property (nonatomic, readwrite, strong) REMenu *menu;
 @property (nonatomic, strong) NSString* bucketKey;
-@property (nonatomic, strong) NSMutableArray<Show>* showArrayBucket;
+@property (nonatomic, strong) NSMutableArray* showArrayBucket;
+
 
 - (IBAction)onLogoutTap:(id)sender;
 - (void)onSearchButton;
+
+
 
 @end
 
@@ -54,8 +58,7 @@
     self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(onSearchButton)];
     
     self.navigationItem.rightBarButtonItem = self.searchButton;
-    
-    
+
     
     __typeof (self) __weak weakSelf = self;
     if (REUIKitIsFlatMode()) {
@@ -173,8 +176,10 @@
         //NSLog(@"title is %@", show.name);
         cell.backgroundColor = [UIColor whiteColor];
         [cell.showsNameLabel setText:show.name];
-        NSString* baseUrl = @"http://image.tmdb.org/t/p/w500";
-        [cell.showsPosterImage setImageWithURL:[[NSURL alloc]initWithString: [baseUrl stringByAppendingString:show.poster_path]]];
+//        NSString* baseUrl = @"http://image.tmdb.org/t/p/w500";
+//        [cell.showsPosterImage setImageWithURL:[[NSURL alloc]initWithString: [baseUrl stringByAppendingString:show.poster_path]]];
+        
+        [cell.showsPosterImage setImageWithURL:[GlobalMethod buildImageURL:show.poster_path size:@"w500"] placeholderImage:[GlobalMethod getImagePlaceholder]];
     }else{
     }
     
