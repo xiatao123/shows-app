@@ -8,114 +8,71 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Pods-AFOAuth1Client.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
+		</dict>
+		<key>Pods-CMDQueryStringSerialization.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-JSONModel.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-NSString-UrlEncode.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>Pods-REMenu.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1F07F445C3974079BFD083AA</key>
+		<key>28321D70864E40ADBDDE7187</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>33449A5F338140E7946C588E</key>
+		<key>41E17867B625440295C489A9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>37E5941CAFE74561A2A07448</key>
+		<key>6807B80EA5EB46FDB9507BDD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3CE2BC24FCC142888F157921</key>
+		<key>861CB48E3B7142E196C44ED3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>476CB678C2774C2792A1C10D</key>
+		<key>932FE435E0AB44268E3A2E9A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4D2A7D9A991A47EA8926F88F</key>
+		<key>C3F9A106638843668A98B33E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5A9A5FC97F014AE2BB283625</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6DE481516DA347039FA3099E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>83055930042B40C4AEF33003</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B01C1779DB8745848562960B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CF0625EA653F4C9B96B3723B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E8EEDA823FE045AD9DF5C01C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EE3459ACF10C4A3C84B055EE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FC86D9ACA69540F6BAA6E9CE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FC8E82CA0FC04F408D278309</key>
+		<key>C5B294B5444A48F88D4FEB10</key>
 		<dict>
 			<key>primary</key>
 			<true/>
