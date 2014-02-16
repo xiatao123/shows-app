@@ -33,8 +33,6 @@
 - (IBAction)onLogoutTap:(id)sender;
 - (void)onSearchButton;
 
-
-
 @end
 
 @implementation ShowCollectionViewController
@@ -58,7 +56,6 @@
     self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(onSearchButton)];
     
     self.navigationItem.rightBarButtonItem = self.searchButton;
-
     
     __typeof (self) __weak weakSelf = self;
     if (REUIKitIsFlatMode()) {
@@ -68,14 +65,11 @@
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     }
     
-    UINavigationBar* navBar = self.navigationController.navigationBar;
-    int borderSize = 1;
-    UIView *navBorder = [[UIView alloc] initWithFrame:CGRectMake(0,navBar.frame.size.height-borderSize,navBar.frame.size.width, borderSize)];
-    [navBorder setBackgroundColor:[UIColor darkGrayColor]];
-    [self.navigationController.navigationBar addSubview:navBorder];
-    
+    //Adding a border on navigation bar
+    [self addNavBorder];
     
     NSMutableArray *menuItems = [[NSMutableArray alloc] init];
+    int tag = 0;
     
     REMenuItem *popularItem = [[REMenuItem alloc] initWithTitle:@"Popular Shows"
                                                        subtitle:@"Popular TV Shows"
@@ -86,6 +80,7 @@
                                                              [weakSelf loadPopular];
                                                          }];
     [menuItems addObject:popularItem];
+    popularItem.tag = tag++;
     
     REMenuItem *topItem = [[REMenuItem alloc] initWithTitle:@"Top Shows"
                                                     subtitle:@"Top Rated TV Shows"
@@ -96,8 +91,8 @@
                                                          [weakSelf loadTopRated];
                                                      }];
     [menuItems addObject:topItem];
-    
-    int temp = 2;
+    topItem.tag = tag++;
+
     for(NSString *categoryName in [GlobalShows category]){
         NSNumber *categoryID = [[GlobalShows category] objectForKey:categoryName];
         REMenuItem *tempItem = [[REMenuItem alloc] initWithTitle: categoryName
@@ -108,13 +103,11 @@
                                                         //NSLog(@"Item: %@", item);
                                                         [weakSelf loadCategory:[categoryID intValue] categoryName:categoryName];
                                                     }];
-        tempItem.tag = temp++;
+        tempItem.tag = tag++;
         [menuItems addObject:tempItem];
     }
     
     
-    popularItem.tag = 0;
-    topItem.tag = 1;
     
     self.menu = [[REMenu alloc] initWithItems:menuItems];
     if (!REUIKitIsFlatMode()) {
@@ -235,7 +228,6 @@
     titleLabel.text = self.bucketKey;
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.textAlignment = UITextAlignmentCenter;
     titleLabel.shadowColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.25f];
     titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
     [titleLabel sizeToFit];
@@ -270,7 +262,6 @@
     titleLabel.text = self.bucketKey;
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.textAlignment = UITextAlignmentCenter;
     titleLabel.shadowColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.25f];
     titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
     [titleLabel sizeToFit];
@@ -328,4 +319,27 @@
     Show *show = [self.showArrayBucket objectAtIndex:indexPath.row];
     controller.tmdb_id = show.id;
 }
+
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    //Adding a border on navigation bar
+    [self addNavBorder];
+}
+
+-(void)addNavBorder{
+    int borderID = 101;
+    UINavigationBar* navBar = self.navigationController.navigationBar;
+    for(UIView* view in self.navigationController.navigationBar.subviews){
+        if ([view isKindOfClass:[UIView class]]&&view.tag==borderID){
+            [view removeFromSuperview];
+        }
+    }
+    
+    int borderSize = 1;
+    UIView *navBorder = [[UIView alloc] initWithFrame:CGRectMake(0,navBar.frame.size.height-borderSize,navBar.frame.size.width, borderSize)];
+    navBorder.tag = borderID;
+    [navBorder setBackgroundColor:[UIColor darkGrayColor]];
+    [self.navigationController.navigationBar addSubview:navBorder];
+}
+
 @end
