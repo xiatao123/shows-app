@@ -7,6 +7,7 @@
 //
 
 #import "ShowDetailsViewController.h"
+#import "ShowCollectionViewController.h"
 #import "YQL.h"
 #import "Show.h"
 #import "UIImageView+AFNetworking.h"
@@ -22,7 +23,9 @@
 - (IBAction)onFavTap:(UIBarButtonItem *)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButton;
 
-- (IBAction)doSwipeGesture:(id)sender;
+
+- (IBAction)onRightSwipeGesture:(id)sender;
+
 
 @end
 
@@ -103,9 +106,22 @@
     }
 }
 
-          
-- (IBAction)doSwipeGesture:(id)sender {
-    
-    NSLog(@"swipe!");
+- (IBAction)onRightSwipeGesture:(id)sender {
+    NSLog(@"swipe right!");
+    int index = 0;
+    for(Show* show in self.showArrayBucket){
+        if(show.id == self.tmdb_id){
+            if([self.showArrayBucket objectAtIndex:(index+1)] != NULL){
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                ShowDetailsViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"ShowDetailsViewController"];
+                [self.navigationController pushViewController:svc animated:YES];
+                Show* showNext = [self.showArrayBucket objectAtIndex:(index+1)];
+                svc.tmdb_id = showNext.id;
+                svc.showArrayBucket = self.showArrayBucket;
+            }
+            break;
+        }
+        index++;
+    }
 }
 @end

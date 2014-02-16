@@ -95,7 +95,7 @@
         <!--Show Details View Controller - Show-->
         <scene sceneID="4f2-kF-mwC">
             <objects>
-                <viewController title="Show" id="pwm-Xr-QKz" customClass="ShowDetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShowDetailsViewController" title="Show" id="pwm-Xr-QKz" customClass="ShowDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BfY-0E-Gre"/>
                         <viewControllerLayoutGuide type="bottom" id="nlL-b1-3WA"/>
@@ -138,7 +138,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UoC-ti-9Td" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="KmS-mT-9EA">
                     <connections>
-                        <action selector="doSwipeGesture:" destination="pwm-Xr-QKz" id="hpT-Br-4QQ"/>
+                        <action selector="onRightSwipeGesture:" destination="pwm-Xr-QKz" id="J1a-WF-aPb"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
