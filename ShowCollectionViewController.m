@@ -166,7 +166,6 @@
     if(self.bucketKey!= NULL && self.bucketKey.length !=0 ){
         [self.showArrayBucket removeAllObjects];
         NSArray *keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
-        NSLog(@"%i", keyBucket.count);
         for(NSString *key in keyBucket){
             //NSLog(@"%@", key);
             Show* show = [[GlobalShows globalShowsSingleton]objectForKey:key];
@@ -210,7 +209,9 @@
 }
 
 -(void)loadFavorite:(NSString*)guid{
-    self.bucketKey = @"favorite";
+    self.bucketKey = @"Favorite";
+    
+    [self setNavTitle:self.bucketKey];
     
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
     if (keyBucket.count != 0) {
@@ -221,11 +222,16 @@
         [query whereKey:@"guid" equalTo:guid];
 
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            NSLog(@"got objects %d", [objects count]);
+            NSMutableArray *bucket = [[GlobalShows globalTriageBucket] objectForKey:self.bucketKey];
+
             for(PFObject *object in objects){
-                NSString *json = object[@"json"];
-                NSLog(json);
+                NSDictionary *json = object[@"json"];
+                NSError *err = nil;
+                Show* show = [[Show alloc] initWithString:json error:&err];
+                [bucket addObject:show.id];
+                [[GlobalShows globalShowsSingleton] setValue:show forKey:show.id];
             }
+            [self.collectionView reloadData];
         }];
     }
 }
@@ -233,15 +239,7 @@
 -(void)loadTopRated{
     self.bucketKey = @"Top";
     
-    UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.text = self.bucketKey;
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.shadowColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.25f];
-    titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
-    [titleLabel sizeToFit];
-    
-    self.navigationItem.titleView = titleLabel;
+    [self setNavTitle:self.bucketKey];
 
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
     if (keyBucket.count != 0) {
@@ -267,15 +265,7 @@
 -(void)loadPopular{
     self.bucketKey = @"Popular";
     
-    UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.text = self.bucketKey;
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.shadowColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.25f];
-    titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
-    [titleLabel sizeToFit];
-    
-    self.navigationItem.titleView = titleLabel;
+    [self setNavTitle:self.bucketKey];
     
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
     if (keyBucket.count != 0) {
@@ -301,15 +291,7 @@
 -(void)loadCategory:(int)categoryID categoryName:(NSString *)categoryName{
     self.bucketKey = categoryName;
     
-    UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.text = self.bucketKey;
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.shadowColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.25f];
-    titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
-    [titleLabel sizeToFit];
-    
-    self.navigationItem.titleView = titleLabel;
+    [self setNavTitle:categoryName];
 
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:categoryName];
     if (keyBucket.count != 0) {
@@ -384,6 +366,18 @@
     navBorder.tag = borderID;
     [navBorder setBackgroundColor:[UIColor darkGrayColor]];
     [self.navigationController.navigationBar addSubview:navBorder];
+}
+
+-(void)setNavTitle:(NSString*) title{
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.text = title;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.shadowColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.25f];
+    titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
+    [titleLabel sizeToFit];
+    
+    self.navigationItem.titleView = titleLabel;
 }
 
 @end
