@@ -15,6 +15,7 @@
 #import "GlobalShows.h"
 
 @interface ShowDetailsViewController ()
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *showOverview;
 @property (weak, nonatomic) IBOutlet UIImageView *showImage;
 @property (strong, nonatomic) PFObject *favorite;
@@ -35,10 +36,16 @@
     return self;
 }
 
+- (void)viewDidLayoutSubviews {
+    self.scrollView.contentSize = CGSizeMake(320, 5000);
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"view did load");
+    // ((UIScrollView *)self.view).contentSize = CGSizeMake(320, 5000);
+    self.scrollView.contentSize = CGSizeMake(320, 5000);
+    
     Show* show = [[GlobalShows globalShowsSingleton]objectForKey:self.tmdb_id];
     self.title = [show valueForKey:@"name"];
     NSString *backdrop_url = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w500/%@", [show valueForKey:@"backdrop_path"]];

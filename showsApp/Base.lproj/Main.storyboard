@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="bottom" id="IcN-qK-coi"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebt-6t-WNo">
@@ -44,7 +44,7 @@
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" title="Main" id="g73-Mp-3Lg" customClass="ShowCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="NFq-yr-wQn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fFY-bP-xzf">
                             <size key="itemSize" width="100" height="170"/>
@@ -100,24 +100,43 @@
                         <viewControllerLayoutGuide type="top" id="BfY-0E-Gre"/>
                         <viewControllerLayoutGuide type="bottom" id="nlL-b1-3WA"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="p5s-CS-bja">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" id="IDY-8q-RS0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="6Au-Xu-hYa">
-                                <rect key="frame" x="20" y="334" width="280" height="128"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dpf-tr-Lf5">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="5000"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eja-gr-Uc4">
-                                <rect key="frame" x="0.0" y="63" width="320" height="256"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eja-gr-Uc4">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="6Au-Xu-hYa">
+                                        <rect key="frame" x="13" y="309" width="280" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Eja-gr-Uc4" firstAttribute="top" secondItem="Dpf-tr-Lf5" secondAttribute="top" id="Dgy-ge-loT"/>
+                                    <constraint firstAttribute="height" constant="5000" id="EWW-wQ-8H9"/>
+                                    <constraint firstAttribute="trailing" secondItem="Eja-gr-Uc4" secondAttribute="trailing" id="M9g-Ri-AUS"/>
+                                    <constraint firstItem="Eja-gr-Uc4" firstAttribute="leading" secondItem="Dpf-tr-Lf5" secondAttribute="leading" id="N1K-y9-8M7"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
+                        <constraints>
+                            <constraint firstItem="Dpf-tr-Lf5" firstAttribute="centerX" secondItem="IDY-8q-RS0" secondAttribute="centerX" id="3uo-aj-TsZ"/>
+                            <constraint firstItem="Dpf-tr-Lf5" firstAttribute="top" secondItem="IDY-8q-RS0" secondAttribute="top" id="c7r-mh-FP2"/>
+                            <constraint firstItem="Dpf-tr-Lf5" firstAttribute="leading" secondItem="IDY-8q-RS0" secondAttribute="leading" id="gGZ-aR-nbD"/>
+                            <constraint firstAttribute="trailing" secondItem="Dpf-tr-Lf5" secondAttribute="trailing" id="nO3-or-Fzi"/>
+                            <constraint firstAttribute="bottom" secondItem="Dpf-tr-Lf5" secondAttribute="bottom" constant="-4520" id="or9-Ix-yYD"/>
+                        </constraints>
+                    </scrollView>
                     <navigationItem key="navigationItem" title="Show" id="Ua1-nu-ISb">
                         <barButtonItem key="rightBarButtonItem" title="Favorite" id="t85-t1-6fo">
                             <connections>
@@ -127,6 +146,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="favButton" destination="t85-t1-6fo" id="Vrm-dY-owe"/>
+                        <outlet property="scrollView" destination="IDY-8q-RS0" id="BCV-Zb-Tvw"/>
                         <outlet property="showImage" destination="Eja-gr-Uc4" id="Obv-kW-Dve"/>
                         <outlet property="showOverview" destination="6Au-Xu-hYa" id="3kL-i0-TNe"/>
                     </connections>
@@ -144,7 +164,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Deq-5t-Ctj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xxF-HY-TH5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="03E-1f-DPq">
@@ -155,7 +175,7 @@
                                 </connections>
                             </searchBar>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="n4S-5Q-lXY">
-                                <rect key="frame" x="0.0" y="108" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fI3-qk-04S">
                                     <size key="itemSize" width="96" height="161"/>
@@ -225,7 +245,7 @@
                         <viewControllerLayoutGuide type="bottom" id="aQF-U9-IY7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wvE-kc-baW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -275,6 +295,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>
