@@ -97,46 +97,49 @@
             <objects>
                 <viewController title="Show" id="pwm-Xr-QKz" customClass="ShowDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="BfY-0E-Gre"/>
-                        <viewControllerLayoutGuide type="bottom" id="nlL-b1-3WA"/>
+                        <viewControllerLayoutGuide type="top" id="gyz-Ak-cFN"/>
+                        <viewControllerLayoutGuide type="bottom" id="eIE-Za-eV2"/>
                     </layoutGuides>
-                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" id="IDY-8q-RS0">
+                    <view key="view" contentMode="scaleToFill" id="1Bw-3h-bfb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dpf-tr-Lf5">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="5000"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDY-8q-RS0">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eja-gr-Uc4">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dpf-tr-Lf5">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="5000"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="6Au-Xu-hYa">
-                                        <rect key="frame" x="13" y="309" width="280" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="6Au-Xu-hYa">
+                                                <rect key="frame" x="13" y="309" width="280" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="5000" id="EWW-wQ-8H9"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="Eja-gr-Uc4" firstAttribute="top" secondItem="Dpf-tr-Lf5" secondAttribute="top" id="Dgy-ge-loT"/>
-                                    <constraint firstAttribute="height" constant="5000" id="EWW-wQ-8H9"/>
-                                    <constraint firstAttribute="trailing" secondItem="Eja-gr-Uc4" secondAttribute="trailing" id="M9g-Ri-AUS"/>
-                                    <constraint firstItem="Eja-gr-Uc4" firstAttribute="leading" secondItem="Dpf-tr-Lf5" secondAttribute="leading" id="N1K-y9-8M7"/>
-                                </constraints>
-                            </view>
+                            </scrollView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eja-gr-Uc4">
+                                <rect key="frame" x="0.0" y="65" width="320" height="256"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Dpf-tr-Lf5" firstAttribute="centerX" secondItem="IDY-8q-RS0" secondAttribute="centerX" id="3uo-aj-TsZ"/>
-                            <constraint firstItem="Dpf-tr-Lf5" firstAttribute="top" secondItem="IDY-8q-RS0" secondAttribute="top" id="c7r-mh-FP2"/>
-                            <constraint firstItem="Dpf-tr-Lf5" firstAttribute="leading" secondItem="IDY-8q-RS0" secondAttribute="leading" id="gGZ-aR-nbD"/>
-                            <constraint firstAttribute="trailing" secondItem="Dpf-tr-Lf5" secondAttribute="trailing" id="nO3-or-Fzi"/>
-                            <constraint firstAttribute="bottom" secondItem="Dpf-tr-Lf5" secondAttribute="bottom" constant="-4520" id="or9-Ix-yYD"/>
+                            <constraint firstAttribute="bottom" secondItem="IDY-8q-RS0" secondAttribute="bottom" id="PeB-Ri-cmz"/>
+                            <constraint firstAttribute="trailing" secondItem="IDY-8q-RS0" secondAttribute="trailing" id="TY0-r1-CfN"/>
+                            <constraint firstItem="IDY-8q-RS0" firstAttribute="leading" secondItem="1Bw-3h-bfb" secondAttribute="leading" id="XPq-Nb-wsm"/>
+                            <constraint firstItem="IDY-8q-RS0" firstAttribute="top" secondItem="1Bw-3h-bfb" secondAttribute="top" id="jYE-lK-WkZ"/>
                         </constraints>
-                    </scrollView>
+                    </view>
                     <navigationItem key="navigationItem" title="Show" id="Ua1-nu-ISb">
                         <barButtonItem key="rightBarButtonItem" title="Favorite" id="t85-t1-6fo">
                             <connections>
