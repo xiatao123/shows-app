@@ -13,6 +13,7 @@
 #import "Show.h"
 #import "ShowResult.h"
 #import "SearchCell.h"
+#import "GlobalMethod.h"
 
 @interface SearchViewController ()
 
@@ -20,11 +21,8 @@
 //@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 //@property (strong, nonatomic) UISearchBar *mySearchBar;
 @property (nonatomic, strong) ShowResult* searchMoviedbResult;
-@property (nonatomic, strong) UIImage* imagePlaceholder;
 
 -(void)reload:(NSString*)searchTxt;
--(NSURL*)buildImageURL:(NSString*)file_path  size:(NSString*)size;
-
 
 @end
 
@@ -49,8 +47,6 @@
 
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-
-    self.imagePlaceholder = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://cdn0.iconfinder.com/data/icons/elite-emoticons/512/not-excited-128.png"]]];
 
     NSLog(@"search view load");
 	// Do any additional setup after loading the view.
@@ -114,7 +110,7 @@
     cell.backgroundColor = [UIColor whiteColor];
     [cell.showsNameLabel setText:show.original_name];
 //    UIImage *placeholderImage = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/skull.png",[self applicationDocumentsDirectory]]];
-    [cell.showsPosterImage setImageWithURL:[self buildImageURL:show.poster_path size:@"w185"] placeholderImage:self.imagePlaceholder];
+    [cell.showsPosterImage setImageWithURL:[GlobalMethod buildImageURL:show.poster_path size:@"w185"] placeholderImage:[GlobalMethod getImagePlaceholder]];
     
     return cell;
 
@@ -128,15 +124,6 @@
 //    return basePath;
 //}
 
--(NSURL*)buildImageURL:(NSString *)file_path size:(NSString *)size{
-    if (file_path==NULL) {
-        return NULL;
-    }
-    static NSString *base_url = @"http://image.tmdb.org/t/p/";
-    NSString* baseAndSize = [base_url stringByAppendingString:size];
-    NSString* fullString = [baseAndSize stringByAppendingString:file_path];
-    return [[NSURL alloc]initWithString:fullString];
-}
 
 -(void)reload:(NSString*)searchTxt{
     [[YQL
