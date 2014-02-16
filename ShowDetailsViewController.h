@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShowDetailsViewController : UIViewController
+@interface ShowDetailsViewController : UIViewController <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) NSString * tmdb_id;
 @end

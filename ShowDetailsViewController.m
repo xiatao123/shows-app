@@ -22,6 +22,8 @@
 - (IBAction)onFavTap:(UIBarButtonItem *)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButton;
 
+- (IBAction)doSwipeGesture:(id)sender;
+
 @end
 
 @implementation ShowDetailsViewController
@@ -69,6 +71,7 @@
     
     
 	// Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,5 +103,11 @@
             [self.favButton setEnabled:YES];
         }];
     }
+}
+
+          
+- (IBAction)doSwipeGesture:(id)sender {
+    
+    NSLog(@"swipe!");
 }
 @end
