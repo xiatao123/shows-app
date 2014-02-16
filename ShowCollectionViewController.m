@@ -71,8 +71,6 @@
     
     
     NSString *guid = [(NSDictionary *)[LocalStorage read:@"current_user"] objectForKey:@"guid"];
-    PFQuery *query = [PFQuery queryWithClassName:@"Favorite"];
-    [query whereKey:@"guid" equalTo:guid];
 
     if(guid){
         REMenuItem *favoriteItem = [[REMenuItem alloc] initWithTitle:@"Favorite Shows"
@@ -80,20 +78,6 @@
                                                               image:[UIImage imageNamed:@"Icon_Home"]
                                                    highlightedImage:nil
                                                              action:^(REMenuItem *item) {
-                                                                 self.bucketKey = @"favorite";
-
-                                                                 NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
-                                                                 if (keyBucket.count != 0) {
-                                                                         //NSLog(@"count!=0!");
-                                                                     [self.collectionView reloadData];
-                                                                 }else{
-                                                                     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                                                                         NSLog(@"got objects %d", [objects count]);
-                                                                         for(PFObject *object in objects){
-                                                                         
-                                                                         }
-                                                                     }];
-                                                                 }
                                                              }];
         
         [menuItems addObject:favoriteItem];
@@ -156,7 +140,11 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleMenu)];
     
-    [self loadPopular];
+    if(guid){
+        [self loadFavorite:guid];
+    }else{
+        [self loadPopular];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -219,6 +207,27 @@
 -(void) viewWillAppear:(BOOL)animated{
     //Adding a border on navigation bar
     [self addNavBorder];
+}
+
+-(void)loadFavorite:(NSString*)guid{
+    self.bucketKey = @"favorite";
+    
+    NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
+    if (keyBucket.count != 0) {
+            //NSLog(@"count!=0!");
+        [self.collectionView reloadData];
+    }else{
+        PFQuery *query = [PFQuery queryWithClassName:@"Favorite"];
+        [query whereKey:@"guid" equalTo:guid];
+
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            NSLog(@"got objects %d", [objects count]);
+            for(PFObject *object in objects){
+                NSString *json = object[@"json"];
+                NSLog(json);
+            }
+        }];
+    }
 }
 
 -(void)loadTopRated{
