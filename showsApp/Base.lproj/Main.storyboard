@@ -97,7 +97,7 @@
         <!--Show Details View Controller - Show-->
         <scene sceneID="4f2-kF-mwC">
             <objects>
-                <viewController title="Show" id="pwm-Xr-QKz" customClass="ShowDetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShowDetailsViewController" title="Show" id="pwm-Xr-QKz" customClass="ShowDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gyz-Ak-cFN"/>
                         <viewControllerLayoutGuide type="bottom" id="eIE-Za-eV2"/>
@@ -135,6 +135,10 @@
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="KmS-mT-9EA" appends="YES" id="Z1A-ns-eRp"/>
+                        </connections>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="IDY-8q-RS0" secondAttribute="bottom" id="PeB-Ri-cmz"/>
                             <constraint firstAttribute="trailing" secondItem="IDY-8q-RS0" secondAttribute="trailing" id="TY0-r1-CfN"/>
@@ -157,6 +161,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UoC-ti-9Td" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="KmS-mT-9EA">
+                    <connections>
+                        <action selector="onRightSwipeGesture:" destination="pwm-Xr-QKz" id="J1a-WF-aPb"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1146" y="-272"/>
         </scene>

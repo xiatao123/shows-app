@@ -7,6 +7,7 @@
 //
 
 #import "ShowDetailsViewController.h"
+#import "ShowCollectionViewController.h"
 #import "YQL.h"
 #import "Show.h"
 #import "UIImageView+AFNetworking.h"
@@ -23,6 +24,10 @@
 @property (assign, nonatomic) bool is_favorited;
 - (IBAction)onFavTap:(UIBarButtonItem *)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButton;
+
+
+- (IBAction)onRightSwipeGesture:(id)sender;
+
 
 @end
 
@@ -91,6 +96,7 @@
     }];
     
 	// Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -141,4 +147,22 @@
     [self.navigationController.navigationBar addSubview:navBorder];
 }
 
+- (IBAction)onRightSwipeGesture:(id)sender {
+    NSLog(@"swipe right!");
+    int index = 0;
+    for(Show* show in self.showArrayBucket){
+        if(show.id == self.tmdb_id){
+            if([self.showArrayBucket objectAtIndex:(index+1)] != NULL){
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                ShowDetailsViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"ShowDetailsViewController"];
+                [self.navigationController pushViewController:svc animated:YES];
+                Show* showNext = [self.showArrayBucket objectAtIndex:(index+1)];
+                svc.tmdb_id = showNext.id;
+                svc.showArrayBucket = self.showArrayBucket;
+            }
+            break;
+        }
+        index++;
+    }
+}
 @end

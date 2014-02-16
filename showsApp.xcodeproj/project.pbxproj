@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		203619D618B03830002D8740 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 203619D518B03830002D8740 /* Parse.framework */; };
+		203619D818B08C21002D8740 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 203619D718B08C21002D8740 /* Parse.framework */; };
 		35351E8C18A334AB005DAF6C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E8B18A334AB005DAF6C /* SearchViewController.m */; };
 		35351E9518A70B8E005DAF6C /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E9418A70B8E005DAF6C /* SearchCell.m */; };
 		353F85FF18AAE2FD004A9346 /* GlobalShows.m in Sources */ = {isa = PBXBuildFile; fileRef = 353F85FE18AAE2FD004A9346 /* GlobalShows.m */; };
@@ -59,7 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		203619D518B03830002D8740 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		203619D718B08C21002D8740 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		347E5A5EA6D142D09FCAE070 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		35351E8A18A334AB005DAF6C /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		35351E8B18A334AB005DAF6C /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 				7891F1971890B55E00BF5611 /* CoreGraphics.framework in Frameworks */,
 				7835634518B01C4300797F4B /* CFNetwork.framework in Frameworks */,
 				7835634318B01C3C00797F4B /* AudioToolbox.framework in Frameworks */,
-				203619D618B03830002D8740 /* Parse.framework in Frameworks */,
+				203619D818B08C21002D8740 /* Parse.framework in Frameworks */,
 				7891F1991890B55E00BF5611 /* UIKit.framework in Frameworks */,
 				7891F1951890B55E00BF5611 /* Foundation.framework in Frameworks */,
 				E395C400627045D2A9407CA9 /* libPods.a in Frameworks */,
@@ -252,7 +252,7 @@
 		7891F1931890B55E00BF5611 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				203619D518B03830002D8740 /* Parse.framework */,
+				203619D718B08C21002D8740 /* Parse.framework */,
 				7835635418B01E2600797F4B /* Social.framework */,
 				7835635218B01C9D00797F4B /* SystemConfiguration.framework */,
 				7835635018B01C9500797F4B /* StoreKit.framework */,
@@ -595,6 +595,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/dspark/Code/shows-app",
+					"/Users/linxi/ObjectC_Course/shows-app/Pods",
+					"/Users/linxi/ObjectC_Course/shows-app",
 					"/Users/taoxia/dev/shows-app",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -627,6 +629,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/dspark/Code/shows-app",
+					"/Users/linxi/ObjectC_Course/shows-app/Pods",
+					"/Users/linxi/ObjectC_Course/shows-app",
 					"/Users/taoxia/dev/shows-app",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
