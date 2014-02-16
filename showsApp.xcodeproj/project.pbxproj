@@ -11,6 +11,7 @@
 		35351E9518A70B8E005DAF6C /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35351E9418A70B8E005DAF6C /* SearchCell.m */; };
 		353F85FF18AAE2FD004A9346 /* GlobalShows.m in Sources */ = {isa = PBXBuildFile; fileRef = 353F85FE18AAE2FD004A9346 /* GlobalShows.m */; };
 		353F860218B0254F004A9346 /* GlobalMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 353F860118B0254F004A9346 /* GlobalMethod.m */; };
+		355A99C018B03A5C00CD7897 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 355A99BF18B03A5C00CD7897 /* Parse.framework */; };
 		356913BE1899B8E70047A580 /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913BD1899B8E70047A580 /* Episode.m */; };
 		356913C11899CC470047A580 /* ShowResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913C01899CC470047A580 /* ShowResult.m */; };
 		356913C51899F06C0047A580 /* ShowCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 356913C41899F06C0047A580 /* ShowCollectionViewController.m */; };
@@ -18,7 +19,6 @@
 		35887AC51899A9E100D4D903 /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 35887AC41899A9E100D4D903 /* Show.m */; };
 		7826D59A1897FB34002CFE5F /* YQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 7826D5991897FB34002CFE5F /* YQL.m */; };
 		7835633A18A9CC5500797F4B /* LocalStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7835633918A9CC5500797F4B /* LocalStorage.m */; };
-		7835634118B01C0000797F4B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835634018B01C0000797F4B /* Parse.framework */; };
 		7835634318B01C3C00797F4B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835634218B01C3C00797F4B /* AudioToolbox.framework */; };
 		7835634518B01C4300797F4B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835634418B01C4300797F4B /* CFNetwork.framework */; };
 		7835634718B01C5400797F4B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7835634618B01C5400797F4B /* CoreLocation.framework */; };
@@ -68,6 +68,7 @@
 		353F85FE18AAE2FD004A9346 /* GlobalShows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalShows.m; sourceTree = "<group>"; };
 		353F860018B0254F004A9346 /* GlobalMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalMethod.h; sourceTree = "<group>"; };
 		353F860118B0254F004A9346 /* GlobalMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalMethod.m; sourceTree = "<group>"; };
+		355A99BF18B03A5C00CD7897 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		356913BC1899B8E70047A580 /* Episode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Episode.h; sourceTree = "<group>"; };
 		356913BD1899B8E70047A580 /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Episode.m; sourceTree = "<group>"; };
 		356913BF1899CC470047A580 /* ShowResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowResult.h; sourceTree = "<group>"; };
@@ -82,7 +83,6 @@
 		7826D5991897FB34002CFE5F /* YQL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQL.m; sourceTree = "<group>"; };
 		7835633818A9CC5500797F4B /* LocalStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalStorage.h; sourceTree = "<group>"; };
 		7835633918A9CC5500797F4B /* LocalStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalStorage.m; sourceTree = "<group>"; };
-		7835634018B01C0000797F4B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		7835634218B01C3C00797F4B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		7835634418B01C4300797F4B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		7835634618B01C5400797F4B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -135,10 +135,10 @@
 				7891F1971890B55E00BF5611 /* CoreGraphics.framework in Frameworks */,
 				7835634518B01C4300797F4B /* CFNetwork.framework in Frameworks */,
 				7835634318B01C3C00797F4B /* AudioToolbox.framework in Frameworks */,
+				355A99C018B03A5C00CD7897 /* Parse.framework in Frameworks */,
 				7891F1991890B55E00BF5611 /* UIKit.framework in Frameworks */,
 				7891F1951890B55E00BF5611 /* Foundation.framework in Frameworks */,
 				E395C400627045D2A9407CA9 /* libPods.a in Frameworks */,
-				7835634118B01C0000797F4B /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,10 +259,10 @@
 				7835634C18B01C6D00797F4B /* QuartzCore.framework */,
 				7835634A18B01C6500797F4B /* MobileCoreServices.framework */,
 				7835634818B01C5D00797F4B /* libz.dylib */,
+				355A99BF18B03A5C00CD7897 /* Parse.framework */,
 				7835634618B01C5400797F4B /* CoreLocation.framework */,
 				7835634418B01C4300797F4B /* CFNetwork.framework */,
 				7835634218B01C3C00797F4B /* AudioToolbox.framework */,
-				7835634018B01C0000797F4B /* Parse.framework */,
 				7891F1941890B55E00BF5611 /* Foundation.framework */,
 				7891F1961890B55E00BF5611 /* CoreGraphics.framework */,
 				7891F1981890B55E00BF5611 /* UIKit.framework */,
@@ -595,6 +595,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/dspark/Code/shows-app",
+					"/Users/linxi/ObjectC_Course/shows-app/Pods",
+					"/Users/linxi/ObjectC_Course/shows-app",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "showsApp/showsApp-Prefix.pch";
@@ -626,6 +628,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/dspark/Code/shows-app",
+					"/Users/linxi/ObjectC_Course/shows-app/Pods",
+					"/Users/linxi/ObjectC_Course/shows-app",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "showsApp/showsApp-Prefix.pch";
