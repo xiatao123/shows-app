@@ -16,6 +16,8 @@
 #import "GlobalShows.h"
 
 @interface ShowDetailsViewController ()
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) Show *show;
 @property (weak, nonatomic) IBOutlet UILabel *showOverview;
 @property (weak, nonatomic) IBOutlet UIImageView *showImage;
 @property (strong, nonatomic) PFObject *favorite;
@@ -40,13 +42,19 @@
     return self;
 }
 
+- (void)viewDidLayoutSubviews {
+    self.scrollView.contentSize = CGSizeMake(320, 5000);
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"view did load");
-    Show* show = [[GlobalShows globalShowsSingleton]objectForKey:self.tmdb_id];
-    self.title = [show valueForKey:@"name"];
-    NSString *backdrop_url = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w500/%@", [show valueForKey:@"backdrop_path"]];
+    // ((UIScrollView *)self.view).contentSize = CGSizeMake(320, 5000);
+    self.scrollView.contentSize = CGSizeMake(320, 5000);
+    
+    self.show = [[GlobalShows globalShowsSingleton]objectForKey:self.tmdb_id];
+    self.title = [self.show valueForKey:@"name"];
+    NSString *backdrop_url = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w500/%@", [self.show valueForKey:@"backdrop_path"]];
     [self.showImage setImageWithURL:[NSURL URLWithString:backdrop_url]];
        [[YQL use:@{@"https://raw.github.com/ios-class/yshows-tables/master/tmdb.tv.id.xml": @"identity" }] select:@"*" from:@"identity" where:@{ @"id" : self.tmdb_id } callback:^(NSError *error, id response) {
         
@@ -54,7 +62,6 @@
         self.showOverview.text = [results valueForKey:@"overview"];
        }];
     
-    NSLog(@"show is %@", show);
     NSString *guid = [(NSDictionary *)[LocalStorage read:@"current_user"] objectForKey:@"guid"];
     PFQuery *query = [PFQuery queryWithClassName:@"Favorite"];
     [query whereKey:@"guid" equalTo:guid];
@@ -97,6 +104,7 @@
         PFObject *testObject = [PFObject objectWithClassName:@"Favorite"];
         testObject[@"guid"] = guid;
         testObject[@"tmdb_id"] = self.tmdb_id;
+        testObject[@"json"] = [self.show toJSONString];
         [testObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             self.favorite = testObject;
             self.is_favorited = true;
