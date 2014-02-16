@@ -16,6 +16,8 @@
 #import "UIImageView+AFNetworking.h"
 #import "GlobalShows.h"
 #import "GlobalMethod.h"
+#import "LocalStorage.h"
+#import <Parse/Parse.h>
 
 @interface ShowCollectionViewController ()
 
@@ -58,18 +60,47 @@
     self.navigationItem.rightBarButtonItem = self.searchButton;
     
     __typeof (self) __weak weakSelf = self;
-    if (REUIKitIsFlatMode()) {
-        [self.navigationController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor blackColor]];
-        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    } else {
-        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    }
+    [self.navigationController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor blackColor]];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     //Adding a border on navigation bar
     [self addNavBorder];
     
     NSMutableArray *menuItems = [[NSMutableArray alloc] init];
     int tag = 0;
+    
+    
+    NSString *guid = [(NSDictionary *)[LocalStorage read:@"current_user"] objectForKey:@"guid"];
+    PFQuery *query = [PFQuery queryWithClassName:@"Favorite"];
+    [query whereKey:@"guid" equalTo:guid];
+
+    if(guid){
+        REMenuItem *favoriteItem = [[REMenuItem alloc] initWithTitle:@"Favorite Shows"
+                                                           subtitle:@"Favorite TV Shows"
+                                                              image:[UIImage imageNamed:@"Icon_Home"]
+                                                   highlightedImage:nil
+                                                             action:^(REMenuItem *item) {
+                                                                 self.bucketKey = @"favorite";
+
+                                                                 NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
+                                                                 if (keyBucket.count != 0) {
+                                                                         //NSLog(@"count!=0!");
+                                                                     [self.collectionView reloadData];
+                                                                 }else{
+                                                                     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                                                                         NSLog(@"got objects %d", [objects count]);
+                                                                         for(PFObject *object in objects){
+                                                                         
+                                                                         }
+                                                                     }];
+                                                                 }
+                                                             }];
+        
+        [menuItems addObject:favoriteItem];
+        favoriteItem.tag = tag++;
+    }
+
+    
     
     REMenuItem *popularItem = [[REMenuItem alloc] initWithTitle:@"Popular Shows"
                                                        subtitle:@"Popular TV Shows"
@@ -103,10 +134,9 @@
                                                         //NSLog(@"Item: %@", item);
                                                         [weakSelf loadCategory:[categoryID intValue] categoryName:categoryName];
                                                     }];
-        tempItem.tag = tag++;
         [menuItems addObject:tempItem];
+        tempItem.tag = tag++;
     }
-    
     
     
     self.menu = [[REMenu alloc] initWithItems:menuItems];
@@ -186,6 +216,10 @@
     return cell;
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    //Adding a border on navigation bar
+    [self addNavBorder];
+}
 
 -(void)loadTopRated{
     self.bucketKey = @"Top";

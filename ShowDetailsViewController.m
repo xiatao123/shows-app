@@ -40,18 +40,31 @@
     [super viewDidLoad];
     NSLog(@"view did load");
     Show* show = [[GlobalShows globalShowsSingleton]objectForKey:self.tmdb_id];
-    /*
+    
+    [self.navigationController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor blackColor]];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    //Adding a border on navigation bar
+    [self addNavBorder];
+    
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.text = [show valueForKey:@"name"];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.shadowColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.25f];
+    titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
+    [titleLabel sizeToFit];
+    self.navigationItem.titleView = titleLabel;
+
+    NSString *backdrop_url = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w500/%@", [show valueForKey:@"backdrop_path"]];
+    [self.showImage setImageWithURL:[NSURL URLWithString:backdrop_url]];
+    
     [[YQL use:@{@"https://raw.github.com/ios-class/yshows-tables/master/tmdb.tv.id.xml": @"identity" }] select:@"*" from:@"identity" where:@{ @"id" : self.tmdb_id } callback:^(NSError *error, id response) {
         
         NSObject *results = [response valueForKeyPath:@"query.results.json"];
-        self.title = [results valueForKeyPath:@"original_name"];
         self.showOverview.text = [results valueForKey:@"overview"];
-        NSString *backdrop_url = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w500/%@", [results valueForKey:@"backdrop_path"]];
-        [self.showImage setImageWithURL:[NSURL URLWithString:backdrop_url]];
     }];
-     */
     
-    NSLog(@"show is %@", show);
     NSString *guid = [(NSDictionary *)[LocalStorage read:@"current_user"] objectForKey:@"guid"];
     PFQuery *query = [PFQuery queryWithClassName:@"Favorite"];
     [query whereKey:@"guid" equalTo:guid];
@@ -66,7 +79,6 @@
         }
         [self.favButton setEnabled:YES];
     }];
-    
     
 	// Do any additional setup after loading the view.
 }
@@ -101,4 +113,21 @@
         }];
     }
 }
+
+-(void)addNavBorder{
+    int borderID = 101;
+    UINavigationBar* navBar = self.navigationController.navigationBar;
+    for(UIView* view in self.navigationController.navigationBar.subviews){
+        if ([view isKindOfClass:[UIView class]]&&view.tag==borderID){
+            [view removeFromSuperview];
+        }
+    }
+    
+    int borderSize = 1;
+    UIView *navBorder = [[UIView alloc] initWithFrame:CGRectMake(0,navBar.frame.size.height-borderSize,navBar.frame.size.width, borderSize)];
+    navBorder.tag = borderID;
+    [navBorder setBackgroundColor:[UIColor darkGrayColor]];
+    [self.navigationController.navigationBar addSubview:navBorder];
+}
+
 @end
