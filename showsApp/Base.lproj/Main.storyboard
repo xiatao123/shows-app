@@ -88,7 +88,9 @@
                             <outlet property="delegate" destination="g73-Mp-3Lg" id="OQK-mE-7Bg"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="faS-EJ-HaV"/>
+                    <navigationItem key="navigationItem" id="faS-EJ-HaV">
+                        <barButtonItem key="backBarButtonItem" title=" " id="jxi-zJ-9u9"/>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e53-pd-u6x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -151,7 +153,8 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Show" id="Ua1-nu-ISb">
-                        <barButtonItem key="rightBarButtonItem" title="Favorite" id="t85-t1-6fo">
+                        <barButtonItem key="rightBarButtonItem" image="fav_down" id="t85-t1-6fo">
+                            <color key="tintColor" red="0.9960784912109375" green="0.81568634510040283" blue="0.21568629145622253" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="onFavTap:" destination="pwm-Xr-QKz" id="cyB-E3-PyI"/>
                             </connections>
@@ -350,6 +353,9 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="fav_down" width="20" height="20"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
