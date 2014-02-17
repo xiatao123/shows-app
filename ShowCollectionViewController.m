@@ -225,7 +225,11 @@
             [bucket addObject:show.id];
             [[GlobalShows globalShowsSingleton] setValue:show forKey:show.id];
         }
-        [self.collectionView reloadData];
+        if(bucket.count>0){
+            [self.collectionView reloadData];
+        }else{
+            [self loadPopular];
+        }
     }];
 
 }
