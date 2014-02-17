@@ -211,27 +211,23 @@
     
     [self setNavTitle:self.bucketKey];
     
-    NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
-    if (keyBucket.count != 0) {
-            //NSLog(@"count!=0!");
+    PFQuery *query = [PFQuery queryWithClassName:@"Favorite"];
+    [query whereKey:@"guid" equalTo:guid];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        NSMutableArray *bucket = [[GlobalShows globalTriageBucket] objectForKey:self.bucketKey];
+        [bucket removeAllObjects];
+
+        for(PFObject *object in objects){
+            NSString *json = object[@"json"];
+            NSError *err = nil;
+            Show* show = [[Show alloc] initWithString:json error:&err];
+            [bucket addObject:show.id];
+            [[GlobalShows globalShowsSingleton] setValue:show forKey:show.id];
+        }
         [self.collectionView reloadData];
-    }else{
-        PFQuery *query = [PFQuery queryWithClassName:@"Favorite"];
-        [query whereKey:@"guid" equalTo:guid];
+    }];
 
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            NSMutableArray *bucket = [[GlobalShows globalTriageBucket] objectForKey:self.bucketKey];
-
-            for(PFObject *object in objects){
-                NSDictionary *json = object[@"json"];
-                NSError *err = nil;
-                Show* show = [[Show alloc] initWithString:json error:&err];
-                [bucket addObject:show.id];
-                [[GlobalShows globalShowsSingleton] setValue:show forKey:show.id];
-            }
-            [self.collectionView reloadData];
-        }];
-    }
 }
 
 -(void)loadTopRated{
