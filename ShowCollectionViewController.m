@@ -78,6 +78,7 @@
                                                               image:[UIImage imageNamed:@"Icon_Home"]
                                                    highlightedImage:nil
                                                              action:^(REMenuItem *item) {
+                                                                 [weakSelf loadFavorite:guid];
                                                              }];
         
         [menuItems addObject:favoriteItem];
@@ -91,7 +92,6 @@
                                                           image:[UIImage imageNamed:@"Icon_Home"]
                                                highlightedImage:nil
                                                          action:^(REMenuItem *item) {
-                                                             //NSLog(@"Item: %@", item);
                                                              [weakSelf loadPopular];
                                                          }];
     [menuItems addObject:popularItem];
@@ -102,7 +102,6 @@
                                                        image:[UIImage imageNamed:@"Icon_Home"]
                                             highlightedImage:nil
                                                      action:^(REMenuItem *item) {
-                                                         //NSLog(@"Item: %@", item);
                                                          [weakSelf loadTopRated];
                                                      }];
     [menuItems addObject:topItem];
@@ -115,7 +114,6 @@
                                                       image:[UIImage imageNamed:@"Icon_Home"]
                                            highlightedImage:nil
                                                     action:^(REMenuItem *item) {
-                                                        //NSLog(@"Item: %@", item);
                                                         [weakSelf loadCategory:[categoryID intValue] categoryName:categoryName];
                                                     }];
         [menuItems addObject:tempItem];
