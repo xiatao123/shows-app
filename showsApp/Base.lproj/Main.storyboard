@@ -123,9 +123,13 @@
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="5000" id="EWW-wQ-8H9"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="SLA-su-vfg" appends="YES" id="nZR-g4-bZZ"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                             </scrollView>
@@ -136,15 +140,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="KmS-mT-9EA" appends="YES" id="Z1A-ns-eRp"/>
-                        </connections>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="IDY-8q-RS0" secondAttribute="bottom" id="PeB-Ri-cmz"/>
                             <constraint firstAttribute="trailing" secondItem="IDY-8q-RS0" secondAttribute="trailing" id="TY0-r1-CfN"/>
                             <constraint firstItem="IDY-8q-RS0" firstAttribute="leading" secondItem="1Bw-3h-bfb" secondAttribute="leading" id="XPq-Nb-wsm"/>
                             <constraint firstItem="IDY-8q-RS0" firstAttribute="top" secondItem="1Bw-3h-bfb" secondAttribute="top" id="jYE-lK-WkZ"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="KmS-mT-9EA" appends="YES" id="Z1A-ns-eRp"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Show" id="Ua1-nu-ISb">
                         <barButtonItem key="rightBarButtonItem" title="Favorite" id="t85-t1-6fo">
@@ -164,6 +168,11 @@
                 <swipeGestureRecognizer direction="right" id="KmS-mT-9EA">
                     <connections>
                         <action selector="onRightSwipeGesture:" destination="pwm-Xr-QKz" id="J1a-WF-aPb"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="SLA-su-vfg">
+                    <connections>
+                        <action selector="onLeftSwipeGesture:" destination="pwm-Xr-QKz" id="MaJ-SI-hfZ"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
@@ -314,7 +323,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ZA3-wi-xF8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4Z4-BL-yfW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -331,7 +340,7 @@
                         <viewControllerLayoutGuide type="bottom" id="P75-c4-NKV"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1Sy-wY-urX">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

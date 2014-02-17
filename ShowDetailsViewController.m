@@ -27,6 +27,7 @@
 
 
 - (IBAction)onRightSwipeGesture:(id)sender;
+- (IBAction)onLeftSwipeGesture:(id)sender;
 
 
 @end
@@ -150,15 +151,38 @@
 - (IBAction)onRightSwipeGesture:(id)sender {
     NSLog(@"swipe right!");
     int index = 0;
-    for(Show* show in self.showArrayBucket){
-        if(show.id == self.tmdb_id){
-            if([self.showArrayBucket objectAtIndex:(index+1)] != NULL){
+    NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
+    for(NSString* showIDString in keyBucket){
+        if(showIDString == self.tmdb_id){
+            if( (index + 1) < keyBucket.count ){
+                NSString* nextShowIDString = [keyBucket objectAtIndex:(index+1)];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 ShowDetailsViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"ShowDetailsViewController"];
                 [self.navigationController pushViewController:svc animated:YES];
-                Show* showNext = [self.showArrayBucket objectAtIndex:(index+1)];
-                svc.tmdb_id = showNext.id;
-                svc.showArrayBucket = self.showArrayBucket;
+                Show* nextShow = [[GlobalShows globalShowsSingleton] objectForKey:nextShowIDString];
+                svc.tmdb_id = nextShow.id;
+                svc.bucketKey = self.bucketKey;
+            }
+            break;
+        }
+        index++;
+    }
+}
+
+- (IBAction)onLeftSwipeGesture:(id)sender {
+    NSLog(@"swipe left!");
+    int index = 0;
+    NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
+    for(NSString* showIDString in keyBucket){
+        if(showIDString == self.tmdb_id){
+            if (index > 0) {
+                NSString* prevShowIDString = [keyBucket objectAtIndex:(index-1)];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                ShowDetailsViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"ShowDetailsViewController"];
+                [self.navigationController pushViewController:svc animated:YES];
+                Show* nextShow = [[GlobalShows globalShowsSingleton] objectForKey:prevShowIDString];
+                svc.tmdb_id = nextShow.id;
+                svc.bucketKey = self.bucketKey;
             }
             break;
         }
