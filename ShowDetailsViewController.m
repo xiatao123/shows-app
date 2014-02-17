@@ -89,7 +89,8 @@
         NSLog(@"got objects %d", [objects count]);
         if ([objects count] == 1) {
             self.favorite = [objects objectAtIndex:0];
-            self.favButton.title = @"Unfavorite";
+                //self.favButton.title = @"Unfavorite";
+            self.favButton.image = [UIImage imageNamed:@"fav_active"];
             self.is_favorited = true;
         }
         [self.favButton setEnabled:YES];
@@ -113,7 +114,8 @@
         [self.favorite deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             self.favorite = nil;
             self.is_favorited = false;
-            self.favButton.title = @"Favorite";
+                //self.favButton.title = @"Favorite";
+            self.favButton.image = [UIImage imageNamed:@"fav_down"];
             [self.favButton setEnabled:YES];
         }];
     }
@@ -125,7 +127,8 @@
         [testObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             self.favorite = testObject;
             self.is_favorited = true;
-            self.favButton.title = @"Unfavorite";
+                //self.favButton.title = @"Unfavorite";
+            self.favButton.image = [UIImage imageNamed:@"fav_active"];
             [self.favButton setEnabled:YES];
         }];
     }
