@@ -108,42 +108,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDY-8q-RS0">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDY-8q-RS0">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dpf-tr-Lf5">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="5000"/>
+                                        <rect key="frame" x="0.0" y="319" width="320" height="4681"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="6Au-Xu-hYa">
-                                                <rect key="frame" x="13" y="309" width="280" height="128"/>
+                                                <rect key="frame" x="20" y="31" width="280" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Information" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ffg-y0-C0P">
+                                                <rect key="frame" x="20" y="0.0" width="88" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Crew" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="VQu-76-QeL">
+                                                <rect key="frame" x="20" y="29" width="280" height="116"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="5000" id="EWW-wQ-8H9"/>
                                         </constraints>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="SLA-su-vfg" appends="YES" id="nZR-g4-bZZ"/>
-                                        </connections>
                                     </view>
                                 </subviews>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Dpf-tr-Lf5" secondAttribute="trailing" id="Tyf-S9-ltX"/>
+                                    <constraint firstItem="Dpf-tr-Lf5" firstAttribute="leading" secondItem="IDY-8q-RS0" secondAttribute="leading" id="dcS-7w-Ans"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="TFJ-D7-ccH" appends="YES" id="RNE-U2-eRZ"/>
+                                </connections>
                             </scrollView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eja-gr-Uc4">
-                                <rect key="frame" x="0.0" y="65" width="320" height="256"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eja-gr-Uc4">
+                                <rect key="frame" x="0.0" y="64" width="320" height="256"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="Eja-gr-Uc4" firstAttribute="leading" secondItem="1Bw-3h-bfb" secondAttribute="leading" id="IiS-Qa-IN7"/>
+                            <constraint firstItem="Eja-gr-Uc4" firstAttribute="top" secondItem="gyz-Ak-cFN" secondAttribute="bottom" id="OLH-f3-tjP"/>
                             <constraint firstAttribute="bottom" secondItem="IDY-8q-RS0" secondAttribute="bottom" id="PeB-Ri-cmz"/>
+                            <constraint firstAttribute="trailing" secondItem="Eja-gr-Uc4" secondAttribute="trailing" id="Q0t-jX-19H"/>
                             <constraint firstAttribute="trailing" secondItem="IDY-8q-RS0" secondAttribute="trailing" id="TY0-r1-CfN"/>
                             <constraint firstItem="IDY-8q-RS0" firstAttribute="leading" secondItem="1Bw-3h-bfb" secondAttribute="leading" id="XPq-Nb-wsm"/>
                             <constraint firstItem="IDY-8q-RS0" firstAttribute="top" secondItem="1Bw-3h-bfb" secondAttribute="top" id="jYE-lK-WkZ"/>
@@ -161,6 +182,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="castLabel" destination="VQu-76-QeL" id="u2n-S4-3sz"/>
                         <outlet property="favButton" destination="t85-t1-6fo" id="Vrm-dY-owe"/>
                         <outlet property="scrollView" destination="IDY-8q-RS0" id="BCV-Zb-Tvw"/>
                         <outlet property="showImage" destination="Eja-gr-Uc4" id="Obv-kW-Dve"/>
@@ -173,9 +195,9 @@
                         <action selector="onRightSwipeGesture:" destination="pwm-Xr-QKz" id="J1a-WF-aPb"/>
                     </connections>
                 </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="left" id="SLA-su-vfg">
+                <swipeGestureRecognizer direction="left" id="TFJ-D7-ccH">
                     <connections>
-                        <action selector="onLeftSwipeGesture:" destination="pwm-Xr-QKz" id="MaJ-SI-hfZ"/>
+                        <action selector="onLeftSwipeGesture:" destination="pwm-Xr-QKz" id="Z9Y-D7-7aN"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
@@ -316,41 +338,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ib4-0O-xWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="698" y="457"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="GdK-aQ-BcM">
-            <objects>
-                <viewController id="xbu-aN-BGS" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Dsd-e8-d6K"/>
-                        <viewControllerLayoutGuide type="bottom" id="ZA3-wi-xF8"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4Z4-BL-yfW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="z9z-MO-0Fy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="EQ6-k4-lIo">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ufA-v2-9s3" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hRc-KJ-Cuv"/>
-                        <viewControllerLayoutGuide type="bottom" id="P75-c4-NKV"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1Sy-wY-urX">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TV2-Kr-vhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>
