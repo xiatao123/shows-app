@@ -10,5 +10,5 @@
 
 @interface ShowDetailsViewController : UIViewController <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) NSString * tmdb_id;
-@property (nonatomic, strong) NSMutableArray* showArrayBucket;
+@property (nonatomic, strong) NSString * bucketKey;
 @end

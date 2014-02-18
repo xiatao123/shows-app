@@ -10,14 +10,9 @@
 #import "JSONModel.h"
 #import "Show.h"
 
-//@protocol Show
-//@end
-
 @interface ShowResult : JSONModel
 
 @property (nonatomic, strong) NSMutableArray<Show>* shows;
-
-
 
 +(JSONKeyMapper*)keyMapper;
 
