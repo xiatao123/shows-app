@@ -24,6 +24,7 @@
 @property (assign, nonatomic) bool is_favorited;
 - (IBAction)onFavTap:(UIBarButtonItem *)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButton;
+@property (weak, nonatomic) IBOutlet UILabel *castLabel;
 
 
 - (IBAction)onRightSwipeGesture:(id)sender;
@@ -49,6 +50,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.scrollView.layer.zPosition = 1;
     Show* show = [[GlobalShows globalShowsSingleton]objectForKey:self.tmdb_id];
     
     [self.navigationController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor blackColor]];
@@ -74,11 +76,35 @@
     NSString *backdrop_url = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w500/%@", [self.show valueForKey:@"backdrop_path"]];
     [self.showImage setImageWithURL:[NSURL URLWithString:backdrop_url]];
     
+    /*
     [[YQL use:@{@"https://raw.github.com/ios-class/yshows-tables/master/tmdb.tv.id.xml": @"identity" }] select:@"*" from:@"identity" where:@{ @"id" : self.tmdb_id } callback:^(NSError *error, id response) {
         
         NSObject *results = [response valueForKeyPath:@"query.results.json"];
+        NSLog(@"%@", results);
         self.showOverview.text = [results valueForKey:@"overview"];
     }];
+    */
+    
+    [[YQL use:@{@"https://raw.github.com/ios-class/yshows-tables/master/tmdb.tv.id.xml": @"identity",
+              @"https://raw2.github.com/ios-class/yshows-tables/master/tmdb.tv.credits.xml": @"credits"}]
+          query:[NSString stringWithFormat:@"select * from yql.query.multi where queries='select * from identity where id=%@; select * from credits where id=%@'", self.tmdb_id, self.tmdb_id]
+          callback:^(NSError * error, id response) {
+              NSArray *results = [response valueForKeyPath:@"query.results.results"];
+              NSObject *info = [results objectAtIndex:0];
+              NSObject *crew = [results objectAtIndex:1];
+              if (info) {
+                  self.showOverview.text = [info valueForKeyPath:@"json.overview"];
+              }
+              if (crew) {
+                  NSLog(@"crew is %@", crew);
+                  NSMutableArray *cast = [[NSMutableArray alloc] init];
+                  for (NSObject *person in (NSArray*)[crew valueForKeyPath:@"json.cast"]) {
+                      [cast addObject:[person valueForKey:@"name"]];
+                  }
+                  self.castLabel.text = [cast componentsJoinedByString:@", "];
+              }
+          }
+    ];
     
     NSString *guid = [(NSDictionary *)[LocalStorage read:@"current_user"] objectForKey:@"guid"];
     PFQuery *query = [PFQuery queryWithClassName:@"Favorite"];
@@ -133,6 +159,12 @@
         }];
     }
 }
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    //Adding a border on navigation bar
+    [self addNavBorder];
+}
+
 
 -(void)addNavBorder{
     int borderID = 101;

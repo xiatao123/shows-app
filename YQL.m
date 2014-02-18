@@ -47,6 +47,63 @@
     ]start];
 }
 
+- (void) query:(NSString *)statement callback:(void (^)(NSError *, id))callback {
+    
+    if (self.use) {
+        statement = [self.use stringByAppendingString:statement];
+    }
+    NSString *q = [statement urlEncode];
+    NSURL *url = [NSURL URLWithString:[YQL_URL stringByAppendingString:q]];
+    NSLog(@"final url is %@",  url);
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [[AFJSONRequestOperation
+      JSONRequestOperationWithRequest:request
+      success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+          callback(nil, JSON);
+      }
+      failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+          callback(error, JSON);
+      }
+    ]start];
+}
+
+- (void) query:(NSString *)statement params:(NSDictionary *)params callback:(void (^)(NSError *, id))callback {
+    
+    if (self.use) {
+        statement = [self.use stringByAppendingString:statement];
+    }
+    NSString *q = [statement urlEncode];
+    NSURL * url;
+    NSLog(@"final url is %@",  url);
+    
+    if (params) {
+        NSMutableArray *parray = [[NSMutableArray alloc] init];
+        for (NSString *key in params) {
+            [parray addObject:[NSString stringWithFormat:@"%@=%@", key, [params objectForKey:key]]];
+        }
+        NSString *temp = [YQL_URL stringByAppendingString:q];
+        temp = [temp stringByAppendingString:@"&"];
+        temp = [temp stringByAppendingString:[parray componentsJoinedByString:@"&"]];
+        url = [NSURL URLWithString:temp];
+    }
+    else  {
+        url = [NSURL URLWithString:[YQL_URL stringByAppendingString:q]];
+    }
+    NSLog(@"the url to request is %@", url);
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [[AFJSONRequestOperation
+      JSONRequestOperationWithRequest:request
+      success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+          callback(nil, JSON);
+      }
+      failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+          callback(error, JSON);
+      }
+    ]start];
+}
+
 + (NSArray *)showTables:(void (^)(NSError *, id))callback {
     [YQL query:@"show tables" callback:callback];
     return nil;

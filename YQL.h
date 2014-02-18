@@ -14,5 +14,7 @@
 + (void) select:(NSString *)field from:(NSString*)table where:(NSDictionary *)filters callback:(void (^)(NSError *, id))callback;
 - (void) select:(NSString *)field from:(NSString*)table where:(NSDictionary *)filters callback:(void (^)(NSError *, id))callback;
 + (void) query:(NSString *)statement callback:(void (^)(NSError *, id))callback;
+- (void) query:(NSString *)statement callback:(void (^)(NSError *, id))callback;
+- (void) query:(NSString *)statement params:(NSDictionary *)params callback:(void (^)(NSError *, id))callback;
 + (YQL *) use:(NSDictionary *)use;
 @end
