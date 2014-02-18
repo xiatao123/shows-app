@@ -34,7 +34,7 @@
     [super viewDidLoad];
     self.defaults = [NSUserDefaults standardUserDefaults];
 	// Do any additional setup after loading the view, typically from a nib.
-    NSLog(@"view did load");
+    //NSLog(@"view did load");
     self.yahoo = [[AFOAuth1Client alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.login.yahoo.com/oauth/v2/"] key:key secret:secret];
     /*
     [YQL showTables:^(NSError *error, id response) {

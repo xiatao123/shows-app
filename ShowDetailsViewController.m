@@ -200,7 +200,7 @@
 }
 
 - (IBAction)onRightSwipeGesture:(id)sender {
-    NSLog(@"swipe right!");
+        //NSLog(@"swipe right!");
     int index = 0;
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
     for(NSString* showIDString in keyBucket){
@@ -229,7 +229,7 @@
 }
 
 - (IBAction)onLeftSwipeGesture:(id)sender {
-    NSLog(@"swipe left!");
+        //NSLog(@"swipe left!");
     int index = 0;
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
     for(NSString* showIDString in keyBucket){
