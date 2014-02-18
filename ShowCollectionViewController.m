@@ -341,7 +341,7 @@
     ShowDetailsViewController *controller = segue.destinationViewController;
     Show *show = [self.showArrayBucket objectAtIndex:indexPath.row];
     controller.tmdb_id = show.id;
-    controller.showArrayBucket = self.showArrayBucket;
+    controller.bucketKey = self.bucketKey;
 }
 
 
