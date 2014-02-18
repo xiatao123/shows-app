@@ -108,11 +108,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="4681"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDY-8q-RS0">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDY-8q-RS0">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="4681"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dpf-tr-Lf5">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dpf-tr-Lf5">
                                         <rect key="frame" x="0.0" y="280" width="320" height="4681"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
@@ -257,6 +257,7 @@
                                         <connections>
                                             <outlet property="showsNameLabel" destination="3oa-BJ-VmE" id="yFI-g1-GXe"/>
                                             <outlet property="showsPosterImage" destination="haB-8b-pdk" id="Eu0-u8-bod"/>
+                                            <segue destination="pwm-Xr-QKz" kind="push" id="vsu-F8-JMT"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -284,7 +285,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1224" y="457"/>
+            <point key="canvasLocation" x="678" y="555"/>
         </scene>
         <!--View Controller - Error-->
         <scene sceneID="ZKQ-gy-xyd">
@@ -339,7 +340,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ib4-0O-xWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="698" y="457"/>
+            <point key="canvasLocation" x="233" y="555"/>
         </scene>
     </scenes>
     <resources>
@@ -350,4 +351,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="vsu-F8-JMT"/>
+    </inferredMetricsTieBreakers>
 </document>
