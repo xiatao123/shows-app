@@ -100,6 +100,12 @@
               NSObject *crew = [results objectAtIndex:1];
               if (info) {
                   self.showOverview.text = [info valueForKeyPath:@"json.overview"];
+                  // self.runTimeLabel.text = [info valueForKeyPath:@"json.runtime"];
+                  self.createdByLabel.text = [[((NSArray*)[info valueForKeyPath:@"json.created_by"]) valueForKey:@"name"] componentsJoinedByString:@", "];
+                  self.runTimeLabel.text = [((NSArray*)[info valueForKeyPath:@"json.episode_run_time"])  componentsJoinedByString:@", "];
+                  self.genreLabel.text = [[((NSArray*)[info valueForKeyPath:@"json.genres"]) valueForKey:@"name"] componentsJoinedByString:@", "];
+                  self.networksLabel.text = [[((NSArray*)[info valueForKeyPath:@"json.networks"]) valueForKey:@"name"] componentsJoinedByString:@", "];
+                  self.statusLabel.text = [info valueForKeyPath:@"json.status"];
               }
               if (crew) {
                       //NSLog(@"crew is %@", crew);
