@@ -17,4 +17,16 @@
                                                        @"results":@"shows"}];
 }
 
+-(void)removeShowsWithoutPoster{
+    NSMutableArray* removeShowArray = [NSMutableArray array];
+    for (Show* show in self.shows) {
+        if (show.poster_path == NULL){
+            [removeShowArray addObject:show];
+        }
+    }
+    for(Show* show in removeShowArray){
+        [self.shows removeObject:show];
+    }
+}
+
 @end

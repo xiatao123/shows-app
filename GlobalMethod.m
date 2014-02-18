@@ -26,7 +26,7 @@
     static dispatch_once_t once;
     static UIImage* imagePlaceholder;
     dispatch_once(&once, ^{
-        imagePlaceholder = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://cdn0.iconfinder.com/data/icons/elite-emoticons/512/not-excited-128.png"]]];
+        //imagePlaceholder = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://cdn0.iconfinder.com/data/icons/elite-emoticons/512/not-excited-128.png"]]];
     });
     
     return imagePlaceholder;
