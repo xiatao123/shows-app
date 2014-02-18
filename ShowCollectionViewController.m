@@ -17,6 +17,7 @@
 #import "GlobalShows.h"
 #import "GlobalMethod.h"
 #import "LocalStorage.h"
+#import "Toast+UIView.h"
 #import <Parse/Parse.h>
 
 @interface ShowCollectionViewController ()
@@ -221,6 +222,15 @@
             [self.collectionView reloadData];
         }else{
             [self loadPopular];
+            UILabel *messagLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
+            [messagLable setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin)]; // autoresizing masks are respected on custom views
+            [messagLable setBackgroundColor:[UIColor orangeColor]];
+            messagLable.text = @"Your favorite list is empty";
+            
+            [self.view showToast:messagLable
+                        duration:3.0
+                        position:@"center"
+             ];
         }
     }];
 

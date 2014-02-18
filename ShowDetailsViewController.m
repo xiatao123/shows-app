@@ -25,7 +25,11 @@
 - (IBAction)onFavTap:(UIBarButtonItem *)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButton;
 @property (weak, nonatomic) IBOutlet UILabel *castLabel;
-
+@property (weak, nonatomic) IBOutlet UILabel *createdByLabel;
+@property (weak, nonatomic) IBOutlet UILabel *runTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *genreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *networksLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 - (IBAction)onHomeTap:(id)sender;
 
 - (IBAction)onRightSwipeGesture:(id)sender;
@@ -96,6 +100,12 @@
               NSObject *crew = [results objectAtIndex:1];
               if (info) {
                   self.showOverview.text = [info valueForKeyPath:@"json.overview"];
+                  // self.runTimeLabel.text = [info valueForKeyPath:@"json.runtime"];
+                  self.createdByLabel.text = [[((NSArray*)[info valueForKeyPath:@"json.created_by"]) valueForKey:@"name"] componentsJoinedByString:@", "];
+                  self.runTimeLabel.text = [((NSArray*)[info valueForKeyPath:@"json.episode_run_time"])  componentsJoinedByString:@", "];
+                  self.genreLabel.text = [[((NSArray*)[info valueForKeyPath:@"json.genres"]) valueForKey:@"name"] componentsJoinedByString:@", "];
+                  self.networksLabel.text = [[((NSArray*)[info valueForKeyPath:@"json.networks"]) valueForKey:@"name"] componentsJoinedByString:@", "];
+                  self.statusLabel.text = [info valueForKeyPath:@"json.status"];
               }
               if (crew) {
                   NSLog(@"crew is %@", crew);
@@ -104,6 +114,7 @@
                       [cast addObject:[person valueForKey:@"name"]];
                   }
                   self.castLabel.text = [cast componentsJoinedByString:@", "];
+                  [self.castLabel sizeToFit];
               }
           }
     ];
@@ -198,7 +209,14 @@
                 NSString* prevShowIDString = [keyBucket objectAtIndex:(index-1)];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 ShowDetailsViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"ShowDetailsViewController"];
-                [self.navigationController pushViewController:svc animated:YES];
+                    //[self.navigationController pushViewController:svc animated:YES];
+                [UIView animateWithDuration:0.75
+                                 animations:^{
+                                     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                                     [self.navigationController pushViewController:svc animated:NO];
+                                     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+                                 }];
+
                 Show* nextShow = [[GlobalShows globalShowsSingleton] objectForKey:prevShowIDString];
                 svc.tmdb_id = nextShow.id;
                 svc.bucketKey = self.bucketKey;
@@ -220,7 +238,14 @@
                 NSString* nextShowIDString = [keyBucket objectAtIndex:(index+1)];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 ShowDetailsViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"ShowDetailsViewController"];
-                [self.navigationController pushViewController:svc animated:YES];
+
+                [UIView animateWithDuration:0.75
+                                 animations:^{
+                                     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                                     [self.navigationController pushViewController:svc animated:NO];
+                                     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+                                 }];
+                
                 Show* nextShow = [[GlobalShows globalShowsSingleton] objectForKey:nextShowIDString];
                 svc.tmdb_id = nextShow.id;
                 svc.bucketKey = self.bucketKey;
