@@ -17,6 +17,7 @@
 @interface SearchViewController ()
 
 @property (nonatomic, strong) ShowResult* searchMoviedbResult;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 -(void)reload:(NSString*)searchTxt;
 
@@ -44,7 +45,9 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
 
+    [self.searchBar becomeFirstResponder];
     NSLog(@"search view load");
+    
 	// Do any additional setup after loading the view.
     //[self reload];
     
