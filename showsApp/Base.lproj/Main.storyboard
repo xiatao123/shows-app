@@ -88,7 +88,9 @@
                             <outlet property="delegate" destination="g73-Mp-3Lg" id="OQK-mE-7Bg"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="faS-EJ-HaV"/>
+                    <navigationItem key="navigationItem" id="faS-EJ-HaV">
+                        <barButtonItem key="backBarButtonItem" title=" " id="jxi-zJ-9u9"/>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e53-pd-u6x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -151,20 +153,21 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="Eja-gr-Uc4" firstAttribute="leading" secondItem="1Bw-3h-bfb" secondAttribute="leading" id="088-ty-1qD"/>
-                            <constraint firstItem="IDY-8q-RS0" firstAttribute="leading" secondItem="1Bw-3h-bfb" secondAttribute="leading" id="1VE-fD-Ppv"/>
-                            <constraint firstItem="IDY-8q-RS0" firstAttribute="top" secondItem="1Bw-3h-bfb" secondAttribute="top" id="RHD-af-jLx"/>
-                            <constraint firstItem="eIE-Za-eV2" firstAttribute="top" secondItem="IDY-8q-RS0" secondAttribute="bottom" id="Ryn-D5-vfa"/>
-                            <constraint firstItem="Eja-gr-Uc4" firstAttribute="top" secondItem="gyz-Ak-cFN" secondAttribute="bottom" id="bvx-DT-YgT"/>
-                            <constraint firstAttribute="trailing" secondItem="Eja-gr-Uc4" secondAttribute="trailing" id="hjv-TQ-svG"/>
-                            <constraint firstAttribute="trailing" secondItem="IDY-8q-RS0" secondAttribute="trailing" id="zNv-qc-Upm"/>
+                            <constraint firstItem="Eja-gr-Uc4" firstAttribute="leading" secondItem="1Bw-3h-bfb" secondAttribute="leading" id="IiS-Qa-IN7"/>
+                            <constraint firstItem="Eja-gr-Uc4" firstAttribute="top" secondItem="gyz-Ak-cFN" secondAttribute="bottom" id="OLH-f3-tjP"/>
+                            <constraint firstAttribute="bottom" secondItem="IDY-8q-RS0" secondAttribute="bottom" id="PeB-Ri-cmz"/>
+                            <constraint firstAttribute="trailing" secondItem="Eja-gr-Uc4" secondAttribute="trailing" id="Q0t-jX-19H"/>
+                            <constraint firstAttribute="trailing" secondItem="IDY-8q-RS0" secondAttribute="trailing" id="TY0-r1-CfN"/>
+                            <constraint firstItem="IDY-8q-RS0" firstAttribute="leading" secondItem="1Bw-3h-bfb" secondAttribute="leading" id="XPq-Nb-wsm"/>
+                            <constraint firstItem="IDY-8q-RS0" firstAttribute="top" secondItem="1Bw-3h-bfb" secondAttribute="top" id="jYE-lK-WkZ"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="KmS-mT-9EA" appends="YES" id="Z1A-ns-eRp"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Show" id="Ua1-nu-ISb">
-                        <barButtonItem key="rightBarButtonItem" title="Favorite" id="t85-t1-6fo">
+                        <barButtonItem key="rightBarButtonItem" image="fav_down" id="t85-t1-6fo">
+                            <color key="tintColor" red="0.9960784912109375" green="0.81568634510040283" blue="0.21568629145622253" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="onFavTap:" destination="pwm-Xr-QKz" id="cyB-E3-PyI"/>
                             </connections>
@@ -359,6 +362,9 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="fav_down" width="20" height="20"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
