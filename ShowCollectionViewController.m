@@ -166,11 +166,8 @@
         [self.showArrayBucket removeAllObjects];
         NSArray *keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
         for(NSString *key in keyBucket){
-            //NSLog(@"%@", key);
             Show* show = [[GlobalShows globalShowsSingleton]objectForKey:key];
-            //NSLog(@"show's name is %@", show.name);
             [self.showArrayBucket addObject:show];
-            //NSLog(@"bucket size %i", self.bucket.count);
         }
         return self.showArrayBucket.count;
     }
@@ -188,13 +185,8 @@
     }
     if (self.bucketKey!= NULL && self.bucketKey.length !=0 ) {
         Show* show = self.showArrayBucket[indexPath.row];
-        //NSLog(@"title is %@", show.name);
-        //NSLog(@"title is %@", show.name);
         cell.backgroundColor = [UIColor whiteColor];
         [cell.showsNameLabel setText:show.name];
-//        NSString* baseUrl = @"http://image.tmdb.org/t/p/w500";
-//        [cell.showsPosterImage setImageWithURL:[[NSURL alloc]initWithString: [baseUrl stringByAppendingString:show.poster_path]]];
-        
         [cell.showsPosterImage setImageWithURL:[GlobalMethod buildImageURL:show.poster_path size:@"w500"] placeholderImage:[GlobalMethod getImagePlaceholder]];
     }else{
     }
@@ -260,6 +252,7 @@
               NSError *err = nil;
               //NSLog(@"%@",showJSON);
               ShowResult* showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
+              [showResult removeShowsWithoutPoster];
               NSMutableArray *bucket = [[GlobalShows globalTriageBucket] objectForKey:self.bucketKey];
               for(Show* show in showResult.shows){
                   [bucket addObject:show.id];
@@ -286,6 +279,7 @@
               NSError *err = nil;
               //NSLog(@"%@",showJSON);
               ShowResult* showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
+              [showResult removeShowsWithoutPoster];
               NSMutableArray *bucket = [[GlobalShows globalTriageBucket] objectForKey:self.bucketKey];
               for(Show* show in showResult.shows){
                   [bucket addObject:show.id];
@@ -314,6 +308,7 @@
               //NSLog(@"%@",showJSON);
               //self.showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
               ShowResult* showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
+              [showResult removeShowsWithoutPoster];
               NSMutableArray *bucket = [[GlobalShows globalTriageBucket] objectForKey:categoryName];
               for(Show* show in showResult.shows){
                   [bucket addObject:show.id];

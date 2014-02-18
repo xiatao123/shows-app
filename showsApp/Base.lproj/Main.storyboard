@@ -341,6 +341,7 @@
                                         <connections>
                                             <outlet property="showsNameLabel" destination="3oa-BJ-VmE" id="yFI-g1-GXe"/>
                                             <outlet property="showsPosterImage" destination="haB-8b-pdk" id="Eu0-u8-bod"/>
+                                            <segue destination="pwm-Xr-QKz" kind="push" id="vsu-F8-JMT"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -368,7 +369,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1224" y="457"/>
+            <point key="canvasLocation" x="678" y="555"/>
         </scene>
         <!--View Controller - Error-->
         <scene sceneID="ZKQ-gy-xyd">
@@ -423,7 +424,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ib4-0O-xWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="698" y="457"/>
+            <point key="canvasLocation" x="233" y="555"/>
         </scene>
     </scenes>
     <resources>
@@ -434,4 +435,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="vsu-F8-JMT"/>
+    </inferredMetricsTieBreakers>
 </document>

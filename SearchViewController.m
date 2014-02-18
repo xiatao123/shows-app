@@ -12,12 +12,10 @@
 #import "ShowResult.h"
 #import "SearchCell.h"
 #import "GlobalMethod.h"
+#import "ShowDetailsViewController.h"
 
 @interface SearchViewController ()
 
-
-//@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-//@property (strong, nonatomic) UISearchBar *mySearchBar;
 @property (nonatomic, strong) ShowResult* searchMoviedbResult;
 
 -(void)reload:(NSString*)searchTxt;
@@ -107,7 +105,6 @@
     Show *show = self.searchMoviedbResult.shows[indexPath.row];
     cell.backgroundColor = [UIColor whiteColor];
     [cell.showsNameLabel setText:show.original_name];
-//    UIImage *placeholderImage = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/skull.png",[self applicationDocumentsDirectory]]];
     [cell.showsPosterImage setImageWithURL:[GlobalMethod buildImageURL:show.poster_path size:@"w185"] placeholderImage:[GlobalMethod getImagePlaceholder]];
     
     return cell;
@@ -128,16 +125,19 @@
       use:@{@"store://pgdGby6VuyucfR52SFZ1wb": @"tmdbsearch" }]
       select:@"*" from:@"tmdbsearch" where:@{ @"query" : searchTxt }
       callback:^(NSError *error, id response) {
-          //NSLog(@"return reposnse: %@", response);
           NSDictionary *searchJSON = [response valueForKeyPath:@"query.results.json"];
           NSLog(@"%@", searchJSON);
           self.searchMoviedbResult = [[ShowResult alloc]initWithDictionary:searchJSON error:nil];
-         // NSLog(@"result %@", self.searchMoviedbResult);
-          Show *model = [self.searchMoviedbResult.shows objectAtIndex:0];
-         NSLog(@"name is %@", model.name );
+          [self.searchMoviedbResult removeShowsWithoutPoster];
           [self.collectionView reloadData];
       }];
-    
-    
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
+    ShowDetailsViewController *controller = segue.destinationViewController;
+    Show *show = [self.searchMoviedbResult.shows objectAtIndex:indexPath.row];
+    controller.tmdb_id = show.id;
+    controller.bucketKey = @"Search";
 }
 @end

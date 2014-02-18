@@ -16,4 +16,6 @@
 
 +(JSONKeyMapper*)keyMapper;
 
+-(void)removeShowsWithoutPoster;
+
 @end
