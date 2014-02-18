@@ -194,8 +194,8 @@
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
     for(NSString* showIDString in keyBucket){
         if(showIDString == self.tmdb_id){
-            if( (index + 1) < keyBucket.count ){
-                NSString* nextShowIDString = [keyBucket objectAtIndex:(index+1)];
+            if (index > 0) {
+                NSString* prevShowIDString = [keyBucket objectAtIndex:(index-1)];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 ShowDetailsViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"ShowDetailsViewController"];
                     //[self.navigationController pushViewController:svc animated:YES];
@@ -206,9 +206,10 @@
                                      [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                                  }];
 
-                Show* nextShow = [[GlobalShows globalShowsSingleton] objectForKey:nextShowIDString];
+                Show* nextShow = [[GlobalShows globalShowsSingleton] objectForKey:prevShowIDString];
                 svc.tmdb_id = nextShow.id;
                 svc.bucketKey = self.bucketKey;
+                [self hackBackAfterSwipe];
             }
             break;
         }
@@ -222,11 +223,10 @@
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
     for(NSString* showIDString in keyBucket){
         if(showIDString == self.tmdb_id){
-            if (index > 0) {
-                NSString* prevShowIDString = [keyBucket objectAtIndex:(index-1)];
+            if( (index + 1) < keyBucket.count ){
+                NSString* nextShowIDString = [keyBucket objectAtIndex:(index+1)];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 ShowDetailsViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"ShowDetailsViewController"];
-                    //[self.navigationController pushViewController:svc animated:YES];
 
                 [UIView animateWithDuration:0.75
                                  animations:^{
@@ -235,13 +235,21 @@
                                      [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
                                  }];
                 
-                Show* nextShow = [[GlobalShows globalShowsSingleton] objectForKey:prevShowIDString];
+                Show* nextShow = [[GlobalShows globalShowsSingleton] objectForKey:nextShowIDString];
                 svc.tmdb_id = nextShow.id;
                 svc.bucketKey = self.bucketKey;
+                [self hackBackAfterSwipe];
             }
             break;
         }
         index++;
     }
+
+}
+
+-(void)hackBackAfterSwipe{
+    NSMutableArray *VCs = [self.navigationController.viewControllers mutableCopy];
+    [VCs removeObjectAtIndex:[VCs count] - 2];
+    self.navigationController.viewControllers = VCs;
 }
 @end
