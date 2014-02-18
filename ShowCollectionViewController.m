@@ -230,10 +230,10 @@
             [self.collectionView reloadData];
         }else{
             [self loadPopular];
-            UILabel *messagLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
+            UILabel *messagLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 250, 30)];
             [messagLable setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin)]; // autoresizing masks are respected on custom views
             [messagLable setBackgroundColor:[UIColor orangeColor]];
-            messagLable.text = @"Your favorite list is empty";
+            messagLable.text = @" Oops! Your favorite list is empty ";
             
             [self.view showToast:messagLable
                         duration:3.0

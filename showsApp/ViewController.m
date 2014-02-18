@@ -45,7 +45,7 @@
       callback:^(NSError *error, id response) {
          
          //NSLog(@"got resposne %@", response);
-         NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.json"] );
+         //NSLog(@"get response.result %@", [response valueForKeyPath:@"query.results.json"] );
          NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
          NSError *err = nil;
          //NSLog(@"%@",showJSON);

@@ -23,7 +23,7 @@
         for(key in use) {
             [uses addObject:[NSString stringWithFormat:@"use '%@' as %@; ", key, [use objectForKey:key]]];
         }
-        NSLog(@"constructed use %@", uses);
+            //NSLog(@"constructed use %@", uses);
         self.use = [uses componentsJoinedByString:@""];
     }
     return self;
@@ -33,7 +33,7 @@
     
     NSString *q = [statement urlEncode];
     NSURL *url = [NSURL URLWithString:[YQL_URL stringByAppendingString:q]];
-    NSLog(@"final url is %@",  url);
+        //NSLog(@"final url is %@",  url);
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [[AFJSONRequestOperation
@@ -54,7 +54,7 @@
     }
     NSString *q = [statement urlEncode];
     NSURL *url = [NSURL URLWithString:[YQL_URL stringByAppendingString:q]];
-    NSLog(@"final url is %@",  url);
+        //NSLog(@"final url is %@",  url);
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [[AFJSONRequestOperation
@@ -75,7 +75,7 @@
     }
     NSString *q = [statement urlEncode];
     NSURL * url;
-    NSLog(@"final url is %@",  url);
+        //NSLog(@"final url is %@",  url);
     
     if (params) {
         NSMutableArray *parray = [[NSMutableArray alloc] init];
