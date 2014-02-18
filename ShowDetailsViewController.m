@@ -25,6 +25,7 @@
 - (IBAction)onFavTap:(UIBarButtonItem *)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButton;
 
+- (IBAction)onHomeTap:(id)sender;
 
 - (IBAction)onRightSwipeGesture:(id)sender;
 - (IBAction)onLeftSwipeGesture:(id)sender;
@@ -151,6 +152,10 @@
     [self.navigationController.navigationBar addSubview:navBorder];
 }
 
+- (IBAction)onHomeTap:(id)sender {
+    NSLog(@"home tap!");
+}
+
 - (IBAction)onRightSwipeGesture:(id)sender {
     NSLog(@"swipe right!");
     int index = 0;
@@ -161,6 +166,7 @@
                 NSString* nextShowIDString = [keyBucket objectAtIndex:(index+1)];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 ShowDetailsViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"ShowDetailsViewController"];
+                //[self.navigationController popViewControllerAnimated:YES];
                 [self.navigationController pushViewController:svc animated:YES];
                 Show* nextShow = [[GlobalShows globalShowsSingleton] objectForKey:nextShowIDString];
                 svc.tmdb_id = nextShow.id;
