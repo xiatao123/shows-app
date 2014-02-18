@@ -198,8 +198,14 @@
                 NSString* nextShowIDString = [keyBucket objectAtIndex:(index+1)];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 ShowDetailsViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"ShowDetailsViewController"];
-                //[self.navigationController popViewControllerAnimated:YES];
-                [self.navigationController pushViewController:svc animated:YES];
+                    //[self.navigationController pushViewController:svc animated:YES];
+                [UIView animateWithDuration:0.75
+                                 animations:^{
+                                     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                                     [self.navigationController pushViewController:svc animated:NO];
+                                     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+                                 }];
+
                 Show* nextShow = [[GlobalShows globalShowsSingleton] objectForKey:nextShowIDString];
                 svc.tmdb_id = nextShow.id;
                 svc.bucketKey = self.bucketKey;
@@ -220,7 +226,15 @@
                 NSString* prevShowIDString = [keyBucket objectAtIndex:(index-1)];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 ShowDetailsViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"ShowDetailsViewController"];
-                [self.navigationController pushViewController:svc animated:YES];
+                    //[self.navigationController pushViewController:svc animated:YES];
+
+                [UIView animateWithDuration:0.75
+                                 animations:^{
+                                     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                                     [self.navigationController pushViewController:svc animated:NO];
+                                     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+                                 }];
+                
                 Show* nextShow = [[GlobalShows globalShowsSingleton] objectForKey:prevShowIDString];
                 svc.tmdb_id = nextShow.id;
                 svc.bucketKey = self.bucketKey;
