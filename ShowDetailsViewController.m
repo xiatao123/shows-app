@@ -26,6 +26,11 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButton;
 @property (weak, nonatomic) IBOutlet UILabel *castLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *createdByLabel;
+@property (weak, nonatomic) IBOutlet UILabel *runTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *genreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *networksLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 - (IBAction)onRightSwipeGesture:(id)sender;
 
@@ -102,6 +107,7 @@
                       [cast addObject:[person valueForKey:@"name"]];
                   }
                   self.castLabel.text = [cast componentsJoinedByString:@", "];
+                  [self.castLabel sizeToFit];
               }
           }
     ];
