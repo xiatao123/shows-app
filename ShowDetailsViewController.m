@@ -25,14 +25,15 @@
 - (IBAction)onFavTap:(UIBarButtonItem *)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButton;
 @property (weak, nonatomic) IBOutlet UILabel *castLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *createdByLabel;
 @property (weak, nonatomic) IBOutlet UILabel *runTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *genreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *networksLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+- (IBAction)onHomeTap:(id)sender;
 
 - (IBAction)onRightSwipeGesture:(id)sender;
+- (IBAction)onLeftSwipeGesture:(id)sender;
 
 
 @end
@@ -188,22 +189,58 @@
     [self.navigationController.navigationBar addSubview:navBorder];
 }
 
+- (IBAction)onHomeTap:(id)sender {
+    NSLog(@"home tap!");
+}
+
 - (IBAction)onRightSwipeGesture:(id)sender {
     NSLog(@"swipe right!");
     int index = 0;
-    for(Show* show in self.showArrayBucket){
-        if(show.id == self.tmdb_id){
-            if([self.showArrayBucket objectAtIndex:(index+1)] != NULL){
+    NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
+    for(NSString* showIDString in keyBucket){
+        if(showIDString == self.tmdb_id){
+            if (index > 0) {
+                NSString* prevShowIDString = [keyBucket objectAtIndex:(index-1)];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 ShowDetailsViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"ShowDetailsViewController"];
                 [self.navigationController pushViewController:svc animated:YES];
-                Show* showNext = [self.showArrayBucket objectAtIndex:(index+1)];
-                svc.tmdb_id = showNext.id;
-                svc.showArrayBucket = self.showArrayBucket;
+                Show* nextShow = [[GlobalShows globalShowsSingleton] objectForKey:prevShowIDString];
+                svc.tmdb_id = nextShow.id;
+                svc.bucketKey = self.bucketKey;
+                [self hackBackAfterSwipe];
             }
             break;
         }
         index++;
     }
+}
+
+- (IBAction)onLeftSwipeGesture:(id)sender {
+    NSLog(@"swipe left!");
+    int index = 0;
+    NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
+    for(NSString* showIDString in keyBucket){
+        if(showIDString == self.tmdb_id){
+            if( (index + 1) < keyBucket.count ){
+                NSString* nextShowIDString = [keyBucket objectAtIndex:(index+1)];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                ShowDetailsViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"ShowDetailsViewController"];
+                [self.navigationController pushViewController:svc animated:YES];
+                Show* nextShow = [[GlobalShows globalShowsSingleton] objectForKey:nextShowIDString];
+                svc.tmdb_id = nextShow.id;
+                svc.bucketKey = self.bucketKey;
+                [self hackBackAfterSwipe];
+            }
+            break;
+        }
+        index++;
+    }
+
+}
+
+-(void)hackBackAfterSwipe{
+    NSMutableArray *VCs = [self.navigationController.viewControllers mutableCopy];
+    [VCs removeObjectAtIndex:[VCs count] - 2];
+    self.navigationController.viewControllers = VCs;
 }
 @end
