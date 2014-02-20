@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-AnimatedGif.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-CMDQueryStringSerialization.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,6 +39,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Toast.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-UIImage+animatedGif.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,77 +57,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>07589073262046EE9A5482FF</key>
+		<key>0C7BF76DC0904D37BF859B61</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>28321D70864E40ADBDDE7187</key>
+		<key>100D2D2ECDBD4ADB97966675</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>395A986F1FED4FB28720979C</key>
+		<key>39593F5BEE90435A9C097CBF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>41E17867B625440295C489A9</key>
+		<key>6B2DCED56B6E4E9EB9C699A3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5F9A84BE97A94876A7A9BA89</key>
+		<key>919089CC51D346DCBA135868</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5FE5DF899E1B445294FD82FD</key>
+		<key>BD0D3ADAE8AF4F159AEF3E4D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6807B80EA5EB46FDB9507BDD</key>
+		<key>BFB51227B42A466888F809E0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>77C4740735A34A47A65B6158</key>
+		<key>C2498EF6A9CD4B0B878E6518</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>861CB48E3B7142E196C44ED3</key>
+		<key>CA048CE7F3D6415FBD7C0BAC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>889A7BF3C0AD4163ABFE6AF9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>932FE435E0AB44268E3A2E9A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AB87A964D19D4FD795250FC9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BFB65AEAD6D7466EAFE2F157</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C3F9A106638843668A98B33E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C5B294B5444A48F88D4FEB10</key>
+		<key>FBC8C1EA342440688FF2590F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

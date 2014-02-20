@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_AFOAuth1Client 3
 #define COCOAPODS_VERSION_PATCH_AFOAuth1Client 3
 
+// AnimatedGif
+#define COCOAPODS_POD_AVAILABLE_AnimatedGif
+#define COCOAPODS_VERSION_MAJOR_AnimatedGif 0
+#define COCOAPODS_VERSION_MINOR_AnimatedGif 0
+#define COCOAPODS_VERSION_PATCH_AnimatedGif 1
+
 // CMDQueryStringSerialization
 #define COCOAPODS_POD_AVAILABLE_CMDQueryStringSerialization
 #define COCOAPODS_VERSION_MAJOR_CMDQueryStringSerialization 0
@@ -47,4 +53,10 @@
 #define COCOAPODS_VERSION_MAJOR_Toast 2
 #define COCOAPODS_VERSION_MINOR_Toast 2
 #define COCOAPODS_VERSION_PATCH_Toast 0
+
+// UIImage+animatedGif
+#define COCOAPODS_POD_AVAILABLE_UIImage_animatedGif
+#define COCOAPODS_VERSION_MAJOR_UIImage_animatedGif 0
+#define COCOAPODS_VERSION_MINOR_UIImage_animatedGif 1
+#define COCOAPODS_VERSION_PATCH_UIImage_animatedGif 0
 
