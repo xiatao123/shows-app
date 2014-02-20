@@ -30,6 +30,14 @@
 @property (nonatomic, strong) NSString* backdrop_path;
 @property (nonatomic, assign) float popularity;
 
+@property (nonatomic, strong) NSString* created_by;
+@property (nonatomic, strong) NSString* runtimes;
+@property (nonatomic, strong) NSString* genres;
+@property (nonatomic, strong) NSString* networks;
+@property (nonatomic, strong) NSString* status;
+@property (nonatomic, strong) NSString* cast;
+@property (nonatomic, assign) bool details;
+
 +(BOOL)propertyIsOptional:(NSString *)propertyName;
 
 @end

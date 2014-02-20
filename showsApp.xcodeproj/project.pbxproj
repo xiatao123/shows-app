@@ -46,6 +46,7 @@
 		7891F1B61890B55E00BF5611 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7891F1981890B55E00BF5611 /* UIKit.framework */; };
 		7891F1BE1890B55E00BF5611 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7891F1BC1890B55E00BF5611 /* InfoPlist.strings */; };
 		7891F1C01890B55E00BF5611 /* showsAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7891F1BF1890B55E00BF5611 /* showsAppTests.m */; };
+		78CDB27F18B59F930085D0EC /* GifViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78CDB27E18B59F930085D0EC /* GifViewController.m */; };
 		E395C400627045D2A9407CA9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E913425D7C364255B0BDA766 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +121,8 @@
 		7891F1BB1890B55E00BF5611 /* showsAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "showsAppTests-Info.plist"; sourceTree = "<group>"; };
 		7891F1BD1890B55E00BF5611 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7891F1BF1890B55E00BF5611 /* showsAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = showsAppTests.m; sourceTree = "<group>"; };
+		78CDB27D18B59F930085D0EC /* GifViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GifViewController.h; sourceTree = "<group>"; };
+		78CDB27E18B59F930085D0EC /* GifViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GifViewController.m; sourceTree = "<group>"; };
 		E913425D7C364255B0BDA766 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -187,6 +190,8 @@
 				35351E8B18A334AB005DAF6C /* SearchViewController.m */,
 				7871301D18A5D6EB008D31E1 /* ShowDetailsViewController.h */,
 				7871301E18A5D6EB008D31E1 /* ShowDetailsViewController.m */,
+				78CDB27D18B59F930085D0EC /* GifViewController.h */,
+				78CDB27E18B59F930085D0EC /* GifViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -471,6 +476,7 @@
 				7871301F18A5D6EB008D31E1 /* ShowDetailsViewController.m in Sources */,
 				7891F1A11890B55E00BF5611 /* main.m in Sources */,
 				7835633A18A9CC5500797F4B /* LocalStorage.m in Sources */,
+				78CDB27F18B59F930085D0EC /* GifViewController.m in Sources */,
 				35887AC51899A9E100D4D903 /* Show.m in Sources */,
 				356913BE1899B8E70047A580 /* Episode.m in Sources */,
 				783B23A01890D30F00FCD806 /* YahooClient.m in Sources */,
