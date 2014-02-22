@@ -54,14 +54,14 @@
     if ((self = [super init])) {
         self.imageAlignment = REMenuImageAlignmentLeft;
         self.closeOnSelection = YES;
-        self.itemHeight = 48.0;
+        self.itemHeight = 28.0;
         self.separatorHeight = 2.0;
         self.waitUntilAnimationIsComplete = YES;
         
         self.textOffset = CGSizeMake(0, 0);
         self.subtitleTextOffset = CGSizeMake(0, 0);
-        self.font = [UIFont boldSystemFontOfSize:21.0];
-        self.subtitleFont = [UIFont systemFontOfSize:14.0];
+        self.font = [UIFont boldSystemFontOfSize:12.0];
+        self.subtitleFont = [UIFont systemFontOfSize:9.0];
         
         self.backgroundColor = [UIColor colorWithRed:53/255.0 green:53/255.0 blue:52/255.0 alpha:1.0];
         self.separatorColor = [UIColor colorWithPatternImage:self.separatorImage];
