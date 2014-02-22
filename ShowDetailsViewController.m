@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) Show *show;
 @property (weak, nonatomic) IBOutlet UILabel *showOverview;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *showImage;
 @property (strong, nonatomic) PFObject *favorite;
 @property (assign, nonatomic) bool is_favorited;
@@ -50,13 +51,17 @@
 }
 
 - (void)viewDidLayoutSubviews {
-    self.scrollView.contentSize = CGSizeMake(320, 5000);
+    self.scrollView.contentSize = CGSizeMake(320, 1300);
+    //[self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.scrollView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.scrollView.layer.zPosition = 1;
+    // self.contentView.translatesAutoresizingMaskIntoConstraints = YES;
+    
+    
     Show* show = [[GlobalShows globalShowsSingleton]objectForKey:self.tmdb_id];
     
     [self.navigationController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor blackColor]];
