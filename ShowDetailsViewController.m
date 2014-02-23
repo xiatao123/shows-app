@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) Show *show;
 @property (weak, nonatomic) IBOutlet UILabel *showOverview;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *showImage;
 @property (strong, nonatomic) PFObject *favorite;
 @property (assign, nonatomic) bool is_favorited;
@@ -50,13 +51,17 @@
 }
 
 - (void)viewDidLayoutSubviews {
-    self.scrollView.contentSize = CGSizeMake(320, 5000);
+    self.scrollView.contentSize = CGSizeMake(320, 1300);
+    //[self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.scrollView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.scrollView.layer.zPosition = 1;
+    // self.contentView.translatesAutoresizingMaskIntoConstraints = YES;
+    
+    
     Show* show = [[GlobalShows globalShowsSingleton]objectForKey:self.tmdb_id];
     
     [self.navigationController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor blackColor]];
@@ -91,7 +96,16 @@
     }];
     */
     
-    [[YQL use:@{@"https://raw.github.com/ios-class/yshows-tables/master/tmdb.tv.id.xml": @"identity",
+    if (self.show.details) {
+        self.showOverview.text = self.show.overview;
+        self.createdByLabel.text = self.show.created_by;
+        self.runTimeLabel.text = self.show.runtimes;
+        self.genreLabel.text = self.show.genres;
+        self.networksLabel.text = self.show.networks;
+        self.statusLabel.text = self.show.status;
+        self.castLabel.text = self.show.cast;
+    }
+    else [[YQL use:@{@"https://raw.github.com/ios-class/yshows-tables/master/tmdb.tv.id.xml": @"identity",
               @"https://raw2.github.com/ios-class/yshows-tables/master/tmdb.tv.credits.xml": @"credits"}]
           query:[NSString stringWithFormat:@"select * from yql.query.multi where queries='select * from identity where id=%@; select * from credits where id=%@'", self.tmdb_id, self.tmdb_id]
           callback:^(NSError * error, id response) {
@@ -99,13 +113,14 @@
               NSObject *info = [results objectAtIndex:0];
               NSObject *crew = [results objectAtIndex:1];
               if (info) {
-                  self.showOverview.text = [info valueForKeyPath:@"json.overview"];
+                  self.show.overview = self.showOverview.text = [info valueForKeyPath:@"json.overview"];
                   // self.runTimeLabel.text = [info valueForKeyPath:@"json.runtime"];
-                  self.createdByLabel.text = [[((NSArray*)[info valueForKeyPath:@"json.created_by"]) valueForKey:@"name"] componentsJoinedByString:@", "];
-                  self.runTimeLabel.text = [((NSArray*)[info valueForKeyPath:@"json.episode_run_time"])  componentsJoinedByString:@", "];
-                  self.genreLabel.text = [[((NSArray*)[info valueForKeyPath:@"json.genres"]) valueForKey:@"name"] componentsJoinedByString:@", "];
-                  self.networksLabel.text = [[((NSArray*)[info valueForKeyPath:@"json.networks"]) valueForKey:@"name"] componentsJoinedByString:@", "];
-                  self.statusLabel.text = [info valueForKeyPath:@"json.status"];
+                  self.show.created_by = self.createdByLabel.text = [[((NSArray*)[info valueForKeyPath:@"json.created_by"]) valueForKey:@"name"] componentsJoinedByString:@", "];
+                  self.show.runtimes = self.runTimeLabel.text = [((NSArray*)[info valueForKeyPath:@"json.episode_run_time"])  componentsJoinedByString:@", "];
+                  self.show.genres = self.genreLabel.text = [[((NSArray*)[info valueForKeyPath:@"json.genres"]) valueForKey:@"name"] componentsJoinedByString:@", "];
+                  self.show.networks = self.networksLabel.text = [[((NSArray*)[info valueForKeyPath:@"json.networks"]) valueForKey:@"name"] componentsJoinedByString:@", "];
+                  self.show.status = self.statusLabel.text = [info valueForKeyPath:@"json.status"];
+                  
               }
               if (crew) {
                       //NSLog(@"crew is %@", crew);
@@ -113,9 +128,11 @@
                   for (NSObject *person in (NSArray*)[crew valueForKeyPath:@"json.cast"]) {
                       [cast addObject:[person valueForKey:@"name"]];
                   }
-                  self.castLabel.text = [cast componentsJoinedByString:@", "];
+                  self.show.cast = self.castLabel.text = [cast componentsJoinedByString:@", "];
                   [self.castLabel sizeToFit];
               }
+              
+              self.show.details = YES;
           }
     ];
     

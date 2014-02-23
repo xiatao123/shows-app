@@ -4,6 +4,34 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
+        <!--Gif View Controller-->
+        <scene sceneID="0pU-lB-5nS">
+            <objects>
+                <viewController id="sYs-fS-65m" customClass="GifViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4Yj-zh-bsS"/>
+                        <viewControllerLayoutGuide type="bottom" id="DLr-U3-zsS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dfo-e6-FtI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PGD-Bi-0AS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jTa-SE-Rqz"/>
+                    <connections>
+                        <outlet property="imageView" destination="PGD-Bi-0AS" id="XTO-4x-mfM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bQ0-6S-Eu6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-200" y="361"/>
+        </scene>
         <!--View Controller - Login-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -25,6 +53,16 @@
                                 </state>
                                 <connections>
                                     <action selector="onLoginTapped:" destination="vXZ-lx-hvc" eventType="touchDown" id="9PA-8B-uY7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10T-V6-EBU">
+                                <rect key="frame" x="142" y="348" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="sYs-fS-65m" kind="modal" id="DYq-gn-IOf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -105,15 +143,15 @@
                         <viewControllerLayoutGuide type="bottom" id="eIE-Za-eV2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1Bw-3h-bfb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="4681"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDY-8q-RS0">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="4681"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDY-8q-RS0">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="640"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dpf-tr-Lf5">
-                                        <rect key="frame" x="0.0" y="260" width="320" height="4681"/>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dpf-tr-Lf5">
+                                        <rect key="frame" x="0.0" y="260" width="320" height="1000"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="..." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="6Au-Xu-hYa">
@@ -217,36 +255,21 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="5000" id="EWW-wQ-8H9"/>
-                                        </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Dpf-tr-Lf5" secondAttribute="trailing" id="Tyf-S9-ltX"/>
-                                    <constraint firstItem="Dpf-tr-Lf5" firstAttribute="leading" secondItem="IDY-8q-RS0" secondAttribute="leading" id="dcS-7w-Ans"/>
-                                </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="TFJ-D7-ccH" appends="YES" id="RNE-U2-eRZ"/>
                                 </connections>
                             </scrollView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eja-gr-Uc4">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eja-gr-Uc4">
                                 <rect key="frame" x="0.0" y="64" width="320" height="256"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="Eja-gr-Uc4" firstAttribute="leading" secondItem="1Bw-3h-bfb" secondAttribute="leading" id="IiS-Qa-IN7"/>
-                            <constraint firstItem="Eja-gr-Uc4" firstAttribute="top" secondItem="gyz-Ak-cFN" secondAttribute="bottom" id="OLH-f3-tjP"/>
-                            <constraint firstAttribute="bottom" secondItem="IDY-8q-RS0" secondAttribute="bottom" id="PeB-Ri-cmz"/>
-                            <constraint firstAttribute="trailing" secondItem="Eja-gr-Uc4" secondAttribute="trailing" id="Q0t-jX-19H"/>
-                            <constraint firstAttribute="trailing" secondItem="IDY-8q-RS0" secondAttribute="trailing" id="TY0-r1-CfN"/>
-                            <constraint firstItem="IDY-8q-RS0" firstAttribute="leading" secondItem="1Bw-3h-bfb" secondAttribute="leading" id="XPq-Nb-wsm"/>
-                            <constraint firstItem="IDY-8q-RS0" firstAttribute="top" secondItem="1Bw-3h-bfb" secondAttribute="top" id="jYE-lK-WkZ"/>
-                        </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="KmS-mT-9EA" appends="YES" id="Z1A-ns-eRp"/>
                         </connections>
@@ -262,6 +285,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="castLabel" destination="VQu-76-QeL" id="u2n-S4-3sz"/>
+                        <outlet property="contentView" destination="Dpf-tr-Lf5" id="hU8-8k-ZbI"/>
                         <outlet property="createdByLabel" destination="xlt-mh-iOz" id="9SF-Zf-cwd"/>
                         <outlet property="favButton" destination="t85-t1-6fo" id="Vrm-dY-owe"/>
                         <outlet property="genreLabel" destination="rLN-LW-QlM" id="c9g-J6-gdf"/>
@@ -356,6 +380,7 @@
                     <navigationItem key="navigationItem" title="Search!" id="naX-rz-bKa"/>
                     <connections>
                         <outlet property="collectionView" destination="n4S-5Q-lXY" id="AFN-zU-90m"/>
+                        <outlet property="searchBar" destination="03E-1f-DPq" id="gRK-0b-V97"/>
                         <outlet property="searchDisplayController" destination="LRu-Rc-VaU" id="gJW-kE-H7g"/>
                     </connections>
                 </viewController>
