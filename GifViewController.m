@@ -29,8 +29,12 @@
 {
     [super viewDidLoad];
     NSLog(@"VIEW DID LOAD");
-    UIImage *gif = [UIImage animatedImageWithAnimatedGIFURL:[NSURL URLWithString:@"http://24.media.tumblr.com/2bd8f547fa260c314fba66c079de110f/tumblr_n10vqu2Dql1qkq1vfo1_400.gif"]];
-    self.imageView.image = gif;
+    UIImage *gif = [UIImage animatedImageWithAnimatedGIFURL:[NSURL URLWithString:@"http://24.media.tumblr.com/6018ca761c8c5dfae87c4c6069d13e24/tumblr_n167hnI75J1srbvdlo1_400.gif"]];
+    self.imageView.animationImages = [gif.images subarrayWithRange:NSMakeRange(0, 17)];
+    self.imageView.animationDuration = gif.duration;
+    self.imageView.animationRepeatCount = 1;
+    self.imageView.image = [gif.images objectAtIndex:17];
+    [self.imageView startAnimating];
 	// Do any additional setup after loading the view.
 }
 

@@ -17,12 +17,14 @@
 #import "GlobalShows.h"
 #import "GlobalMethod.h"
 #import <EventKit/EventKit.h>
+#import "UIImage+animatedGIF.h"
 
 @interface ShowDetailsViewController ()
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) Show *show;
 @property (strong, nonatomic) Episode *episode;
 @property (weak, nonatomic) IBOutlet UILabel *showOverview;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *showImage;
 @property (strong, nonatomic) PFObject *favorite;
 @property (assign, nonatomic) bool is_favorited;
@@ -58,13 +60,17 @@
 }
 
 - (void)viewDidLayoutSubviews {
-    self.scrollView.contentSize = CGSizeMake(320, 5000);
+    self.scrollView.contentSize = CGSizeMake(320, 1300);
+    //[self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.scrollView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.scrollView.layer.zPosition = 1;
+    // self.contentView.translatesAutoresizingMaskIntoConstraints = YES;
+    
+    
     Show* show = [[GlobalShows globalShowsSingleton]objectForKey:self.tmdb_id];
     
     
@@ -88,8 +94,6 @@
     
     self.show = [[GlobalShows globalShowsSingleton]objectForKey:self.tmdb_id];
     self.title = [self.show valueForKey:@"name"];
-    NSString *backdrop_url = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w500/%@", [self.show valueForKey:@"backdrop_path"]];
-    [self.showImage setImageWithURL:[NSURL URLWithString:backdrop_url]];
     
     /*
     [[YQL use:@{@"https://raw.github.com/ios-class/yshows-tables/master/tmdb.tv.id.xml": @"identity" }] select:@"*" from:@"identity" where:@{ @"id" : self.tmdb_id } callback:^(NSError *error, id response) {
@@ -101,6 +105,7 @@
     */
     
     if (self.show.details) {
+        NSLog(@"SHOW ID IS %@", self.show.id);
         self.showOverview.text = self.show.overview;
         self.createdByLabel.text = self.show.created_by;
         self.runTimeLabel.text = self.show.runtimes;
@@ -108,14 +113,35 @@
         self.networksLabel.text = self.show.networks;
         self.statusLabel.text = self.show.status;
         self.castLabel.text = self.show.cast;
+        
+        if (self.show.has_gif) {
+            if (self.show.gif_loop) {
+                self.showImage.image = [UIImage animatedImageWithAnimatedGIFURL:[NSURL URLWithString:self.show.gif_url]];
+                self.show.gif_loop = YES;
+            }
+            else {
+                UIImage *gif = [UIImage animatedImageWithAnimatedGIFURL:[NSURL URLWithString:self.show.gif_url]];
+                self.showImage.animationImages = [gif.images subarrayWithRange:NSMakeRange(0, self.show.gif_end)];
+                self.showImage.animationDuration = gif.duration;
+                self.showImage.animationRepeatCount = 1;
+                self.showImage.image = [gif.images objectAtIndex:self.show.gif_end];
+                [self.showImage startAnimating];
+            }
+        }
+        else {
+            NSString *backdrop_url = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w500/%@", [self.show valueForKey:@"backdrop_path"]];
+            [self.showImage setImageWithURL:[NSURL URLWithString:backdrop_url]];
+        }
     }
     else [[YQL use:@{@"https://raw.github.com/ios-class/yshows-tables/master/tmdb.tv.id.xml": @"identity",
               @"https://raw2.github.com/ios-class/yshows-tables/master/tmdb.tv.credits.xml": @"credits"}]
-          query:[NSString stringWithFormat:@"select * from yql.query.multi where queries='select * from identity where id=%@; select * from credits where id=%@'", self.tmdb_id, self.tmdb_id]
+          query:[NSString stringWithFormat:@"select * from yql.query.multi where queries='select * from identity where id=%@; select * from credits where id=%@; select feed.entry from json where url=\"https://spreadsheets.google.com/feeds/list/0Asp5x6yM0pSXdFM3UTEta1lHelJsZGRXMW1uVzNDSVE/od6/public/values?alt=json\" and feed.entry.gsx_id._t=%@'", self.tmdb_id, self.tmdb_id, self.tmdb_id]
           callback:^(NSError * error, id response) {
+              NSLog(@"got response %@", response);
               NSArray *results = [response valueForKeyPath:@"query.results.results"];
               NSObject *info = [results objectAtIndex:0];
               NSObject *crew = [results objectAtIndex:1];
+              NSObject *gif = [results objectAtIndex:2];
               if (info) {
                   self.show.overview = self.showOverview.text = [info valueForKeyPath:@"json.overview"];
                   // self.runTimeLabel.text = [info valueForKeyPath:@"json.runtime"];
@@ -127,7 +153,7 @@
                   
               }
               if (crew) {
-                  NSLog(@"crew is %@", crew);
+                  //NSLog(@"crew is %@", crew);
                   NSMutableArray *cast = [[NSMutableArray alloc] init];
                   for (NSObject *person in (NSArray*)[crew valueForKeyPath:@"json.cast"]) {
                       [cast addObject:[person valueForKey:@"name"]];
@@ -135,8 +161,34 @@
                   self.show.cast = self.castLabel.text = [cast componentsJoinedByString:@", "];
                   [self.castLabel sizeToFit];
               }
+              if (![[gif description] isEqualToString:@"<null>"]) {
+                  NSLog(@"VALUE OF GIF IS %@", gif);
+                  self.show.has_gif = YES;
+                  self.show.gif_url = [gif valueForKeyPath:@"json.feed.entry.gsx_src._t"];
+                  self.show.gif_end = [[gif valueForKeyPath:@"json.feed.entry.gsx_cut._t"] intValue];
+                  NSLog(@"got gif %@", gif);
+                  
+                  
+                  if (self.show.gif_end == 0) {
+                      self.showImage.image = [UIImage animatedImageWithAnimatedGIFURL:[NSURL URLWithString:self.show.gif_url]];
+                      self.show.gif_loop = YES;
+                  }
+                  else {
+                      UIImage *gif = [UIImage animatedImageWithAnimatedGIFURL:[NSURL URLWithString:self.show.gif_url]];
+                      self.showImage.animationImages = [gif.images subarrayWithRange:NSMakeRange(0, self.show.gif_end)];
+                      self.showImage.animationDuration = gif.duration;
+                      self.showImage.animationRepeatCount = 1;
+                      self.showImage.image = [gif.images objectAtIndex:self.show.gif_end];
+                      [self.showImage startAnimating];
+                  }
+              }
               
+              else {
+                 NSString *backdrop_url = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w500/%@", [self.show valueForKey:@"backdrop_path"]];
+                  [self.showImage setImageWithURL:[NSURL URLWithString:backdrop_url]];
+              }
               self.show.details = YES;
+              [[GlobalShows globalShowsSingleton] setValue:self.show forKey:self.show.id];
           }
     ];
     
@@ -146,7 +198,7 @@
     [query whereKey:@"tmdb_id" equalTo:self.tmdb_id];
     [self.favButton setEnabled:NO];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        NSLog(@"got objects %d", [objects count]);
+            //NSLog(@"got objects %d", [objects count]);
         if ([objects count] == 1) {
             self.favorite = [objects objectAtIndex:0];
                 //self.favButton.title = @"Unfavorite";
@@ -289,7 +341,7 @@
 }
 
 - (IBAction)onRightSwipeGesture:(id)sender {
-    NSLog(@"swipe right!");
+        //NSLog(@"swipe right!");
     int index = 0;
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
     for(NSString* showIDString in keyBucket){
@@ -318,7 +370,7 @@
 }
 
 - (IBAction)onLeftSwipeGesture:(id)sender {
-    NSLog(@"swipe left!");
+        //NSLog(@"swipe left!");
     int index = 0;
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
     for(NSString* showIDString in keyBucket){
