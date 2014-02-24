@@ -32,4 +32,11 @@
     return imagePlaceholder;
 }
 
++ (NSString*)buildTodayDateFormat{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *date = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[NSDate date]]];
+    NSLog(@"Date %@",date);
+    return date;
+}
 @end

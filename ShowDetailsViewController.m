@@ -10,15 +10,19 @@
 #import "ShowCollectionViewController.h"
 #import "YQL.h"
 #import "Show.h"
+#import "Episode.h"
 #import "UIImageView+AFNetworking.h"
 #import "LocalStorage.h"
 #import <Parse/Parse.h>
 #import "GlobalShows.h"
+#import "GlobalMethod.h"
+#import <EventKit/EventKit.h>
 #import "UIImage+animatedGIF.h"
 
 @interface ShowDetailsViewController ()
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) Show *show;
+@property (strong, nonatomic) Episode *episode;
 @property (weak, nonatomic) IBOutlet UILabel *showOverview;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *showImage;
@@ -33,10 +37,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *networksLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 - (IBAction)onHomeTap:(id)sender;
+@property (strong, nonatomic) NSString* savedEventId;
+
+- (IBAction)onCalendarTap:(id)sender;
 
 - (IBAction)onRightSwipeGesture:(id)sender;
 - (IBAction)onLeftSwipeGesture:(id)sender;
-
+- (void)addCalendarEvent;
+- (void)removeCalendarEvent;
 
 @end
 
@@ -64,6 +72,7 @@
     
     
     Show* show = [[GlobalShows globalShowsSingleton]objectForKey:self.tmdb_id];
+    
     
     [self.navigationController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor blackColor]];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -128,7 +137,7 @@
               @"https://raw2.github.com/ios-class/yshows-tables/master/tmdb.tv.credits.xml": @"credits"}]
           query:[NSString stringWithFormat:@"select * from yql.query.multi where queries='select * from identity where id=%@; select * from credits where id=%@; select feed.entry from json where url=\"https://spreadsheets.google.com/feeds/list/0Asp5x6yM0pSXdFM3UTEta1lHelJsZGRXMW1uVzNDSVE/od6/public/values?alt=json\" and feed.entry.gsx_id._t=%@'", self.tmdb_id, self.tmdb_id, self.tmdb_id]
           callback:^(NSError * error, id response) {
-              NSLog(@"got response %@", response);
+              //NSLog(@"got response %@", response);
               NSArray *results = [response valueForKeyPath:@"query.results.results"];
               NSObject *info = [results objectAtIndex:0];
               NSObject *crew = [results objectAtIndex:1];
@@ -199,6 +208,19 @@
         [self.favButton setEnabled:YES];
     }];
     
+    NSString* x = [NSString stringWithFormat: @"use 'store://6p3MRsP6JUlzV5obpwzSXJ' as table; select * from table where seriesname='%@' and date='%@';", self.show.name, [GlobalMethod buildTodayDateFormat]];
+                   
+    
+    NSLog(@"%@", x);
+    [YQL query:[NSString stringWithFormat: @"use 'store://6p3MRsP6JUlzV5obpwzSXJ' as table; select * from table where seriesname='%@' and date='%@';", self.show.name, [GlobalMethod buildTodayDateFormat]]
+      callback:^(NSError *error, id response) {
+          NSDictionary *showJSON = [response valueForKeyPath:@"query.results.Episode"] ;
+          NSLog(@"***********%@", showJSON);
+          NSError *err = nil;
+          self.episode = [[Episode alloc]initWithDictionary:showJSON error:&err];
+          NSLog(@"~~~~~%@", self.episode.FirstAired);
+      }];
+    
 	// Do any additional setup after loading the view.
     
 }
@@ -212,6 +234,7 @@
 - (IBAction)onFavTap:(UIBarButtonItem *)sender {
     NSString *guid = [(NSDictionary *)[LocalStorage read:@"current_user"] objectForKey:@"guid"];
     
+    
     [self.favButton setEnabled:NO];
     if (self.is_favorited) {
         [self.favorite deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -220,6 +243,7 @@
                 //self.favButton.title = @"Favorite";
             self.favButton.image = [UIImage imageNamed:@"fav_down"];
             [self.favButton setEnabled:YES];
+            
         }];
     }
     else {
@@ -233,8 +257,40 @@
                 //self.favButton.title = @"Unfavorite";
             self.favButton.image = [UIImage imageNamed:@"fav_active"];
             [self.favButton setEnabled:YES];
+            
         }];
     }
+}
+
+-(void)removeCalendarEvent{
+    EKEventStore* store = [[EKEventStore alloc] init];
+    [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+        if (!granted) { return; }
+        NSLog(@"remove calendar event");
+        EKEvent* eventToRemove = [store eventWithIdentifier:self.savedEventId];
+        if (eventToRemove) {
+            NSError* error = nil;
+            [store removeEvent:eventToRemove span:EKSpanThisEvent commit:YES error:&error];
+        }
+    }];
+}
+
+-(void)addCalendarEvent{
+    EKEventStore *store = [[EKEventStore alloc] init];
+    [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+        if (!granted) { return; }
+        NSLog(@"add calender event");
+        EKEvent *event = [EKEvent eventWithEventStore:store];
+        event.title = self.show.name;
+        event.startDate = [NSDate date]; //today
+        event.endDate = [event.startDate dateByAddingTimeInterval:60*60];  //set 1 hour meeting
+        //event.allDay = YES;
+        [event setCalendar:[store defaultCalendarForNewEvents]];
+        NSError *err = nil;
+        [store saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
+        self.savedEventId = event.eventIdentifier;  //this is so you can access this event later
+    }];
+
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
@@ -261,6 +317,32 @@
 
 - (IBAction)onHomeTap:(id)sender {
     NSLog(@"home tap!");
+}
+
+- (IBAction)onCalendarTap:(id)sender {
+    UIAlertView *alert;
+    if (self.episode != NULL) {
+        alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat: @"Show is on %@", self.episode.FirstAired]
+                                     message:@"Do you want to add notification on your calendar?"
+                                        delegate:self
+                                 cancelButtonTitle:@"OK"
+                                 otherButtonTitles:@"NO", nil];
+    }else{
+        alert = [[UIAlertView alloc] initWithTitle:@"Show is ended"
+                                     message:@"Get Resources from the Internet!"
+                                     delegate:nil
+                                     cancelButtonTitle:@"OK"
+                                     otherButtonTitles:nil];
+    }
+     [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+//    if (buttonIndex == [[UIAlertView cancelButtonIndex] intValue]){
+//        
+//    }else{
+//        
+//    }
 }
 
 - (IBAction)onRightSwipeGesture:(id)sender {

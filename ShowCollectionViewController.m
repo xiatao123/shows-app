@@ -207,6 +207,10 @@
 -(void) viewWillAppear:(BOOL)animated{
     //Adding a border on navigation bar
     [self addNavBorder];
+    if ([self.bucketKey  isEqual: @"Favorite"]) {
+        NSString *guid = [(NSDictionary *)[LocalStorage read:@"current_user"] objectForKey:@"guid"];
+        [self loadFavorite:guid];
+    }
 }
 
 -(void)loadFavorite:(NSString*)guid{
@@ -287,7 +291,7 @@
           callback:^(NSError *error, id response) {
               NSDictionary *showJSON = [response valueForKeyPath:@"query.results.json"] ;
               NSError *err = nil;
-              //NSLog(@"%@",showJSON);
+              NSLog(@"%@",showJSON);
               ShowResult* showResult = [[ShowResult alloc] initWithDictionary:showJSON error:&err];
               [showResult removeShowsWithoutPoster];
               NSMutableArray *bucket = [[GlobalShows globalTriageBucket] objectForKey:self.bucketKey];
