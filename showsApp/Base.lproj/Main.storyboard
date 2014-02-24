@@ -4,34 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Gif View Controller-->
-        <scene sceneID="0pU-lB-5nS">
-            <objects>
-                <viewController id="sYs-fS-65m" customClass="GifViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4Yj-zh-bsS"/>
-                        <viewControllerLayoutGuide type="bottom" id="DLr-U3-zsS"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Dfo-e6-FtI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PGD-Bi-0AS">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="398"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="jTa-SE-Rqz"/>
-                    <connections>
-                        <outlet property="imageView" destination="PGD-Bi-0AS" id="XTO-4x-mfM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bQ0-6S-Eu6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-200" y="361"/>
-        </scene>
         <!--View Controller - Login-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -55,31 +27,16 @@
                                     <action selector="onLoginTapped:" destination="vXZ-lx-hvc" eventType="touchDown" id="9PA-8B-uY7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10T-V6-EBU">
-                                <rect key="frame" x="142" y="348" width="46" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="8Rz-ah-jdK">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="sYs-fS-65m" kind="push" id="DYq-gn-IOf"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrk-29-uRK">
-                                <rect key="frame" x="183" y="139" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="zRw-n6-PD5" kind="push" id="Q1i-8j-RFr"/>
-                                </connections>
-                            </button>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="NrA-7u-CHN"/>
                     <connections>
+                        <outlet property="imageView" destination="8Rz-ah-jdK" id="gaW-TM-0Jh"/>
                         <segue destination="g73-Mp-3Lg" kind="push" identifier="goToHome" id="GM0-78-YvH"/>
                     </connections>
                 </viewController>
@@ -444,35 +401,6 @@
             </objects>
             <point key="canvasLocation" x="-293" y="-272"/>
         </scene>
-        <!--Web View Controller-->
-        <scene sceneID="UbJ-WF-6jL">
-            <objects>
-                <viewController id="zRw-n6-PD5" customClass="WebViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="tmW-aX-zlc"/>
-                        <viewControllerLayoutGuide type="bottom" id="Kzl-c9-2M8"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Kz7-He-1JY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gms-P2-hoN">
-                                <rect key="frame" x="6" y="5" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Wg0-Wf-p7d"/>
-                    <connections>
-                        <outlet property="webView" destination="Gms-P2-hoN" id="QKl-X3-Gct"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RAY-yN-ChI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="382" y="-574"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="HOX-P7-41H">
             <objects>
@@ -493,6 +421,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Background" width="20" height="20"/>
         <image name="fav_down" width="20" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

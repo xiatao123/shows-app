@@ -20,6 +20,7 @@
 @interface ViewController ()
 - (IBAction)onLoginTapped:(UIButton *)sender;
 @property (nonatomic, strong) AFOAuth1Client *yahoo;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) NSUserDefaults * defaults;
 @end
 
@@ -28,6 +29,7 @@
 - (void)viewDidLoad
 {
     
+    self.imageView.layer.zPosition = -1;
     NSString *key = @"dj0yJmk9aks5ZHdkNzcxZ2dFJmQ9WVdrOVYwUnNPR0pRTkdVbWNHbzlPRFEzTWpVNE5EWXkmcz1jb25zdW1lcnNlY3JldCZ4PWVl";
     NSString *secret = @"1867229fe956948e06b3d2958a6fe973ab052c4e";
     
