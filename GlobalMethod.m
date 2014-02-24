@@ -32,4 +32,12 @@
     return imagePlaceholder;
 }
 
++ (NSString*)buildTodayDateFormat{
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+    NSInteger day = [components day];
+    NSInteger month = [components month];
+    NSInteger year = [components year];
+    NSString* date = [NSString stringWithFormat:@"%d-%2d-%2d", year, month, day];
+    return date;
+}
 @end
