@@ -123,7 +123,7 @@
                   
               }
               if (crew) {
-                  NSLog(@"crew is %@", crew);
+                      //NSLog(@"crew is %@", crew);
                   NSMutableArray *cast = [[NSMutableArray alloc] init];
                   for (NSObject *person in (NSArray*)[crew valueForKeyPath:@"json.cast"]) {
                       [cast addObject:[person valueForKey:@"name"]];
@@ -142,7 +142,7 @@
     [query whereKey:@"tmdb_id" equalTo:self.tmdb_id];
     [self.favButton setEnabled:NO];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        NSLog(@"got objects %d", [objects count]);
+            //NSLog(@"got objects %d", [objects count]);
         if ([objects count] == 1) {
             self.favorite = [objects objectAtIndex:0];
                 //self.favButton.title = @"Unfavorite";
@@ -217,7 +217,7 @@
 }
 
 - (IBAction)onRightSwipeGesture:(id)sender {
-    NSLog(@"swipe right!");
+        //NSLog(@"swipe right!");
     int index = 0;
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
     for(NSString* showIDString in keyBucket){
@@ -246,7 +246,7 @@
 }
 
 - (IBAction)onLeftSwipeGesture:(id)sender {
-    NSLog(@"swipe left!");
+        //NSLog(@"swipe left!");
     int index = 0;
     NSArray* keyBucket = [[GlobalShows globalTriageBucket]objectForKey:self.bucketKey];
     for(NSString* showIDString in keyBucket){
