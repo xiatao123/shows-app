@@ -137,7 +137,7 @@
               @"https://raw2.github.com/ios-class/yshows-tables/master/tmdb.tv.credits.xml": @"credits"}]
           query:[NSString stringWithFormat:@"select * from yql.query.multi where queries='select * from identity where id=%@; select * from credits where id=%@; select feed.entry from json where url=\"https://spreadsheets.google.com/feeds/list/0Asp5x6yM0pSXdFM3UTEta1lHelJsZGRXMW1uVzNDSVE/od6/public/values?alt=json\" and feed.entry.gsx_id._t=%@'", self.tmdb_id, self.tmdb_id, self.tmdb_id]
           callback:^(NSError * error, id response) {
-              NSLog(@"got response %@", response);
+              //NSLog(@"got response %@", response);
               NSArray *results = [response valueForKeyPath:@"query.results.results"];
               NSObject *info = [results objectAtIndex:0];
               NSObject *crew = [results objectAtIndex:1];
@@ -208,9 +208,14 @@
         [self.favButton setEnabled:YES];
     }];
     
+    NSString* x = [NSString stringWithFormat: @"use 'store://6p3MRsP6JUlzV5obpwzSXJ' as table; select * from table where seriesname='%@' and date='%@';", self.show.name, [GlobalMethod buildTodayDateFormat]];
+                   
+    
+    NSLog(@"%@", x);
     [YQL query:[NSString stringWithFormat: @"use 'store://6p3MRsP6JUlzV5obpwzSXJ' as table; select * from table where seriesname='%@' and date='%@';", self.show.name, [GlobalMethod buildTodayDateFormat]]
       callback:^(NSError *error, id response) {
           NSDictionary *showJSON = [response valueForKeyPath:@"query.results.Episode"] ;
+          NSLog(@"***********%@", showJSON);
           NSError *err = nil;
           self.episode = [[Episode alloc]initWithDictionary:showJSON error:&err];
           NSLog(@"~~~~~%@", self.episode.FirstAired);
@@ -333,7 +338,7 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-//    if (buttonIndex == [UIAlertView cancelButtonIndex]){
+//    if (buttonIndex == [[UIAlertView cancelButtonIndex] intValue]){
 //        
 //    }else{
 //        
