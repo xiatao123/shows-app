@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShowDetailsViewController : UIViewController <UIGestureRecognizerDelegate>
+@interface ShowDetailsViewController : UIViewController <UIGestureRecognizerDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) NSString * tmdb_id;
 @property (nonatomic, strong) NSString * bucketKey;
 @end

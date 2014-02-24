@@ -12,5 +12,6 @@
 
 + (NSURL*)buildImageURL:(NSString*)file_path  size:(NSString*)size;
 + (UIImage*)getImagePlaceholder;
++ (NSString* )buildTodayDateFormat;
 
 @end
