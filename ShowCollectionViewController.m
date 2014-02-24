@@ -54,6 +54,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    self.navigationController.navigationBarHidden = NO;
+    
     self.bucketKey = @"";
     self.showArrayBucket = [NSMutableArray array];
     self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(onSearchButton)];
@@ -332,13 +334,6 @@
     }
 }
 
-- (IBAction)onLogoutTap:(id)sender {
-    NSLog(@"logout tapped");
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-    [[self navigationController] popViewControllerAnimated:YES];
-}
-
 - (void)onSearchButton{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchViewController"];
@@ -396,6 +391,9 @@
 }
 
 -(void)logout{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"current_user"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 

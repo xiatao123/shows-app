@@ -18,6 +18,7 @@
 
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 - (IBAction)onLoginTapped:(UIButton *)sender;
 @property (nonatomic, strong) AFOAuth1Client *yahoo;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -26,9 +27,16 @@
 
 @implementation ViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBarHidden = YES;
+    self.yahoo.accessToken = nil;
+}
+
 - (void)viewDidLoad
 {
-    
+    self.loginButton.layer.cornerRadius = 5;
+    self.loginButton.layer.borderWidth = 5;
+    self.loginButton.layer.borderColor = self.loginButton.backgroundColor.CGColor;
     self.imageView.layer.zPosition = -1;
     NSString *key = @"dj0yJmk9aks5ZHdkNzcxZ2dFJmQ9WVdrOVYwUnNPR0pRTkdVbWNHbzlPRFEzTWpVNE5EWXkmcz1jb25zdW1lcnNlY3JldCZ4PWVl";
     NSString *secret = @"1867229fe956948e06b3d2958a6fe973ab052c4e";
