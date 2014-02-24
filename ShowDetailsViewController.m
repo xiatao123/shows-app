@@ -215,10 +215,8 @@
     [YQL query:[NSString stringWithFormat: @"use 'store://6p3MRsP6JUlzV5obpwzSXJ' as table; select * from table where seriesname='%@' and date='%@';", self.show.name, [GlobalMethod buildTodayDateFormat]]
       callback:^(NSError *error, id response) {
           NSDictionary *showJSON = [response valueForKeyPath:@"query.results.Episode"] ;
-          NSLog(@"***********%@", showJSON);
           NSError *err = nil;
           self.episode = [[Episode alloc]initWithDictionary:showJSON error:&err];
-          NSLog(@"~~~~~%@", self.episode.FirstAired);
       }];
     
 	// Do any additional setup after loading the view.
@@ -282,7 +280,8 @@
         NSLog(@"add calender event");
         EKEvent *event = [EKEvent eventWithEventStore:store];
         event.title = self.show.name;
-        event.startDate = [NSDate date]; //today
+       
+        event.startDate = [self.episode buildCalendarDate];
         event.endDate = [event.startDate dateByAddingTimeInterval:60*60];  //set 1 hour meeting
         //event.allDay = YES;
         [event setCalendar:[store defaultCalendarForNewEvents]];
@@ -320,6 +319,7 @@
 }
 
 - (IBAction)onCalendarTap:(id)sender {
+    NSLog(@"calendar tap!");
     UIAlertView *alert;
     if (self.episode != NULL) {
         alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat: @"Show is on %@", self.episode.FirstAired]
@@ -338,11 +338,11 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-//    if (buttonIndex == [[UIAlertView cancelButtonIndex] intValue]){
-//        
-//    }else{
-//        
-//    }
+    if (buttonIndex == alertView.cancelButtonIndex ){
+        [self addCalendarEvent];
+    }else{
+        
+    }
 }
 
 - (IBAction)onRightSwipeGesture:(id)sender {
