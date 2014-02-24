@@ -20,5 +20,6 @@
 @property (nonatomic, strong) NSString* Airs_Time;
 
 +(BOOL)propertyIsOptional:(NSString *)propertyName;
+-(NSDate*) buildCalendarDate;
 
 @end

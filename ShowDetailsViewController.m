@@ -280,10 +280,8 @@
         NSLog(@"add calender event");
         EKEvent *event = [EKEvent eventWithEventStore:store];
         event.title = self.show.name;
-        //self.episode.Airs_Time
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"yyyy-MM-dd"];
-        event.startDate = [dateFormat dateFromString:self.episode.FirstAired];
+       
+        event.startDate = [self.episode buildCalendarDate];
         event.endDate = [event.startDate dateByAddingTimeInterval:60*60];  //set 1 hour meeting
         //event.allDay = YES;
         [event setCalendar:[store defaultCalendarForNewEvents]];
@@ -321,6 +319,7 @@
 }
 
 - (IBAction)onCalendarTap:(id)sender {
+    NSLog(@"calendar tap!");
     UIAlertView *alert;
     if (self.episode != NULL) {
         alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat: @"Show is on %@", self.episode.FirstAired]
