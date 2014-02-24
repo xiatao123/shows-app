@@ -38,6 +38,10 @@
 @property (nonatomic, strong) NSString* cast;
 @property (nonatomic, assign) bool details;
 
+@property (nonatomic, assign) bool has_gif;
+@property (nonatomic, strong) NSString *gif_url;
+@property (nonatomic, assign) int gif_end;
+
 +(BOOL)propertyIsOptional:(NSString *)propertyName;
 
 @end
