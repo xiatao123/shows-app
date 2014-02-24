@@ -121,7 +121,16 @@
         tempItem.tag = tag++;
     }
     
-    
+    REMenuItem *logoutItem = [[REMenuItem alloc] initWithTitle:@"Log Out"
+                                                   subtitle:@""
+                                                      image:[UIImage imageNamed:@"Icon_Home"]
+                                           highlightedImage:nil
+                                                     action:^(REMenuItem *item) {
+                                                         [weakSelf logout];
+                                                     }];
+    [menuItems addObject:logoutItem];
+    logoutItem.tag = tag++;
+
     self.menu = [[REMenu alloc] initWithItems:menuItems];
     if (!REUIKitIsFlatMode()) {
         self.menu.cornerRadius = 4;
@@ -222,10 +231,10 @@
             [self.collectionView reloadData];
         }else{
             [self loadPopular];
-            UILabel *messagLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
+            UILabel *messagLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 250, 30)];
             [messagLable setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin)]; // autoresizing masks are respected on custom views
             [messagLable setBackgroundColor:[UIColor orangeColor]];
-            messagLable.text = @"Your favorite list is empty";
+            messagLable.text = @" Oops! Your favorite list is empty ";
             
             [self.view showToast:messagLable
                         duration:3.0
@@ -381,6 +390,10 @@
     [titleLabel sizeToFit];
     
     self.navigationItem.titleView = titleLabel;
+}
+
+-(void)logout{
+    
 }
 
 @end
