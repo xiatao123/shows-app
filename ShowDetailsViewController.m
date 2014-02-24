@@ -164,6 +164,7 @@
                   [self.showImage setImageWithURL:[NSURL URLWithString:backdrop_url]];
               }
               self.show.details = YES;
+              [[GlobalShows globalShowsSingleton] setValue:self.show forKey:self.show.id];
           }
     ];
     
