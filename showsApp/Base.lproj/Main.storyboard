@@ -17,10 +17,12 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebt-6t-WNo">
-                                <rect key="frame" x="98" y="269" width="125" height="30"/>
+                                <rect key="frame" x="85" y="350" width="150" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login with Yahoo">
-                                    <color key="titleColor" red="0.31359246992424705" green="0.22535143921618306" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.48534443430000002" green="0.16788321170000001" blue="0.90980398650000005" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="Login with Yahoo!">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -37,6 +39,7 @@
                     <navigationItem key="navigationItem" id="NrA-7u-CHN"/>
                     <connections>
                         <outlet property="imageView" destination="8Rz-ah-jdK" id="gaW-TM-0Jh"/>
+                        <outlet property="loginButton" destination="ebt-6t-WNo" id="RS8-PO-iXg"/>
                         <segue destination="g73-Mp-3Lg" kind="push" identifier="goToHome" id="GM0-78-YvH"/>
                     </connections>
                 </viewController>
@@ -421,7 +424,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Background" width="20" height="20"/>
+        <image name="Background" width="320" height="480"/>
         <image name="fav_down" width="20" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
