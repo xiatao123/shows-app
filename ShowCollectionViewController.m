@@ -121,7 +121,16 @@
         tempItem.tag = tag++;
     }
     
-    
+    REMenuItem *logoutItem = [[REMenuItem alloc] initWithTitle:@"Log Out"
+                                                   subtitle:@""
+                                                      image:[UIImage imageNamed:@"Icon_Home"]
+                                           highlightedImage:nil
+                                                     action:^(REMenuItem *item) {
+                                                         [weakSelf logout];
+                                                     }];
+    [menuItems addObject:logoutItem];
+    logoutItem.tag = tag++;
+
     self.menu = [[REMenu alloc] initWithItems:menuItems];
     if (!REUIKitIsFlatMode()) {
         self.menu.cornerRadius = 4;
@@ -381,6 +390,10 @@
     [titleLabel sizeToFit];
     
     self.navigationItem.titleView = titleLabel;
+}
+
+-(void)logout{
+    
 }
 
 @end
