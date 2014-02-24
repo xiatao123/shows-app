@@ -96,6 +96,7 @@
     */
     
     if (self.show.details) {
+        NSLog(@"SHOW ID IS %@", self.show.id);
         self.showOverview.text = self.show.overview;
         self.createdByLabel.text = self.show.created_by;
         self.runTimeLabel.text = self.show.runtimes;
@@ -105,12 +106,18 @@
         self.castLabel.text = self.show.cast;
         
         if (self.show.has_gif) {
-            UIImage *gif = [UIImage animatedImageWithAnimatedGIFURL:[NSURL URLWithString:self.show.gif_url]];
-            self.showImage.animationImages = [gif.images subarrayWithRange:NSMakeRange(0, self.show.gif_end)];
-            self.showImage.animationDuration = gif.duration;
-            self.showImage.animationRepeatCount = 1;
-            self.showImage.image = [gif.images objectAtIndex:self.show.gif_end];
-            [self.showImage startAnimating];
+            if (self.show.gif_loop) {
+                self.showImage.image = [UIImage animatedImageWithAnimatedGIFURL:[NSURL URLWithString:self.show.gif_url]];
+                self.show.gif_loop = YES;
+            }
+            else {
+                UIImage *gif = [UIImage animatedImageWithAnimatedGIFURL:[NSURL URLWithString:self.show.gif_url]];
+                self.showImage.animationImages = [gif.images subarrayWithRange:NSMakeRange(0, self.show.gif_end)];
+                self.showImage.animationDuration = gif.duration;
+                self.showImage.animationRepeatCount = 1;
+                self.showImage.image = [gif.images objectAtIndex:self.show.gif_end];
+                [self.showImage startAnimating];
+            }
         }
         else {
             NSString *backdrop_url = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w500/%@", [self.show valueForKey:@"backdrop_path"]];
@@ -151,12 +158,20 @@
                   self.show.gif_url = [gif valueForKeyPath:@"json.feed.entry.gsx_src._t"];
                   self.show.gif_end = [[gif valueForKeyPath:@"json.feed.entry.gsx_cut._t"] intValue];
                   NSLog(@"got gif %@", gif);
-                  UIImage *gif = [UIImage animatedImageWithAnimatedGIFURL:[NSURL URLWithString:self.show.gif_url]];
-                  self.showImage.animationImages = [gif.images subarrayWithRange:NSMakeRange(0, self.show.gif_end)];
-                  self.showImage.animationDuration = gif.duration;
-                  self.showImage.animationRepeatCount = 1;
-                  self.showImage.image = [gif.images objectAtIndex:self.show.gif_end];
-                  [self.showImage startAnimating];
+                  
+                  
+                  if (self.show.gif_end == 0) {
+                      self.showImage.image = [UIImage animatedImageWithAnimatedGIFURL:[NSURL URLWithString:self.show.gif_url]];
+                      self.show.gif_loop = YES;
+                  }
+                  else {
+                      UIImage *gif = [UIImage animatedImageWithAnimatedGIFURL:[NSURL URLWithString:self.show.gif_url]];
+                      self.showImage.animationImages = [gif.images subarrayWithRange:NSMakeRange(0, self.show.gif_end)];
+                      self.showImage.animationDuration = gif.duration;
+                      self.showImage.animationRepeatCount = 1;
+                      self.showImage.image = [gif.images objectAtIndex:self.show.gif_end];
+                      [self.showImage startAnimating];
+                  }
               }
               
               else {

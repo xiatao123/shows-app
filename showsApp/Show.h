@@ -41,6 +41,7 @@
 @property (nonatomic, assign) bool has_gif;
 @property (nonatomic, strong) NSString *gif_url;
 @property (nonatomic, assign) int gif_end;
+@property (nonatomic, assign) bool gif_loop;
 
 +(BOOL)propertyIsOptional:(NSString *)propertyName;
 

@@ -194,7 +194,6 @@
     }
     if (self.bucketKey!= NULL && self.bucketKey.length !=0 ) {
         Show* show = self.showArrayBucket[indexPath.row];
-        cell.backgroundColor = [UIColor whiteColor];
         [cell.showsNameLabel setText:show.name];
         [cell.showsPosterImage setImageWithURL:[GlobalMethod buildImageURL:show.poster_path size:@"w500"] placeholderImage:[GlobalMethod getImagePlaceholder]];
     }else{
